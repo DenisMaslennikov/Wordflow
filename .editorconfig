@@ -15,10 +15,10 @@ tab_width = 4
 max_line_length = 120
 indent_size = 4
 
-[*.vue]
+[{*.tsx, *.ts}]
 tab_width = 2
 
-[{Makefile,Caddyfile}]
+[Makefile]
 indent_style = tab  # Включаем Tab чтобы PyCharm не менял на пробелы
 
 [*.md]
