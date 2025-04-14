@@ -21,12 +21,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView
+
+from backend.api.v1.users.views import CustomTokenObtainPairView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     # path("api/", include("api.urls", namespace="api")),
-    path("api/v1/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/v1/token/", CustomTokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/v1/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),
     # Optional UI:
