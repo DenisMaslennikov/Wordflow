@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 from backend.blogs.models import Blog
+from backend.tags.models import Tag
 
 User = get_user_model()
 
@@ -24,5 +25,15 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(blank=True, null=True)
 
+    tags = models.ManyToManyField(Tag, related_name="posts", through="PostTag", help_text="Теги")
+
     def __str__(self):
         return self.title
+
+
+class PostTag(models.Model):
+    """Модель для связи постов и тегов."""
+
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, help_text="Идентификатор тега")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, help_text="Идентификатор Поста")
+    created_at = models.DateTimeField(auto_now_add=True)
