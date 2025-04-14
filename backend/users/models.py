@@ -31,14 +31,15 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractBaseUser):
     """Модель пользователя."""
 
-    bio = models.TextField(blank=True, null=True)
-    email = models.EmailField(unique=True)
-    username = models.CharField(max_length=30, unique=True)
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(auto_now_add=True)
+    bio = models.TextField(blank=True, null=True, help_text="О себе")
+    email = models.EmailField(unique=True, help_text="Email")
+    username = models.CharField(max_length=30, unique=True, help_text="Имя пользователя")
+    first_name = models.CharField(max_length=30, blank=True, help_text="Имя")
+    last_name = models.CharField(max_length=30, blank=True, help_text="Фамилия")
+    is_active = models.BooleanField(default=True, help_text="Пользователь активен")
+    is_staff = models.BooleanField(default=False, help_text="Персонал")
+    is_superuser = models.BooleanField(default=False, help_text="Суперпользователь")
+    date_joined = models.DateTimeField(auto_now_add=True, help_text="Дата регистрации")
 
     objects = CustomUserManager()
 
