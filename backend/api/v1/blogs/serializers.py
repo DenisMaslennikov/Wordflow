@@ -36,4 +36,4 @@ class BlogListSerializer(serializers.ModelSerializer):
         """Метакласс сериализатора."""
 
         model = Blog
-        fields = ( "id", "title", "description",)
+        fields = ("id", "title", "description",)

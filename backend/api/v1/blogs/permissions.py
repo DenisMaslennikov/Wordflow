@@ -7,7 +7,7 @@ from blogs.models import Blog
 class IsOwnerOrReadOnly(permissions.BasePermission):
     """Владелец блога или только чтение."""
     def has_object_permission(self, request, view, obj: Blog):
+        """Проверяет наличие прав на объект."""
         if request.method in permissions.SAFE_METHODS:
             return True
         return request.user in obj.authors.all()
-

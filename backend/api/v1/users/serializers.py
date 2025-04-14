@@ -51,6 +51,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
         return user
 
+
 class UsernameUserSerializer(serializers.ModelSerializer):
     """Сериализатор для случаев когда требуется только имя пользователя."""
 
