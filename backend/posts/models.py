@@ -37,3 +37,6 @@ class PostTag(models.Model):
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE, help_text="Идентификатор тега")
     post = models.ForeignKey(Post, on_delete=models.CASCADE, help_text="Идентификатор Поста")
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.tag} - {self.post}"
