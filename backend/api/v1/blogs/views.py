@@ -22,10 +22,8 @@ class BlogViewSet(ModelViewSet):
     def get_queryset(self):
         """Получение кверисета в зависимости от типа запроса."""
         if self.action == 'retrieve':
-            queryset = Blog.objects.prefetch_related("authors").all()
-        else:
-            queryset = Blog.objects.all()
-        return queryset
+            return Blog.objects.prefetch_related("authors").all()
+        return Blog.objects.all()
 
     def get_serializer_class(self):
         """Получение класса сериализатора в зависимости от действия."""
@@ -35,6 +33,5 @@ class BlogViewSet(ModelViewSet):
             return BlogCreateUpdateSerializer
         elif self.action == "list":
             return BlogListSerializer
-        else:
-            return None
+        return None
 
