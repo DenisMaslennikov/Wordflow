@@ -33,7 +33,7 @@ class User(AbstractBaseUser):
 
     bio = models.TextField(blank=True, null=True, help_text="О себе")
     email = models.EmailField(unique=True, help_text="Email")
-    username = models.CharField(max_length=30, unique=True, help_text="Имя пользователя")
+    username = models.CharField(max_length=30, unique=True, help_text="Имя пользователя", null=False)
     first_name = models.CharField(max_length=30, blank=True, help_text="Имя")
     last_name = models.CharField(max_length=30, blank=True, help_text="Фамилия")
     is_active = models.BooleanField(default=True, help_text="Пользователь активен")

@@ -42,9 +42,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         """Метакласс серилизатора регистрации."""
 
         model = get_user_model()
-        fields = ("email", "password")
+        fields = ("email", "password", "username")
 
     def create(self, validated_data):
         """Создание нового пользователя."""
-        user = get_user_model().objects.create_user(email=validated_data["email"], password=validated_data["password"])
+        user = get_user_model().objects.create_user(
+            email=validated_data["email"], password=validated_data["password"], username=validated_data["username"]
+        )
         return user
