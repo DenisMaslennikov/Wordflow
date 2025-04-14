@@ -17,7 +17,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - "./backend:/src/"
+      - "./backend:/backend/"
       - django_media:/media
     depends_on:
       - db

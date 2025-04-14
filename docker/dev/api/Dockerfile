@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y \
   && curl -sSL 'https://install.python-poetry.org' | python - \
   && poetry --version
 
-WORKDIR /src
+WORKDIR /backend
 
 COPY ./backend/poetry.lock ./backend/pyproject.toml .
 
