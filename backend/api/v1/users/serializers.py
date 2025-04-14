@@ -50,3 +50,11 @@ class RegisterSerializer(serializers.ModelSerializer):
             email=validated_data["email"], password=validated_data["password"], username=validated_data["username"]
         )
         return user
+
+class UsernameUserSerializer(serializers.ModelSerializer):
+    """Сериализатор для случаев когда требуется только имя пользователя."""
+
+    class Meta:
+        """Метакласс сериализатора."""
+        model = get_user_model()
+        fields = ("id", "username")
