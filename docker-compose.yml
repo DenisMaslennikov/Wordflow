@@ -18,6 +18,7 @@ services:
       - "8000:8000"
     volumes:
       - "./backend:/src/"
+      - django_media:/media
     depends_on:
       - db
     restart: always
@@ -25,4 +26,5 @@ services:
 
 volumes:
   pgdata:
+  django_media:
 

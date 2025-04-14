@@ -123,6 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = "/media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -134,11 +136,9 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
-
-PECTACULAR_SETTINGS = {
+SPECTACULAR_SETTINGS = {
     "TITLE": "Wordflow blogging platform API",
     "DESCRIPTION": "Pet project the purpose of which is to refresh practical skills of Django and React",
     "VERSION": "0.1.0",
     "SERVE_INCLUDE_SCHEMA": False,
-    # OTHER SETTINGS
 }
