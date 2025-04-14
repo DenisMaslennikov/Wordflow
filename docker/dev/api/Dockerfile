@@ -4,6 +4,7 @@ ENV TZ=Europe/Moscow \
   # python:
   PYTHONDONTWRITEBYTECODE=1 \
   PYTHONUNBUFFERED=1 \
+  PYTHONPATH='/backend' \
   # poetry:
   POETRY_VERSION=2.1.2 \
   POETRY_NO_INTERACTION=1 \
