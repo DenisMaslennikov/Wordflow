@@ -1,9 +1,11 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
+from api.v1.blogs.views import BlogViewSet
 from api.v1.users.views import RegisterView
 
 router = DefaultRouter()
+router.register('blogs', BlogViewSet)
 
 app_name = "v1"
 
