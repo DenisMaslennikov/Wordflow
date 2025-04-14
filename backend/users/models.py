@@ -33,6 +33,7 @@ class User(AbstractBaseUser):
 
     bio = models.TextField(blank=True, null=True)
     email = models.EmailField(unique=True)
+    username = models.CharField(max_length=30, unique=True)
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30, blank=True)
     is_active = models.BooleanField(default=True)
