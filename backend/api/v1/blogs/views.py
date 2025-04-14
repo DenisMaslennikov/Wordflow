@@ -13,7 +13,7 @@ from blogs.models import Blog
 class BlogViewSet(ModelViewSet):
     """Вьюсет для модели Blog."""
 
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = (IsOwnerOrReadOnly,)
     serializer_class = BlogListSerializer
     queryset = Blog.objects.all()
     pagination_class = BlogPagination
