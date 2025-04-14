@@ -38,10 +38,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Rest Framework
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_spectacular",
     "django_filters",
+    # Apps
+    "blogs.apps.BlogsConfig",
+    "users.apps.UsersConfig",
+    "images.apps.ImagesConfig",
+    "posts.apps.PostsConfig",
+    "comments.apps.CommentsConfig",
+    "tags.apps.TagsConfig",
 ]
 
 MIDDLEWARE = [
@@ -87,6 +95,10 @@ DATABASES = {
         "PORT": os.getenv("POSTGRES_PORT"),
     }
 }
+
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+    EMAIL_FILE_PATH = BASE_DIR / "mail"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -142,3 +154,6 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "0.1.0",
     "SERVE_INCLUDE_SCHEMA": False,
 }
+
+AUTH_USER_MODEL = "users.User"
+AUTHENTICATION_BACKENDS = ["users.backends.EmailBackend"]
