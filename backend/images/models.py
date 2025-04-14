@@ -16,5 +16,5 @@ class Image(models.Model):
     blog = models.ForeignKey(
         Blog, on_delete=models.CASCADE, help_text="Идентификатор блога в который было загружено изображение"
     )
-    alt = models.CharField(max_length="100", null=True, blank=True, help_text="Описание изображения")
-    image = models.ImageField(upload_to=settings.MEDIA_ROOT, help_text="Изображение")
+    alt = models.CharField(max_length=100, null=True, blank=True, help_text="Описание изображения")
+    image = models.ImageField(upload_to="blog_images", help_text="Изображение")
