@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from backend.blogs.models import Blog
-from backend.tags.models import Tag
+from tags.models import Tag
+from blogs.models import Blog
 
 User = get_user_model()
 
