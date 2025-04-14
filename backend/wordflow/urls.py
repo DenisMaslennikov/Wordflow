@@ -23,7 +23,7 @@ from django.urls import path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from backend.api.v1.users.views import CustomTokenObtainPairView
+from api.v1.users.views import CustomTokenObtainPairView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
