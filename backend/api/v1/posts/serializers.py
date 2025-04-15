@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 from api.v1.tags.serializers import TagSerializer
 from api.v1.users.serializers import UsernameUserSerializer
-from config.constants import POST_STATUS_PUBLISHED, POST_STATUS_DRAFT
+from utils.constants import POST_STATUS_PUBLISHED, POST_STATUS_DRAFT
 from posts.models import Post
 
 

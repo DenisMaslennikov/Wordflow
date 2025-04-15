@@ -20,7 +20,7 @@ class TagSerializer(serializers.ModelSerializer):
         """Валидация уникальности тега"""
         if Tag.objects.filter(name=name).exists():
             raise serializers.ValidationError({"name": "Тег с таким именем уже есть"})
-        slug = slugify(name, lowercase=True, max_length=40, separator="_", regex_pattern=r"[^\w-]")
+        slug = tag_slugify(name)
         if Tag.objects.filter(slug=slug).exists():
             raise serializers.ValidationError({"slug": "Тег с таким слагом уже есть"})
         return name

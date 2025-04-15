@@ -13,7 +13,7 @@ from api.v1.posts.serializers import (
     PostForAuthorSerializer,
     PostListWithStatusSerializer,
 )
-from config.constants import POST_STATUS_PUBLISHED
+from utils.constants import POST_STATUS_PUBLISHED
 from posts.models import Post
 
 
