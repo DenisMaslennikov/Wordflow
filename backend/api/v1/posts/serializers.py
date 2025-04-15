@@ -2,7 +2,7 @@ from django.utils.text import Truncator
 from rest_framework import serializers
 
 from api.v1.tags.serializers import TagSerializer
-from api.v1.users.serializers import UsernameUserSerializer
+from api.v1.users.serializers import UsernameAvatarUserSerializer
 from posts.models import Post
 from tags.models import Tag
 from utils.constants import POST_STATUS_DRAFT, POST_STATUS_PUBLISHED
@@ -11,7 +11,7 @@ from utils.constants import POST_STATUS_DRAFT, POST_STATUS_PUBLISHED
 class PostListSerializer(serializers.ModelSerializer):
     """Сериализатор списка постов."""
 
-    user = UsernameUserSerializer(read_only=True)
+    user = UsernameAvatarUserSerializer(read_only=True)
     content = serializers.SerializerMethodField()
     tags = TagSerializer(many=True, read_only=True)
 
@@ -29,7 +29,7 @@ class PostListSerializer(serializers.ModelSerializer):
 class PostListWithStatusSerializer(serializers.ModelSerializer):
     """Сериализатор поста со статусом."""
 
-    user = UsernameUserSerializer(read_only=True)
+    user = UsernameAvatarUserSerializer(read_only=True)
     tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
@@ -42,7 +42,7 @@ class PostListWithStatusSerializer(serializers.ModelSerializer):
 class PostDetailedSerializer(serializers.ModelSerializer):
     """Сериализатор детального просмотра поста."""
 
-    user = UsernameUserSerializer(read_only=True)
+    user = UsernameAvatarUserSerializer(read_only=True)
     tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
@@ -63,7 +63,7 @@ class PostDetailedSerializer(serializers.ModelSerializer):
 class PostForAuthorSerializer(serializers.ModelSerializer):
     """Сериализатор постов для авторов."""
 
-    user = UsernameUserSerializer(read_only=True)
+    user = UsernameAvatarUserSerializer(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
     updated_at = serializers.DateTimeField(read_only=True)
     tags = TagSerializer(many=True, read_only=True)

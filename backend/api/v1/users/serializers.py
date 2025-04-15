@@ -52,10 +52,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-class UsernameUserSerializer(serializers.ModelSerializer):
-    """Сериализатор для случаев когда требуется только имя пользователя."""
+class UsernameAvatarUserSerializer(serializers.ModelSerializer):
+    """Сериализатор для случаев когда требуется только имя пользователя и аватар."""
 
     class Meta:
         """Метакласс сериализатора."""
+
         model = get_user_model()
-        fields = ("id", "username")
+        fields = ("id", "username", "avatar")
