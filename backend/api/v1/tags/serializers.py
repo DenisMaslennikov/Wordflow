@@ -9,5 +9,12 @@ class TagSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
 
     class Meta:
+        """Метакласс сериализатора."""
+
         model = Tag
         fields = ("id", "name", "slug")
+
+    def validate_name(self, name):
+        """Валидация уникальности тега"""
+        if Tag.objects.filter(name=name).exists():
+            raise serializers.ValidationError({"name": "Тег с таким именем уже есть"})
