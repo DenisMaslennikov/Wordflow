@@ -9,6 +9,10 @@ class CustomUserManager(BaseUserManager):
         """Создание пользователя."""
         if not email:
             raise ValueError("Email обязателен")
+        if extra_fields.get("is_staff"):
+            raise ValueError("Пользователь не может иметь статус is_staff.")
+        if extra_fields.get("is_superuser"):
+            raise ValueError("Пользователь не может иметь статус is_superuser.")
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -40,6 +44,7 @@ class User(AbstractBaseUser):
     is_staff = models.BooleanField(default=False, help_text="Персонал")
     is_superuser = models.BooleanField(default=False, help_text="Суперпользователь")
     date_joined = models.DateTimeField(auto_now_add=True, help_text="Дата регистрации")
+    avatar = models.ImageField(help_text="Аватар пользователя", upload_to="users", null=True, blank=True)
 
     objects = CustomUserManager()
 
