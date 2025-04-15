@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 from blogs.models import Blog
+from images.models import Image
 from tags.models import Tag
 from utils.constants import POST_STATUS_DRAFT, POST_STATUS_PUBLISHED
 
@@ -21,10 +22,11 @@ class Post(models.Model):
     slug = models.SlugField(max_length=270, help_text="Имя поста в ссылке")
     title = models.CharField(max_length=255, help_text="Заголовок поста")
     content = models.TextField(help_text="Содержимое поста")
-    status = models.CharField(max_length=9, choices=STATUSES)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(blank=True, null=True)
+    status = models.CharField(max_length=9, choices=STATUSES, help_text="Статус")
+    created_at = models.DateTimeField(auto_now_add=True, help_text="Создано")
+    updated_at = models.DateTimeField(auto_now=True, help_text="Изменено")
+    published_at = models.DateTimeField(blank=True, null=True, help_text="Дата публикации")
+    preview = models.ForeignKey(Image, on_delete=models.SET_NULL, help_text="Превью к посту", null=True, blank=True)
 
     tags = models.ManyToManyField(Tag, related_name="posts", through="PostTag", help_text="Теги")
 
