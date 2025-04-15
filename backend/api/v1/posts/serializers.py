@@ -112,3 +112,10 @@ class PostForAuthorSerializer(serializers.ModelSerializer):
         post = super().create(validated_data)
         post.tags.set(tags)
         return post
+
+    def update(self, instance, validated_data):
+        """Обновление поста."""
+        tags = validated_data.pop("tag_ids", [])
+        post = super().update(instance, validated_data)
+        post.tags.set(tags)
+        return post
