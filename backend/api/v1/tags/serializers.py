@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from slugify import slugify
 
 from tags.models import Tag
 
@@ -7,6 +8,7 @@ class TagSerializer(serializers.ModelSerializer):
     """Сериализатор тегов."""
 
     id = serializers.IntegerField(read_only=True)
+    slug = serializers.CharField(read_only=True)
 
     class Meta:
         """Метакласс сериализатора."""
@@ -18,4 +20,7 @@ class TagSerializer(serializers.ModelSerializer):
         """Валидация уникальности тега"""
         if Tag.objects.filter(name=name).exists():
             raise serializers.ValidationError({"name": "Тег с таким именем уже есть"})
+        slug = slugify(name, lowercase=True, max_length=40, separator="_", regex_pattern=r"[^\w-]")
+        if Tag.objects.filter(slug=slug).exists():
+            raise serializers.ValidationError({"slug": "Тег с таким слагом уже есть"})
         return name
