@@ -2,9 +2,9 @@ from rest_framework import permissions
 from rest_framework.request import Request
 from rest_framework.viewsets import ModelViewSet
 
-from blogs.models import Blog, BlogAuthor
+from blogs.models import BlogAuthor
 from posts.models import Post
-from utils.constants import ADMINISTRATOR_ROLE_ID, AUTHOR_ROLE_ID
+from utils.constants import AUTHOR_ROLES
 
 
 class IsBlogAuthorOrForbidden(permissions.BasePermission):
@@ -15,9 +15,7 @@ class IsBlogAuthorOrForbidden(permissions.BasePermission):
         if (
             request.user
             and request.user.is_authenticated
-            and BlogAuthor.objects.filter(
-                blog=obj.blog, role__in=[AUTHOR_ROLE_ID, AUTHOR_ROLE_ID], user_id=request.user.id
-            ).exists()
+            and BlogAuthor.objects.filter(blog=obj.blog, role__in=AUTHOR_ROLES, user_id=request.user.id).exists()
         ):
             return True
         return False
@@ -27,4 +25,4 @@ class IsBlogAuthorOrForbidden(permissions.BasePermission):
         blog_id = view.kwargs.get("blog_id") or request.query_params.get("blog_id")
         if not blog_id or not request.user.is_authenticated:
             return False
-        return Blog.objects.filter(id=blog_id, authors=request.user).exists()
+        return BlogAuthor.objects.filter(blog_id=blog_id, user_id=request.user.id, role__in=AUTHOR_ROLES).exists()
