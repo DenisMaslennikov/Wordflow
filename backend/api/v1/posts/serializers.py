@@ -4,6 +4,7 @@ from rest_framework import serializers
 from api.v1.tags.serializers import TagSerializer
 from api.v1.users.serializers import UsernameUserSerializer
 from posts.models import Post
+from tags.models import Tag
 from utils.constants import POST_STATUS_DRAFT, POST_STATUS_PUBLISHED
 
 
@@ -42,6 +43,7 @@ class PostDetailedSerializer(serializers.ModelSerializer):
     """Сериализатор детального просмотра поста."""
 
     user = UsernameUserSerializer(read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
         """Метаклас сериализатора детального просмотра поста."""
@@ -54,6 +56,7 @@ class PostDetailedSerializer(serializers.ModelSerializer):
             "title",
             "content",
             "published_at",
+            "tags",
         )
 
 
@@ -63,6 +66,8 @@ class PostForAuthorSerializer(serializers.ModelSerializer):
     user = UsernameUserSerializer(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
     updated_at = serializers.DateTimeField(read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
+    tag_ids = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all(), write_only=True, required=False)
 
     class Meta:
         """Метакласс сериализатора постов для автора."""
@@ -78,6 +83,8 @@ class PostForAuthorSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
             "status",
+            "tags",
+            "tag_ids",
         )
 
     def validate(self, attrs):
@@ -98,3 +105,10 @@ class PostForAuthorSerializer(serializers.ModelSerializer):
                 {"status": "Недопустимое значение поля status может быть только Published или Draft"}
             )
         return status
+
+    def create(self, validated_data):
+        """Создание нового поста."""
+        tags = validated_data.pop("tag_ids", [])
+        post = super().create(validated_data)
+        post.tags.set(tags)
+        return post
