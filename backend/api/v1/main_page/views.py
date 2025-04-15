@@ -1,3 +1,5 @@
+import datetime
+
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import viewsets, mixins, filters
@@ -12,7 +14,11 @@ from posts.models import Post
 class MainPagePostsAPIView(ListAPIView):
     """Апи вью для постов на главной странице."""
 
-    queryset = Post.objects.all().select_related("user").prefetch_related("tags")
+    queryset = (
+        Post.objects.select_related("user")
+        .prefetch_related("tags")
+        .filter(published_at__lte=datetime.datetime.now(), status__exact="Published")
+    )
     serializer_class = PostListSerializer
     filter_backends = (PrioritizedPostSearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     search_fields = ("title", "content")
