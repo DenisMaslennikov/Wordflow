@@ -3,12 +3,12 @@ from rest_framework.routers import DefaultRouter
 
 from api.v1.blogs.views import BlogViewSet
 from api.v1.main_page.views import MainPagePostsListAPIView
-from api.v1.posts.views import PostListAPIView, PostRetrieveAPIView
+from api.v1.posts.views import PostListAPIView, PostRetrieveAPIView, PostForAuthorViewSet
 from api.v1.users.views import RegisterView
 
 router = DefaultRouter()
 router.register("blogs", BlogViewSet)
-router.register(r"posts", PostListAPIView)
+router.register(r"posts", PostForAuthorViewSet)
 
 app_name = "v1"
 

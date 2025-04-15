@@ -34,3 +34,22 @@ class PostDetailedSerializer(serializers.ModelSerializer):
             "content",
             "published_at",
         )
+
+
+class PostForAuthorSerializer(serializers.ModelSerializer):
+    user = UsernameUserSerializer(read_only=True)
+    created_at = serializers.DateTimeField(read_only=True)
+    updated_at = serializers.DateTimeField(read_only=True)
+
+    class Meta:
+        model = Post
+        fields = (
+            "id",
+            "user",
+            "slug",
+            "title",
+            "content",
+            "published_at",
+            "created_at",
+            "updated_at",
+        )
