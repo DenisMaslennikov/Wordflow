@@ -1,5 +1,6 @@
 from django.db import models
-from slugify import slugify
+
+from utils.tools import tag_slugify
 
 
 class Tag(models.Model):
@@ -13,5 +14,5 @@ class Tag(models.Model):
 
     def save(self, *args, **kwargs):
         """Сохранение модели."""
-        self.slug = slugify(self.name, lowercase=True, max_length=40, separator="_", regex_pattern=r"[^\w-]")
+        self.slug = tag_slugify(self.name)
         super().save(*args, **kwargs)

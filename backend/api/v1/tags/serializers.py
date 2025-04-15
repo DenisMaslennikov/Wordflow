@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from slugify import slugify
 
 from tags.models import Tag
+from utils.tools import tag_slugify
 
 
 class TagSerializer(serializers.ModelSerializer):
