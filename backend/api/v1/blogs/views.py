@@ -1,5 +1,6 @@
 from django.db.transaction import atomic
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
 
@@ -19,8 +20,20 @@ class BlogViewSet(ModelViewSet):
     pagination_class = BlogPagination
     filter_backends = (DjangoFilterBackend, PrioritizedBlogSearchFilter, filters.OrderingFilter)
     filterset_fields = ("authors",)
-    search_fields = ("title", "description")
     ordering_fields = ("title", "description", "created_at")
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name="search",
+                type=str,
+                location=OpenApiParameter.QUERY,
+                description="Search by title and description",
+            ),
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        super().list(request, *args, **kwargs)
 
     @atomic
     def perform_create(self, serializer):
