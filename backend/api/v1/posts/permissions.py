@@ -2,16 +2,23 @@ from rest_framework import permissions
 from rest_framework.request import Request
 from rest_framework.viewsets import ModelViewSet
 
-from blogs.models import Blog
+from blogs.models import Blog, BlogAuthor
 from posts.models import Post
+from utils.constants import ADMINISTRATOR_ROLE_ID, AUTHOR_ROLE_ID
 
 
 class IsBlogAuthorOrForbidden(permissions.BasePermission):
-    """Автор блога или запрещено."""
+    """Автор/Администратор блога или запрещено."""
 
     def has_object_permission(self, request: Request, view: ModelViewSet, obj: Post) -> bool:
         """Права на конкретный пост."""
-        if request.user and request.user.is_authenticated and request.user in obj.blog.authors.all():
+        if (
+            request.user
+            and request.user.is_authenticated
+            and BlogAuthor.objects.filter(
+                blog=obj.blog, role__in=[AUTHOR_ROLE_ID, AUTHOR_ROLE_ID], user_id=request.user.id
+            ).exists()
+        ):
             return True
         return False
 
