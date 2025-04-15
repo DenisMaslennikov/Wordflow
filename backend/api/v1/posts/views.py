@@ -7,7 +7,12 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from api.v1.posts.filters import PrioritizedPostSearchFilter
 from api.v1.posts.pagination import PostPagination
 from api.v1.posts.permissions import IsBlogAuthorOrForbidden
-from api.v1.posts.serializers import PostListSerializer, PostDetailedSerializer, PostForAuthorSerializer
+from api.v1.posts.serializers import (
+    PostListSerializer,
+    PostDetailedSerializer,
+    PostForAuthorSerializer,
+    PostListWithStatusSerializer,
+)
 from config.constants import POST_STATUS_PUBLISHED
 from posts.models import Post
 
@@ -69,12 +74,12 @@ class PostForAuthorViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         """Возвращает класс сериализатора в зависимости от типа запроса."""
         if self.action == "list":
-            return PostListSerializer
+            return PostListWithStatusSerializer
         return PostForAuthorSerializer
 
     def perform_create(self, serializer):
         """Создание нового поста."""
-        serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user, blog_id=self.kwargs["blog_id"])
 
     def perform_update(self, serializer):
         """Обновление поста."""

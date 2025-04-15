@@ -33,11 +33,22 @@ class Post(models.Model):
             models.UniqueConstraint(
                 fields=["blog", "slug"],
                 name="unique_blog_post_slug",
-            )
+            ),
+            models.CheckConstraint(
+                check=models.Q(status__in=dict(STATUSES).keys()),
+                name="check_valid_post_status",
+                violation_error_message="Статус должен быть 'Draft' или 'Published'",
+            ),
         ]
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        """При сохранении проверяем что статус является допустимым значением."""
+        if self.status not in dict(STATUSES).keys():
+            raise ValueError(f"Invalid status value: {self.status}. Allowed values: {dict(STATUSES).keys()}")
+        super().save(*args, **kwargs)
 
 
 class PostTag(models.Model):
