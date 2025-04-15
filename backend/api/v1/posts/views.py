@@ -8,13 +8,13 @@ from api.v1.posts.filters import PrioritizedPostSearchFilter
 from api.v1.posts.pagination import PostPagination
 from api.v1.posts.permissions import IsBlogAuthorOrForbidden
 from api.v1.posts.serializers import (
-    PostListSerializer,
     PostDetailedSerializer,
     PostForAuthorSerializer,
+    PostListSerializer,
     PostListWithStatusSerializer,
 )
-from utils.constants import POST_STATUS_PUBLISHED
 from posts.models import Post
+from utils.constants import POST_STATUS_PUBLISHED
 
 
 class PostListAPIView(ListAPIView):

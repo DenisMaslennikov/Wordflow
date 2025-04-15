@@ -3,39 +3,49 @@ from rest_framework import serializers
 
 from api.v1.tags.serializers import TagSerializer
 from api.v1.users.serializers import UsernameUserSerializer
-from utils.constants import POST_STATUS_PUBLISHED, POST_STATUS_DRAFT
 from posts.models import Post
+from utils.constants import POST_STATUS_DRAFT, POST_STATUS_PUBLISHED
 
 
 class PostListSerializer(serializers.ModelSerializer):
+    """Сериализатор списка постов."""
 
     user = UsernameUserSerializer(read_only=True)
     content = serializers.SerializerMethodField()
     tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
+        """Метаклас сериализатора списка постов."""
+
         model = Post
         fields = ("id", "user", "slug", "title", "content", "published_at", "tags")
 
     def get_content(self, obj) -> str:
+        """Получение поля content для списка постов."""
         return Truncator(obj.content).words(30)
 
 
 class PostListWithStatusSerializer(serializers.ModelSerializer):
+    """Сериализатор поста со статусом."""
 
     user = UsernameUserSerializer(read_only=True)
     tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
+        """Метакласс сериализатора поста со статусом."""
+
         model = Post
         fields = ("id", "user", "slug", "title", "published_at", "tags", "status")
 
 
 class PostDetailedSerializer(serializers.ModelSerializer):
+    """Сериализатор детального просмотра поста."""
 
     user = UsernameUserSerializer(read_only=True)
 
     class Meta:
+        """Метаклас сериализатора детального просмотра поста."""
+
         model = Post
         fields = (
             "id",
@@ -48,11 +58,15 @@ class PostDetailedSerializer(serializers.ModelSerializer):
 
 
 class PostForAuthorSerializer(serializers.ModelSerializer):
+    """Сериализатор постов для авторов."""
+
     user = UsernameUserSerializer(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
     updated_at = serializers.DateTimeField(read_only=True)
 
     class Meta:
+        """Метакласс сериализатора постов для автора."""
+
         model = Post
         fields = (
             "id",

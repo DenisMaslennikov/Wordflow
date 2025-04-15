@@ -1,15 +1,15 @@
 import datetime
 
 from django_filters.rest_framework import DjangoFilterBackend
-from drf_spectacular.utils import extend_schema, OpenApiParameter
-from rest_framework import viewsets, mixins, filters
+from drf_spectacular.utils import OpenApiParameter, extend_schema
+from rest_framework import filters
 from rest_framework.generics import ListAPIView
 
 from api.v1.posts.filters import PrioritizedPostSearchFilter
 from api.v1.posts.pagination import PostPagination
 from api.v1.posts.serializers import PostListSerializer
-from utils.constants import POST_STATUS_PUBLISHED
 from posts.models import Post
+from utils.constants import POST_STATUS_PUBLISHED
 
 
 class MainPagePostsListAPIView(ListAPIView):

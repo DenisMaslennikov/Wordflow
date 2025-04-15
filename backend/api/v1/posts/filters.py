@@ -1,5 +1,5 @@
+from django.db.models import Case, IntegerField, Q, Value, When
 from rest_framework import filters
-from django.db.models import Case, When, Q, IntegerField, Value
 
 
 class PrioritizedPostSearchFilter(filters.BaseFilterBackend):

@@ -33,6 +33,7 @@ class BlogViewSet(ModelViewSet):
         ]
     )
     def list(self, request, *args, **kwargs):
+        """Получение списка постов."""
         return super().list(request, *args, **kwargs)
 
     @atomic

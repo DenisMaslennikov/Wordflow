@@ -1,4 +1,4 @@
-from django.db.models import Case, When, IntegerField, Value, Q
+from django.db.models import Case, IntegerField, Q, Value, When
 from rest_framework.filters import BaseFilterBackend
 
 
