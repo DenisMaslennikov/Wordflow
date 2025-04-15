@@ -1,0 +1,2 @@
+POST_STATUS_PUBLISHED = "Published"
+POST_STATUS_DRAFT = "Draft"
