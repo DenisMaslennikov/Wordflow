@@ -33,7 +33,7 @@ class BlogViewSet(ModelViewSet):
         ]
     )
     def list(self, request, *args, **kwargs):
-        super().list(request, *args, **kwargs)
+        return super().list(request, *args, **kwargs)
 
     @atomic
     def perform_create(self, serializer):
