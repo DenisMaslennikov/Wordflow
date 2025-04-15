@@ -9,10 +9,10 @@ class PrioritizedBlogSearchFilter(BaseFilterBackend):
         """Получаем фильтрованный кверисет."""
         search_query = request.query_params.get("search", "")
 
-        if not search_query:
-            return queryset
-
         term = search_query.strip()
+
+        if not term:
+            return queryset
 
         prioritized_filtered_qs = (
             queryset.annotate(
