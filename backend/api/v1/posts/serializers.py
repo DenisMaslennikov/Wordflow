@@ -89,11 +89,17 @@ class PostForAuthorSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         """Валидация уникальности слага для блога."""
+        instance = self.instance
         blog_id = self.context["view"].kwargs.get("blog_id")
         slug = attrs.get("slug")
 
         # Проверяем существование поста с таким slug в этом блоге
-        if Post.objects.filter(blog_id=blog_id, slug=slug).exists():
+        qs = Post.objects.filter(blog_id=blog_id, slug=slug)
+
+        if instance:
+            qs = qs.exclude(pk=instance.pk)
+
+        if qs.exists():
             raise serializers.ValidationError({"slug": "Пост с таким slug уже существует в этом блоге"})
 
         return attrs
