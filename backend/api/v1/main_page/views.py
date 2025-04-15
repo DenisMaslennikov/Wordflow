@@ -38,4 +38,5 @@ class MainPagePostsListAPIView(ListAPIView):
         ]
     )
     def get(self, request, *args, **kwargs):
+        """GET метод для получения списка постов."""
         return super().get(request, *args, **kwargs)
