@@ -8,12 +8,14 @@ from api.v1.users.views import RegisterView
 
 router = DefaultRouter()
 router.register("blogs", BlogViewSet)
-router.register(r"posts", PostForAuthorViewSet)
+blog_router = DefaultRouter()
+blog_router.register("posts", PostForAuthorViewSet)
 
 app_name = "v1"
 
 urlpatterns = [
     path("", include(router.urls)),
+    path("blog/<int:blog_id>/", include(blog_router.urls)),
     path("user/register/", RegisterView.as_view(), name="register"),
     path("main_page/posts/", MainPagePostsListAPIView.as_view(), name="main_page_posts"),
     path("blog_posts/<int:blog_id>", PostListAPIView.as_view(), name="blog_posts"),
