@@ -32,7 +32,12 @@ class BlogViewSet(ModelViewSet):
 
     def get_queryset(self):
         """Получение кверисета в зависимости от типа запроса."""
-        if self.action == "retrieve":
+        if (
+            self.action == "retrieve"
+            or self.action == "update"
+            or self.action == "partial_update"
+            or self.action == "create"
+        ):
             return Blog.objects.prefetch_related("authors").all()
         return Blog.objects.all()
 
