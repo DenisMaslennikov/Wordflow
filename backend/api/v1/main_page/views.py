@@ -12,7 +12,7 @@ from config.constants import POST_STATUS_PUBLISHED
 from posts.models import Post
 
 
-class MainPagePostsAPIView(ListAPIView):
+class MainPagePostsListAPIView(ListAPIView):
     """Апи вью для постов на главной странице."""
 
     queryset = (
