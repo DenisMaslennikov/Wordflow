@@ -28,6 +28,14 @@ class Post(models.Model):
 
     tags = models.ManyToManyField(Tag, related_name="posts", through="PostTag", help_text="Теги")
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["blog", "slug"],
+                name="unique_blog_post_slug",
+            )
+        ]
+
     def __str__(self):
         return self.title
 
