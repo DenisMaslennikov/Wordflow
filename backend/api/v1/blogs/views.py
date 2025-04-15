@@ -47,6 +47,4 @@ class BlogViewSet(ModelViewSet):
             return BlogDetailedSerializer
         elif self.action == "create" or self.action == "update" or self.action == "partial_update":
             return BlogCreateUpdateSerializer
-        elif self.action == "list":
-            return BlogListSerializer
-        return None
+        return BlogListSerializer
