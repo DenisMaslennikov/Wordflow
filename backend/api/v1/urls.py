@@ -12,7 +12,7 @@ router = DefaultRouter()
 router.register("blogs", BlogViewSet)
 router.register("tags", TagsViewSet)
 blog_router = DefaultRouter()
-blog_router.register("posts", PostForAuthorViewSet)
+blog_router.register("posts", PostForAuthorViewSet, basename="blog-posts")
 
 app_name = "v1"
 
@@ -21,7 +21,7 @@ urlpatterns = [
     path("blog/<int:blog_id>/", include(blog_router.urls)),
     path("user/register/", RegisterView.as_view(), name="register"),
     path("main_page/posts/", MainPagePostsListAPIView.as_view(), name="main_page_posts"),
-    path("blog_posts/<int:blog_id>", PostListAPIView.as_view(), name="blog_posts"),
-    path("blog_post/<int:id>", PostRetrieveAPIView.as_view(), name="blog_post"),
+    path("blog_posts/<int:blog_id>/", PostListAPIView.as_view(), name="blog_posts"),
+    path("blog_post/<int:id>/", PostRetrieveAPIView.as_view(), name="blog_post"),
     path("roles/", RolesListAPIView.as_view(), name="roles"),
 ]
