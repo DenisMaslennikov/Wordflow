@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "posts.apps.PostsConfig",
     "comments.apps.CommentsConfig",
     "tags.apps.TagsConfig",
+    "roles.apps.RolesConfig",
 ]
 
 MIDDLEWARE = [
