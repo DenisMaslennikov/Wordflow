@@ -16,7 +16,7 @@ class PostListSerializer(serializers.ModelSerializer):
         model = Post
         fields = ("id", "user", "slug", "title", "content", "published_at", "tags")
 
-    def get_content(self, obj):
+    def get_content(self, obj) -> str:
         return Truncator(obj.content).words(30)
 
 
