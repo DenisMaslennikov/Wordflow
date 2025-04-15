@@ -2,13 +2,14 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 from blogs.models import Blog
+from config.constants import POST_STATUS_PUBLISHED, POST_STATUS_DRAFT
 from tags.models import Tag
 
 User = get_user_model()
 
 STATUSES = (
-    ("Draft", "Черновик"),
-    ("Published", "Опубликованный"),
+    (POST_STATUS_DRAFT, "Черновик"),
+    (POST_STATUS_PUBLISHED, "Опубликованный"),
 )
 
 

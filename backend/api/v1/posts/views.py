@@ -7,6 +7,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from api.v1.posts.filters import PrioritizedPostSearchFilter
 from api.v1.posts.pagination import PostPagination
 from api.v1.posts.serializers import PostListSerializer, PostDetailedSerializer
+from config.constants import POST_STATUS_PUBLISHED
 from posts.models import Post
 
 
@@ -22,7 +23,11 @@ class PostListAPIView(ListAPIView):
     def get_queryset(self):
         blog_id = self.kwargs["blog_id"]
         return (
-            Post.objects.filter(blog_id=blog_id, published_at__lte=datetime.datetime.now(), status__exact="Published")
+            Post.objects.filter(
+                blog_id=blog_id,
+                published_at__lte=datetime.datetime.now(tz=datetime.timezone.utc),
+                status__exact=POST_STATUS_PUBLISHED,
+            )
             .select_related("user")
             .prefetch_related("tags")
         )
@@ -30,7 +35,9 @@ class PostListAPIView(ListAPIView):
 
 class PostRetrieveAPIView(RetrieveAPIView):
     queryset = (
-        Post.objects.filter(published_at__lte=datetime.datetime.now(), status__exact="Published")
+        Post.objects.filter(
+            published_at__lte=datetime.datetime.now(tz=datetime.timezone.utc), status__exact=POST_STATUS_PUBLISHED
+        )
         .select_related("user")
         .prefetch_related("tags")
     )
