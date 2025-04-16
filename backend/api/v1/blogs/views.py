@@ -72,6 +72,7 @@ class BlogViewSet(ModelViewSet):
             return BlogCreateUpdateSerializer
         return BlogListSerializer
 
+    @extend_schema(responses=UserRoleListSerializer)
     @decorators.action(
         detail=True,
         methods=["get"],
