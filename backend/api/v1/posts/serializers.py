@@ -93,7 +93,9 @@ class PostForAuthorSerializer(serializers.ModelSerializer):
         blog_id = self.context["view"].kwargs.get("blog_id")
         slug = attrs.get("slug")
 
-        # Проверяем существование поста с таким slug в этом блоге
+        if slug is None:
+            return attrs
+
         qs = Post.objects.filter(blog_id=blog_id, slug=slug)
 
         if instance:
@@ -121,7 +123,9 @@ class PostForAuthorSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         """Обновление поста."""
-        tags = validated_data.pop("tag_ids", [])
+        tags = validated_data.pop("tag_ids", None)
         post = super().update(instance, validated_data)
-        post.tags.set(tags)
+        if tags is not None:
+            if set(tags) != set(instance.tags.all()):
+                instance.tags.set(tags)
         return post
