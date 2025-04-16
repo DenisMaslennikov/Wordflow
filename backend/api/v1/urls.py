@@ -12,7 +12,7 @@ router = DefaultRouter()
 router.register("blogs", BlogViewSet)
 router.register("tags", TagsViewSet)
 blog_router = DefaultRouter()
-blog_router.register("posts", PostForAuthorViewSet, basename="blog-posts")
+blog_router.register("posts", PostForAuthorViewSet, basename="blog-author-posts")
 
 app_name = "v1"
 
