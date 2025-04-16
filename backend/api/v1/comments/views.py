@@ -19,3 +19,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """Создание комментария."""
         serializer.save(user=self.request.user, post_id=self.kwargs["post_id"])
+
+    def perform_update(self, serializer):
+        """Обновление комментария."""
+        serializer.save(edited=True)
