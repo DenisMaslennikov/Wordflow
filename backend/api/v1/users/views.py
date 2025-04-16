@@ -1,7 +1,10 @@
-from rest_framework import generics
+from django.contrib.auth import get_user_model
+from rest_framework import generics, viewsets, parsers, renderers
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .serializers import CustomTokenObtainPairSerializer, RegisterSerializer
+from .serializers import CustomTokenObtainPairSerializer, UserSerializer
+
+User = get_user_model()
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
@@ -10,7 +13,10 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
 
-class RegisterView(generics.CreateAPIView):
-    """Представление регистрации пользователей."""
+class UserViewSet(viewsets.ModelViewSet):
+    """Вьюсет пользователя."""
 
-    serializer_class = RegisterSerializer
+    queryset = User.objects.all()
+    parser_classes = (parsers.MultiPartParser, parsers.FormParser)
+    renderer_classes = (renderers.JSONRenderer,)
+    serializer_class = UserSerializer

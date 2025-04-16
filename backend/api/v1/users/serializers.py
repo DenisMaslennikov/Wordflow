@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from rest_framework import exceptions, serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
+User = get_user_model()
+
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """Сериализатор получения пару токенов (access & refresh)."""
@@ -12,7 +14,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         password = attrs.get("password")
 
         if email and password:
-            user = get_user_model().objects.filter(email=email).first()
+            user = User.objects.filter(email=email).first()
 
             if user and user.check_password(password):
                 if not user.is_active:
@@ -33,30 +35,45 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         return token
 
 
-class RegisterSerializer(serializers.ModelSerializer):
-    """Сериализатор регистрации пользователей."""
-
-    password = serializers.CharField(write_only=True, required=True)
-
-    class Meta:
-        """Метакласс серилизатора регистрации."""
-
-        model = get_user_model()
-        fields = ("email", "password", "username")
-
-    def create(self, validated_data):
-        """Создание нового пользователя."""
-        user = get_user_model().objects.create_user(
-            email=validated_data["email"], password=validated_data["password"], username=validated_data["username"]
-        )
-        return user
-
-
 class UsernameAvatarUserSerializer(serializers.ModelSerializer):
     """Сериализатор для случаев когда требуется только имя пользователя и аватар."""
 
     class Meta:
         """Метакласс сериализатора."""
 
-        model = get_user_model()
+        model = User
         fields = ("id", "username", "avatar")
+
+
+class UserSerializer(serializers.ModelSerializer):
+    """Сериализатор пользователя."""
+
+    id = serializers.IntegerField(read_only=True)
+    password = serializers.CharField(write_only=True, required=True)
+    email = serializers.EmailField(write_only=True, required=True)
+
+    class Meta:
+        """Метакласс сериализатора пользователя."""
+
+        model = User
+        fields = ("id", "username", "email", "password", "first_name", "last_name", "bio", "avatar")
+        extra_kwargs = {
+            "avatar": {"required": False},
+            "bio": {"required": False},
+            "first_name": {"required": False},
+            "last_name": {"required": False},
+        }
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        user.save()
+        return user
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop("password", None)
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        if password:
+            instance.set_password(password)
+        instance.save()
+        return instance
