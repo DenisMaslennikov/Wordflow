@@ -9,6 +9,9 @@ start: ## Запустить контейнеры Docker
 bash: ## Открыть оболочку bash в контейнере 'api'
 	docker compose exec $(CONTAINER_NAME) bash
 
+frontend_bash: ## Открыть оболочку bash в контейнере 'frontend'
+	docker compose exec frontend bash
+
 drop: ## Остановить и удалить контейнеры Docker
 	docker compose down -v
 
