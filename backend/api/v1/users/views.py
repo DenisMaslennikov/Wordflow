@@ -26,7 +26,7 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
 
     @decorators.action(detail=False, methods=["put", "patch", "get"], permission_classes=[IsMeOrReadOnly])
     def me(self, request):
-        """Эндпоинты для реализации редактирования профиля текущего пользователя."""
+        """Эндпоинты для реализации работы с профилем текущего пользователя."""
 
         user = request.user
 
