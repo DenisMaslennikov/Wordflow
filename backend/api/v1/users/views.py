@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from rest_framework import viewsets, parsers, renderers, mixins, decorators, filters
+from rest_framework import decorators, filters, mixins, parsers, renderers, viewsets
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -29,7 +29,6 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
     @decorators.action(detail=False, methods=["put", "patch", "get"], permission_classes=[IsMeOrReadOnly])
     def me(self, request):
         """Эндпоинты для реализации работы с профилем текущего пользователя."""
-
         user = request.user
 
         if request.method == "GET":

@@ -1,20 +1,20 @@
 from django.db.transaction import atomic
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import OpenApiParameter, extend_schema
-from rest_framework import filters, decorators
+from rest_framework import decorators, filters
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from api.v1.blogs.filters import PrioritizedBlogSearchFilter
 from api.v1.blogs.pagination import BlogPagination
-from api.v1.blogs.permissions import IsAdminOrReadOnly, IsAdminOrForbidden
+from api.v1.blogs.permissions import IsAdminOrForbidden, IsAdminOrReadOnly
 from api.v1.blogs.serializers import (
     BlogCreateUpdateSerializer,
     BlogDetailedSerializer,
     BlogListSerializer,
-    UserRoleListSerializer,
     BlogUserRoleSerializer,
+    UserRoleListSerializer,
     UserRoleSerializer,
 )
 from blogs.models import Blog, BlogAuthor

@@ -65,11 +65,13 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
+        """Создание пользователя."""
         user = User.objects.create_user(**validated_data)
         user.save()
         return user
 
     def update(self, instance, validated_data):
+        """Обновление пользователя."""
         password = validated_data.pop("password", None)
         for attr, value in validated_data.items():
             setattr(instance, attr, value)

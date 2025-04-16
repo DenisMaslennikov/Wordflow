@@ -1,6 +1,4 @@
-import os
-
-from rest_framework import viewsets, mixins, parsers, renderers
+from rest_framework import mixins, parsers, renderers, viewsets
 
 from api.v1.images.serializers import ImageSerializer
 from api.v1.posts.permissions import IsBlogAuthorOrForbidden

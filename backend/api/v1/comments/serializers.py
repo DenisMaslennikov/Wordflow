@@ -10,5 +10,7 @@ class CommentSerializer(serializers.ModelSerializer):
     edited = serializers.BooleanField(read_only=True)
 
     class Meta:
+        """Мета класс сериалзатора комментариев."""
+
         model = Comment
         fields = ("id", "content", "created_at", "edited")

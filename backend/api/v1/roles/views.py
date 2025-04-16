@@ -5,5 +5,7 @@ from roles.models import Role
 
 
 class RolesListAPIView(generics.ListAPIView):
+    """Список ролей."""
+
     queryset = Role.objects.all()
     serializer_class = RoleSerializer
