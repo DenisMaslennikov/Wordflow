@@ -69,7 +69,7 @@ class PostForAuthorViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Возвращает кверисет с постами блога если пользователь автор этого блога."""
-        return Post.objects.filter(blog_id=self.kwargs["blog_id"], blog__authors=self.request.user)
+        return Post.objects.filter(blog=self.kwargs["blog_id"]).prefetch_related("tags").select_related("user")
 
     def get_serializer_class(self):
         """Возвращает класс сериализатора в зависимости от типа запроса."""
