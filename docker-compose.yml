@@ -11,7 +11,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: docker\dev\api\Dockerfile
+      dockerfile: docker/dev/api/Dockerfile
     command: bash ./run_dev.sh
     env_file: config/.env
     ports:
@@ -22,6 +22,20 @@ services:
     depends_on:
       - db
     restart: always
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/dev/frontend/Dockerfile
+    command: npm run dev -- --host
+    volumes:
+      - "./frontend:/frontend/"
+      - /frontend/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+
 
 
 volumes:
