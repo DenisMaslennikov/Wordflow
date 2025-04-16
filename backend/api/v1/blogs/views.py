@@ -6,7 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from api.v1.blogs.filters import PrioritizedBlogSearchFilter
 from api.v1.blogs.pagination import BlogPagination
-from api.v1.blogs.permissions import IsOwnerOrReadOnly
+from api.v1.blogs.permissions import IsAdminOrReadOnly
 from api.v1.blogs.serializers import BlogCreateUpdateSerializer, BlogDetailedSerializer, BlogListSerializer
 from blogs.models import Blog
 
@@ -14,7 +14,7 @@ from blogs.models import Blog
 class BlogViewSet(ModelViewSet):
     """Вьюсет для модели Blog."""
 
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsAdminOrReadOnly,)
     serializer_class = BlogListSerializer
     queryset = Blog.objects.all()
     pagination_class = BlogPagination

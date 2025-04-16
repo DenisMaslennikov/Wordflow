@@ -1,9 +1,10 @@
 from rest_framework import permissions
 
-from blogs.models import Blog
+from blogs.models import Blog, BlogAuthor
+from utils.constants import ADMINISTRATOR_ROLE_ID
 
 
-class IsOwnerOrReadOnly(permissions.BasePermission):
+class IsAdminOrReadOnly(permissions.BasePermission):
     """Владелец блога или только чтение."""
 
     def has_permission(self, request, view):
@@ -16,4 +17,4 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         """Проверяет наличие прав на объект."""
         if request.method in permissions.SAFE_METHODS:
             return True
-        return request.user in obj.authors.all()
+        return BlogAuthor.objects.filter(user=request.user, role=ADMINISTRATOR_ROLE_ID).exists()
