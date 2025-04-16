@@ -12,3 +12,5 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, help_text="Пост к которому сделан комментарий")
     user = models.ForeignKey(User, on_delete=models.CASCADE, help_text="Пользователь сделавший комментарий")
     content = models.TextField(help_text="Содержимое комментария")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
