@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from rest_framework import viewsets, parsers, renderers, mixins, decorators
+from rest_framework import viewsets, parsers, renderers, mixins, decorators, filters
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -23,6 +23,8 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
     renderer_classes = (renderers.JSONRenderer,)
     serializer_class = UserSerializer
     permission_classes = (IsMeOrReadOnly,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ("username",)
 
     @decorators.action(detail=False, methods=["put", "patch", "get"], permission_classes=[IsMeOrReadOnly])
     def me(self, request):
