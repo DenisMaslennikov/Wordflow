@@ -41,7 +41,10 @@ function App() {
               <Route index path={"/"} element={<PostList />} />
               <Route path={"blog/:blogSlug"} element={<PostList />} />
             </Route>
-            <Route path={"blog/:blogSlug/:postSlug"} element={<Post />} />
+            <Route
+              path={"blog/:blogSlug/:postSlug/:postId"}
+              element={<Post />}
+            />
             <Route path={"profile"} element={<EditUserProfile />} />
             <Route path={"user/:username"} element={<UserProfile />} />
             <Route path={"register"} element={<Registration />} />
@@ -59,7 +62,10 @@ function App() {
               <Route index element={<Navigate replace to={"posts"} />} />
               <Route path={"posts"} element={<BloggerPostList />} />
             </Route>
-            <Route path={"post/:postSlug"} element={<BloggerPostEditor />} />
+            <Route
+              path={"post/:postSlug/:postId"}
+              element={<BloggerPostEditor />}
+            />
             <Route path={"users"} element={<BloggerAdmin />} />
             <Route path={"comments"} element={<BloggerComments />} />
             <Route path={"images"} element={<BloggerImages />} />
