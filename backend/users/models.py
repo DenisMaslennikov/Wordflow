@@ -28,7 +28,8 @@ class CustomUserManager(BaseUserManager):
             raise ValueError("Суперпользователь должен иметь is_staff=True.")
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Суперпользователь должен иметь is_superuser=True.")
-
+        # TODO Добавить логику регистрации суперпользователя если понадобится. Сейчас суперпользователя нельзя создать
+        #  так как в create_user идет проверка на is_staff и is_superuser
         return self.create_user(email, password, **extra_fields)
 
 
