@@ -18,6 +18,7 @@ from api.v1.blogs.serializers import (
     UserRoleSerializer,
 )
 from blogs.models import Blog, BlogAuthor
+from utils.constants import ADMINISTRATOR_ROLE_ID
 
 
 class BlogViewSet(ModelViewSet):
@@ -49,8 +50,9 @@ class BlogViewSet(ModelViewSet):
     def perform_create(self, serializer):
         """Создание нового блога."""
         blog = serializer.save()
-        blog.authors.add(self.request.user)
-        blog.save()
+        admin = BlogAuthor.objects.create(blog=blog, user=self.request.user, role_id=ADMINISTRATOR_ROLE_ID)
+        admin.save()
+
         return blog
 
     def get_queryset(self):
