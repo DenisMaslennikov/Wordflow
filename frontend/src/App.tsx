@@ -18,6 +18,7 @@ import BloggerComments from "./pages/BloggerComments.tsx";
 import BloggerImages from "./pages/BloggerImages.tsx";
 import Registration from "./pages/Registration.tsx";
 import Login from "./pages/Login.tsx";
+import PageNotFound from "./pages/PageNotFound.tsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -63,6 +64,7 @@ function App() {
             <Route path={"comments"} element={<BloggerComments />} />
             <Route path={"images"} element={<BloggerImages />} />
           </Route>
+          <Route path={"*"} element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
 
