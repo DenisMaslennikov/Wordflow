@@ -21,7 +21,7 @@ services:
       - django_media:/media
     depends_on:
       - db
-    restart: always
+    restart: unless-stopped
 
   frontend:
     build:
