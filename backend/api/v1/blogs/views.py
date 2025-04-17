@@ -31,6 +31,7 @@ class BlogViewSet(ModelViewSet):
     filter_backends = (DjangoFilterBackend, PrioritizedBlogSearchFilter, filters.OrderingFilter)
     filterset_fields = ("authors",)
     ordering_fields = ("title", "description", "created_at")
+    lookup_field = "slug"
 
     @extend_schema(
         parameters=[
