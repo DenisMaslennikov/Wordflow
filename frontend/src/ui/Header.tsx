@@ -17,6 +17,7 @@ const LeftHeaderBlock = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
+  align-items: center;
   gap: 2rem;
 `;
 
@@ -24,6 +25,7 @@ const RightHeaderBlock = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
+  align-items: center;
   gap: 2rem;
 `;
 
