@@ -19,6 +19,7 @@ import BloggerImages from "./pages/BloggerImages.tsx";
 import Registration from "./pages/Registration.tsx";
 import Login from "./pages/Login.tsx";
 import PageNotFound from "./pages/PageNotFound.tsx";
+import AppWrapper from "./ui/AppWrapper.tsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,46 +34,47 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
       <GlobalStyles />
-
-      <BrowserRouter>
-        <Routes>
-          <Route element={<BlogLayout />}>
-            <Route element={<PostListView />}>
-              <Route index path={"/"} element={<PostList />} />
-              <Route path={"blog/:blogSlug"} element={<PostList />} />
+      <AppWrapper>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<BlogLayout />}>
+              <Route element={<PostListView />}>
+                <Route index path={"/"} element={<PostList />} />
+                <Route path={"blog/:blogSlug"} element={<PostList />} />
+              </Route>
+              <Route
+                path={"blog/:blogSlug/:postSlug/:postId"}
+                element={<Post />}
+              />
+              <Route path={"profile"} element={<EditUserProfile />} />
+              <Route path={"user/:username"} element={<UserProfile />} />
+              <Route path={"register"} element={<Registration />} />
+              <Route path={"login"} element={<Login />} />
             </Route>
             <Route
-              path={"blog/:blogSlug/:postSlug/:postId"}
-              element={<Post />}
-            />
-            <Route path={"profile"} element={<EditUserProfile />} />
-            <Route path={"user/:username"} element={<UserProfile />} />
-            <Route path={"register"} element={<Registration />} />
-            <Route path={"login"} element={<Login />} />
-          </Route>
-          <Route
-            path={"admin/:blogSlug"}
-            element={
-              <ProtectedRoute>
-                <BloggerLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route element={<PostListView />}>
-              <Route index element={<Navigate replace to={"posts"} />} />
-              <Route path={"posts"} element={<BloggerPostList />} />
+              path={"admin/:blogSlug"}
+              element={
+                <ProtectedRoute>
+                  <BloggerLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route element={<PostListView />}>
+                <Route index element={<Navigate replace to={"posts"} />} />
+                <Route path={"posts"} element={<BloggerPostList />} />
+              </Route>
+              <Route
+                path={"post/:postSlug/:postId"}
+                element={<BloggerPostEditor />}
+              />
+              <Route path={"users"} element={<BloggerAdmin />} />
+              <Route path={"comments"} element={<BloggerComments />} />
+              <Route path={"images"} element={<BloggerImages />} />
             </Route>
-            <Route
-              path={"post/:postSlug/:postId"}
-              element={<BloggerPostEditor />}
-            />
-            <Route path={"users"} element={<BloggerAdmin />} />
-            <Route path={"comments"} element={<BloggerComments />} />
-            <Route path={"images"} element={<BloggerImages />} />
-          </Route>
-          <Route path={"*"} element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
+            <Route path={"*"} element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AppWrapper>
 
       <Toaster
         position="top-right"
