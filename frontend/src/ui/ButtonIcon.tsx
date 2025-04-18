@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { HOVER_COLOR, BUTTONS_MAIN_COLOR } from "../utils/constants.ts";
+import { HOVER_COLOR, BUTTON_TEXT_COLOR } from "../utils/constants.ts";
 
 const ButtonIcon = styled.button<{ $height?: string; $width?: string }>`
   background: none;
@@ -9,7 +9,7 @@ const ButtonIcon = styled.button<{ $height?: string; $width?: string }>`
   & svg {
     width: ${({ $width = "2.2rem" }) => $width};
     height: ${({ $height = "2.2rem" }) => $height};
-    color: var(${BUTTONS_MAIN_COLOR});
+    color: var(${BUTTON_TEXT_COLOR});
   }
 
   &:hover {
