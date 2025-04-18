@@ -8,7 +8,7 @@ const Img = styled.img`
 
 const LogoContainer = styled.div`
   display: flex;
-  gap: 0.5rem;
+  gap: 0.2rem;
   text-align: center;
   align-items: center;
 `;
