@@ -31,7 +31,6 @@ const GlobalStyles = createGlobalStyle`
           --color-grey-900: #fff;
         }
       
-        --color-hover: #769eef;
         --color-active: #769eef;
       
         --border-radius-tiny: 3px;
