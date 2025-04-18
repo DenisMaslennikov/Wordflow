@@ -7,6 +7,8 @@ const MenuLink = styled(NavLink)`
     display: flex;
     align-items: center;
 
+    gap: 0.3rem;
+
     color: var(--color-grey-700);
     font-size: 1.6rem;
     font-weight: 500;
@@ -21,6 +23,17 @@ const MenuLink = styled(NavLink)`
     color: var(--color-active);
     background-color: var(--color-grey-50);
     border-radius: var(--border-radius-sm);
+  }
+
+  & svg {
+    color: var(--color-grey-900);
+  }
+
+  &:hover svg,
+  &:active svg,
+  &.active:link svg,
+  &.active:visited svg {
+    color: var(--color-active);
   }
 `;
 
