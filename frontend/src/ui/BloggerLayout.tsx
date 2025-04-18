@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
+import Header from "./Header.tsx";
 
 function BloggerLayout() {
   return (
-    <div>
+    <>
+      <Header>BloggerLayout</Header>
       <Outlet />
-    </div>
+    </>
   );
 }
 
