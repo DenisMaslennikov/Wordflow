@@ -5,6 +5,7 @@ import BlogMenu from "./BlogMenu.tsx";
 import useDarkMode from "../hooks/useDarkMode.ts";
 import ButtonIcon from "./ButtonIcon.tsx";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
+import UserMenu from "./UserMenu.tsx";
 
 function BlogLayout() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -16,9 +17,7 @@ function BlogLayout() {
           <BlogMenu />
         </Header.LeftHeaderBlock>
         <Header.RightHeaderBlock>
-          <button>Регистрация</button>
-          <button>Регистрация</button>
-          <button>Регистрация</button>
+          <UserMenu />
           <ButtonIcon onClick={toggleDarkMode}>
             {isDarkMode ? <HiOutlineSun /> : <HiOutlineMoon />}
           </ButtonIcon>
