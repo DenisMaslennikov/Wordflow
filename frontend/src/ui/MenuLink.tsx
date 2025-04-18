@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { HOVER_COLOR } from "../utils/constants.ts";
 
 const MenuLink = styled(NavLink)`
   &:link,
@@ -21,7 +22,7 @@ const MenuLink = styled(NavLink)`
   &.active:link,
   &.active:visited {
     color: var(--color-active);
-    background-color: var(--color-grey-50);
+    background-color: var(${HOVER_COLOR});
     border-radius: var(--border-radius-sm);
   }
 
