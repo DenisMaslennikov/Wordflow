@@ -2,6 +2,8 @@ import { createGlobalStyle } from "styled-components";
 import { TEXT_MAIN_COLOR } from "../utils/constants.ts";
 
 const GlobalStyles = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+  
     :root {
         &, &.light-mode {
             --color-grey-0: #fff;
