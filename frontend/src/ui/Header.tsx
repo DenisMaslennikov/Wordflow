@@ -24,6 +24,7 @@ const RightHeaderBlock = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
+  gap: 2rem;
 `;
 
 function Header({ children }: { children: React.ReactNode }) {
