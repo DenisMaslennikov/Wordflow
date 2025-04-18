@@ -3,7 +3,7 @@ import AuthorizedUserMenu from "../features/authentication/AuthorizedUserMenu.ts
 import UnauthorizedUserMenu from "../features/authentication/UnauthorizedUserMenu.tsx";
 
 function UserMenu() {
-  const user = useUser();
+  const { isUserLoading, user } = useUser();
   return user?.id ? <AuthorizedUserMenu /> : <UnauthorizedUserMenu />;
 }
 

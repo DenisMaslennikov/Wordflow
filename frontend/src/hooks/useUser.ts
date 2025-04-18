@@ -1,12 +1,13 @@
+import { useQuery } from "@tanstack/react-query";
+import { userAPI } from "../features/authentication/userAPI.ts";
+
 function useUser() {
-  return {
-    id: 4,
-    username: "sd",
-    first_name: "",
-    last_name: "",
-    bio: null,
-    avatar: "http://127.0.0.1:8000/media/users/111111111111111111_cB9CyAV.png",
-  };
+  const { data: user, isLoading: isUserLoading } = useQuery({
+    queryFn: userAPI.getUserMe,
+    queryKey: ["user"],
+    staleTime: 60_000,
+  });
+  return { isUserLoading, user };
 }
 
 export default useUser;
