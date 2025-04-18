@@ -15,6 +15,9 @@ const ButtonIcon = styled.button<{ $height?: string; $width?: string }>`
   &:hover {
     background-color: var(${HOVER_COLOR});
   }
+  &:hover svg {
+    color: var(--color-active);
+  }
 `;
 
 export default ButtonIcon;
