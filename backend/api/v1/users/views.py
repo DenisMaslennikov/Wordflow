@@ -1,6 +1,9 @@
 from django.contrib.auth import get_user_model
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import decorators, filters, mixins, parsers, renderers, viewsets
 from rest_framework.response import Response
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from .permissions import IsMeOrReadOnly
@@ -13,6 +16,13 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     """Представление получения пары токенов (refresh & access)."""
 
     serializer_class = CustomTokenObtainPairSerializer
+
+    @extend_schema(
+        request=CustomTokenObtainPairSerializer,
+        responses=TokenObtainPairSerializer,
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
 
 
 class CustomTokenRefreshView(TokenRefreshView):
