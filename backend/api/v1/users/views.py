@@ -1,10 +1,10 @@
 from django.contrib.auth import get_user_model
 from rest_framework import decorators, filters, mixins, parsers, renderers, viewsets
 from rest_framework.response import Response
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from .permissions import IsMeOrReadOnly
-from .serializers import CustomTokenObtainPairSerializer, UserSerializer
+from .serializers import CustomTokenObtainPairSerializer, UserSerializer, CustomTokenRefreshSerializer
 
 User = get_user_model()
 
@@ -13,6 +13,12 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     """Представление получения пары токенов (refresh & access)."""
 
     serializer_class = CustomTokenObtainPairSerializer
+
+
+class CustomTokenRefreshView(TokenRefreshView):
+    """Кастомный класс обновления токенов по refresh токену."""
+
+    serializer_class = CustomTokenRefreshSerializer
 
 
 class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin):

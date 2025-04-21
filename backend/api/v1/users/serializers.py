@@ -1,8 +1,25 @@
 from django.contrib.auth import get_user_model
 from rest_framework import exceptions, serializers
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
 
 User = get_user_model()
+
+
+class CustomTokenRefreshSerializer(TokenRefreshSerializer):
+    """Кастомный сериализатор для получения пары токенов по refresh токену."""
+
+    def validate(self, attrs):
+        """Валидация и создание токенов."""
+        data = super().validate(attrs)
+
+        # Создаем новый refresh token
+        refresh = RefreshToken(attrs["refresh"])
+        new_refresh = str(refresh)
+
+        # Добавляем его в ответ
+        data["refresh"] = new_refresh
+        return data
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
