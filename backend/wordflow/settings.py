@@ -171,7 +171,7 @@ SIMPLE_JWT = {
 }
 
 if DEBUG:
-    SIMPLE_JWT["ACCESS_TOKEN_LIFETIME"] = timedelta(days=1)
+    SIMPLE_JWT["ACCESS_TOKEN_LIFETIME"] = timedelta(minutes=10)
 
 
 SPECTACULAR_SETTINGS = {

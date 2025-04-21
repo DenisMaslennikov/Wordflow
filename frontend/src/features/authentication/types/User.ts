@@ -10,4 +10,9 @@ interface User extends BaseUser {
   id: number;
 }
 
-export type { User };
+interface Login {
+  email: string;
+  password: string;
+}
+
+export type { User, Login };
