@@ -8,6 +8,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from .permissions import IsMeOrReadOnly
 from .serializers import CustomTokenObtainPairSerializer, UserSerializer, CustomTokenRefreshSerializer
+from ..blogs.serializers import BlogListSerializer
 
 User = get_user_model()
 
@@ -59,4 +60,12 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
             serializer = self.get_serializer(user, data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
+            return Response(serializer.data)
+
+    @decorators.action(detail=False, methods=["get"], permission_classes=[IsMeOrReadOnly])
+    def me_blogs_list(self, request):
+        """Эндпоинты для списка блогов текущего пользователя."""
+        user = request.user
+        if request.method == "GET":
+            serializer = BlogListSerializer(user.blogs.all(), many=True)
             return Response(serializer.data)
