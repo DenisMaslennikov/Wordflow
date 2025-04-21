@@ -1,5 +1,6 @@
-import DarkModeContext from "../context/DarkMode/DarkModeContext.ts";
 import { useContext } from "react";
+
+import DarkModeContext from "../context/DarkMode/DarkModeContext.ts";
 
 function useDarkMode() {
   const context = useContext(DarkModeContext);
