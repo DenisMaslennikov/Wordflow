@@ -15,6 +15,8 @@ interface UserForm extends BaseUser {
   email: string;
   bio: string | null;
   avatar: string | null;
+  password: string;
+  repeatPassword: string;
 }
 
 interface Login {
