@@ -10,7 +10,7 @@ import UserCreateUpdateForm from "./UserCreateUpdateForm.tsx";
 const MenuContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 1.2rem;
+  gap: 0.5rem;
 `;
 
 function UserMenu() {
@@ -28,14 +28,14 @@ function UserMenu() {
       ) : (
         <Modal>
           <Modal.Open modalId={"registration"}>
-            <Button $style={"link"} $size={"small"}>
+            <Button $style={"regular"} $size={"small"}>
               Регистрация
             </Button>
           </Modal.Open>
           <Modal.Window modalId={"registration"}>
             <UserCreateUpdateForm />
           </Modal.Window>
-          <Button $style={"link"} $size={"small"}>
+          <Button $style={"regular"} $size={"small"}>
             Вход
           </Button>
         </Modal>
