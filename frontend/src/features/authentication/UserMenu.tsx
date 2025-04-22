@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth.ts";
 import Button from "../../ui/Button.tsx";
 import Modal from "../../ui/Modal.tsx";
 import UserCreateUpdateForm from "./UserCreateUpdateForm.tsx";
+import LoginForm from "./LoginForm.tsx";
 
 const MenuContainer = styled.div`
   display: flex;
@@ -35,9 +36,14 @@ function UserMenu() {
           <Modal.Window modalId={"registration"}>
             <UserCreateUpdateForm />
           </Modal.Window>
-          <Button $style={"regular"} $size={"small"}>
-            Вход
-          </Button>
+          <Modal.Open modalId={"Login"}>
+            <Button $style={"regular"} $size={"small"}>
+              Вход
+            </Button>
+          </Modal.Open>
+          <Modal.Window modalId={"Login"}>
+            <LoginForm />
+          </Modal.Window>
         </Modal>
       )}
     </MenuContainer>
