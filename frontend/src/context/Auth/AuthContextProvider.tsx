@@ -5,14 +5,15 @@ import {
   useMemo,
   useRef,
 } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { AuthContext } from "./AuthContext.ts";
 import useLocalStorageState from "../../hooks/useLocalStorageState.ts";
+import { getTokenExpirationTime } from "../../utils/jwt.ts";
 import { ACCESS_KEY, REFRESH_KEY } from "../../utils/constants.ts";
+import apiClient, { setAuthTokenUpdater } from "../../service/apiClient.ts";
 
 import { type TokensPair } from "../../features/authentication/types/Tokens.ts";
-import { getTokenExpirationTime } from "../../utils/jwt.ts";
-import apiClient, { setAuthTokenUpdater } from "../../service/apiClient.ts";
 
 function AuthContextProvider({ children }: PropsWithChildren) {
   const [accessToken, setAccessToken] = useLocalStorageState<string | null>(
@@ -23,8 +24,8 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     null,
     REFRESH_KEY,
   );
-
   const refreshTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const queryClient = useQueryClient();
 
   const isAuthenticated = !!accessToken;
 
@@ -39,10 +40,11 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   const logout = useCallback(() => {
     setAccessToken(null);
     setRefreshToken(null);
+    queryClient.invalidateQueries({ queryKey: ["user"] });
     if (refreshTimeoutRef.current) {
       clearTimeout(refreshTimeoutRef.current);
     }
-  }, [setAccessToken, setRefreshToken]);
+  }, [queryClient, setAccessToken, setRefreshToken]);
 
   const scheduleTokenRefresh = useCallback(
     (accessToken: string) => {

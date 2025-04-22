@@ -16,16 +16,21 @@ const MenuContainer = styled.div`
 
 function UserMenu() {
   const { isUserLoading, user } = useUser();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   if (isUserLoading || user === undefined) return <SpinnerMini />;
 
   return (
     <MenuContainer>
       {isAuthenticated ? (
-        <Button $style={"link"} $size={"large"}>
-          {user.username}
-        </Button>
+        <>
+          <Button $style={"link"} $size={"small"}>
+            {user.username}
+          </Button>
+          <Button $style={"link"} $size={"small"} onClick={logout}>
+            Выход
+          </Button>
+        </>
       ) : (
         <Modal>
           <Modal.Open modalId={"registration"}>
