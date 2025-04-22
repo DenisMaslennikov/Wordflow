@@ -13,6 +13,7 @@ import React, {
 import { createPortal } from "react-dom";
 import useOutsideClick from "../hooks/useOutsideClick.ts";
 import { HiXMark } from "react-icons/hi2";
+import { HOVER_COLOR } from "../utils/constants.ts";
 
 interface Modal {
   openId: string | null;
@@ -40,6 +41,7 @@ const StyledModal = styled.div`
   background-color: var(--color-grey-0);
   border-radius: var(--border-radius-lg);
   transition: all 0.5s;
+  padding: 1rem;
 `;
 
 const Overlay = styled.div`
@@ -49,7 +51,7 @@ const Overlay = styled.div`
   width: 100%;
   height: 100vh;
   background-color: var(--backdrop-color);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(1px);
   z-index: 1000;
   transition: all 0.5s;
 `;
@@ -57,21 +59,20 @@ const Overlay = styled.div`
 const Button = styled.button`
   background: none;
   border: none;
-  padding: 0.4rem;
-  border-radius: var(--border-radius-sm);
-  transform: translateX(0.8rem);
+  padding: 0;
+  border-radius: var(--border-radius-lg);
   transition: all 0.2s;
   position: absolute;
-  top: 1.2rem;
-  right: 1.9rem;
+  top: 0;
+  right: -1.5rem;
 
   &:hover {
-    background-color: var(--color-grey-100);
+    background-color: var(${HOVER_COLOR});
   }
 
   & svg {
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 1.5rem;
+    height: 1.5rem;
     color: var(--color-grey-500);
   }
 `;
