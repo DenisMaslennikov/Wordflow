@@ -12,6 +12,9 @@ import Button from "../../ui/Button.tsx";
 import FormRowHorizontal from "../../ui/FormRowHorizontal.tsx";
 import FileInput from "../../ui/FileInput.tsx";
 
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+
 function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
   const { user, isUserLoading } = useUser();
   const { isAuthenticated } = useAuth();
@@ -58,7 +61,14 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           id={"email"}
           disabled={isBusy}
           placeholder={"Email"}
-          {...register("email", { required: "Не указан email" })}
+          type="email"
+          {...register("email", {
+            required: "Не указан email",
+            pattern: {
+              value: EMAIL_REGEX,
+              message: "Введите валидный email",
+            },
+          })}
         />
       </FormRowVertical>
       <FormRowVertical error={errors?.password?.message}>
