@@ -43,6 +43,10 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
     filter_backends = (filters.SearchFilter,)
     search_fields = ("username",)
 
+    @extend_schema(request=UserSerializer)
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
     @decorators.action(detail=False, methods=["put", "patch", "get"], permission_classes=[IsMeOrReadOnly])
     def me(self, request):
         """Эндпоинты для реализации работы с профилем текущего пользователя."""

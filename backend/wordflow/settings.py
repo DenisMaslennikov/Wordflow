@@ -179,6 +179,7 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Pet project the purpose of which is to refresh practical skills of Django and React",
     "VERSION": "0.1.0",
     "SERVE_INCLUDE_SCHEMA": False,
+    "COMPONENT_SPLIT_REQUEST": True,
 }
 
 AUTH_USER_MODEL = "users.User"

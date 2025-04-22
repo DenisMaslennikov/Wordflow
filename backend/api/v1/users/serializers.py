@@ -68,6 +68,7 @@ class UserSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     password = serializers.CharField(write_only=True, required=True)
     email = serializers.EmailField(write_only=True, required=True)
+    avatar = serializers.ImageField(required=False)
 
     class Meta:
         """Метакласс сериализатора пользователя."""
@@ -75,7 +76,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ("id", "username", "email", "password", "first_name", "last_name", "bio", "avatar")
         extra_kwargs = {
-            "avatar": {"required": False},
             "bio": {"required": False},
             "first_name": {"required": False},
             "last_name": {"required": False},
@@ -83,7 +83,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """Создание пользователя."""
+        avatar = validated_data.pop("avatar")
         user = User.objects.create_user(**validated_data)
+        if avatar:
+            user.avatar = avatar
         user.save()
         return user
 
