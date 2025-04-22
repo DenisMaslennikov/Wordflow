@@ -73,7 +73,7 @@ const Button = styled.button`
   & svg {
     width: 1.5rem;
     height: 1.5rem;
-    color: var(--color-grey-500);
+    color: var(--color-grey-0);
   }
 `;
 
