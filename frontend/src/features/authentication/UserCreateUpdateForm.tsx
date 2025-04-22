@@ -49,7 +49,10 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
 
   return (
     <Form $width={"350px"} onSubmit={handleSubmit(onSubmit)}>
-      <FormRowVertical error={errors?.username?.message}>
+      <FormRowVertical
+        label={"Имя пользователя"}
+        error={errors?.username?.message}
+      >
         <Input
           id={"username"}
           disabled={isBusy}
@@ -64,7 +67,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           })}
         />
       </FormRowVertical>
-      <FormRowVertical error={errors?.email?.message}>
+      <FormRowVertical label={"Email"} error={errors?.email?.message}>
         <Input
           id={"email"}
           disabled={isBusy}
@@ -79,7 +82,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           })}
         />
       </FormRowVertical>
-      <FormRowVertical error={errors?.password?.message}>
+      <FormRowVertical label={"Пароль"} error={errors?.password?.message}>
         <Input
           id={"password"}
           disabled={isBusy}
@@ -94,7 +97,10 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           })}
         />
       </FormRowVertical>
-      <FormRowVertical error={errors?.repeatPassword?.message}>
+      <FormRowVertical
+        label={"Повтор пароля"}
+        error={errors?.repeatPassword?.message}
+      >
         <Input
           id={"repeatPassword"}
           disabled={isBusy}
@@ -107,7 +113,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           })}
         />
       </FormRowVertical>
-      <FormRowVertical error={errors?.first_name?.message}>
+      <FormRowVertical label={"Имя"} error={errors?.first_name?.message}>
         <Input
           id={"first_name"}
           disabled={isBusy}
@@ -115,7 +121,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           {...register("first_name")}
         />
       </FormRowVertical>
-      <FormRowVertical error={errors?.last_name?.message}>
+      <FormRowVertical label={"Фамилия"} error={errors?.last_name?.message}>
         <Input
           id={"last_name"}
           disabled={isBusy}
@@ -123,7 +129,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           {...register("last_name")}
         />
       </FormRowVertical>
-      <FormRowVertical error={errors?.bio?.message}>
+      <FormRowVertical label={"О себе"} error={errors?.bio?.message}>
         <TextArea
           id={"bio"}
           disabled={isBusy}
@@ -132,7 +138,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           {...register("bio")}
         />
       </FormRowVertical>
-      <FormRowVertical error={errors?.bio?.message}>
+      <FormRowVertical label={"Аватар"} error={errors?.bio?.message}>
         <FileInput
           id={"image"}
           disabled={isBusy}
