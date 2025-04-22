@@ -54,6 +54,7 @@ apiClient.interceptors.response.use(
     };
 
     if (err.response?.status === 401 && !originalRequest._retry) {
+      if (!getTokenFromLocalStorage(REFRESH_KEY)) return;
       if (isRefreshing) {
         return new Promise<string>((resolve, reject) => {
           failedQueue.push({ resolve, reject });
