@@ -33,6 +33,8 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     ({ access, refresh }: TokensPair) => {
       setAccessToken(access);
       setRefreshToken(refresh);
+      localStorage.setItem(ACCESS_KEY, JSON.stringify(access));
+      localStorage.setItem(REFRESH_KEY, JSON.stringify(refresh));
     },
     [setAccessToken, setRefreshToken],
   );
@@ -40,6 +42,8 @@ function AuthContextProvider({ children }: PropsWithChildren) {
   const logout = useCallback(() => {
     setAccessToken(null);
     setRefreshToken(null);
+    localStorage.removeItem(REFRESH_KEY);
+    localStorage.removeItem(ACCESS_KEY);
     queryClient.invalidateQueries({ queryKey: ["user"] });
     if (refreshTimeoutRef.current) {
       clearTimeout(refreshTimeoutRef.current);
