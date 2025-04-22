@@ -19,9 +19,9 @@ interface UserForm extends BaseUser {
   repeatPassword: string;
 }
 
-interface Login {
+interface LoginForm {
   email: string;
   password: string;
 }
 
-export type { UserProfile, Login, UserForm };
+export type { UserProfile, LoginForm, UserForm };
