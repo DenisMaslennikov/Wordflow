@@ -42,6 +42,9 @@ const StyledModal = styled.div`
   border-radius: var(--border-radius-lg);
   transition: all 0.5s;
   padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
 `;
 
 const Overlay = styled.div`
