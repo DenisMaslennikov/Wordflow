@@ -22,11 +22,12 @@ import PageNotFound from "./pages/PageNotFound.tsx";
 import AppWrapper from "./ui/AppWrapper.tsx";
 import DarkModeContextProvider from "./context/DarkMode/DarkModeContextProvider.tsx";
 import AuthContextProvider from "./context/Auth/AuthContextProvider.tsx";
+import { DEFAULT_STALE_TIME } from "./utils/constants.ts";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 0,
+      staleTime: DEFAULT_STALE_TIME,
     },
   },
 });

@@ -12,4 +12,5 @@ export const ACCESS_KEY = "accessToken";
 export const REFRESH_KEY = "refreshToken";
 
 // STALE TIME FOR REACT-QUERY QUERIES
+export const DEFAULT_STALE_TIME = 0;
 export const USER_PROFILE_STALE_TIME = 60 * 60 * 1000;
