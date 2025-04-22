@@ -26,7 +26,10 @@ const StyledFormRow = styled.div`
 
 const Error = styled.span`
   font-size: 0.75rem;
+  padding: 0.5rem 0;
   color: var(--color-red-700);
+  hyphens: auto;
+  word-break: break-word;
 `;
 
 interface FormRowProps {

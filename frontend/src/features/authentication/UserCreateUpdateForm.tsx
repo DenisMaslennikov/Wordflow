@@ -14,6 +14,7 @@ import FileInput from "../../ui/FileInput.tsx";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+const USERNAME_REGEX = /^[A-Za-zА-Яа-яЁё][A-Za-zА-Яа-яЁё0-9_-]{2,29}$/;
 
 function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
   const { user, isUserLoading } = useUser();
@@ -47,13 +48,20 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form $width={"350px"} onSubmit={handleSubmit(onSubmit)}>
       <FormRowVertical error={errors?.username?.message}>
         <Input
           id={"username"}
           disabled={isBusy}
           placeholder={"Имя пользователя"}
-          {...register("username", { required: "Не указано имя пользователя" })}
+          {...register("username", {
+            required: "Не указано имя пользователя",
+            pattern: {
+              value: USERNAME_REGEX,
+              message:
+                "Имя пользователя должно начинаться с буквы и содержать латиницу, буквы русского алфавита, цифры  символы _-",
+            },
+          })}
         />
       </FormRowVertical>
       <FormRowVertical error={errors?.email?.message}>
@@ -77,7 +85,13 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           disabled={isBusy}
           placeholder={"Пароль"}
           type={"password"}
-          {...register("password", { required: "Не указан пароль" })}
+          {...register("password", {
+            required: "Не указан пароль",
+            minLength: {
+              value: 8,
+              message: "Минимальная длинна пароля 8 символов",
+            },
+          })}
         />
       </FormRowVertical>
       <FormRowVertical error={errors?.repeatPassword?.message}>
