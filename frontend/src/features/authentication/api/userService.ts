@@ -29,11 +29,6 @@ const userService = {
     });
     return response.data;
   },
-
-  logout: () => {
-    localStorage.removeItem(ACCESS_KEY);
-    localStorage.removeItem(REFRESH_KEY);
-  },
 };
 
 export { userService };
