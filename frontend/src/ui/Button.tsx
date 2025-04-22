@@ -10,17 +10,26 @@ const styles = {
       background-color: var(${HOVER_COLOR});
     }
   `,
+  regular: css`
+    border: none;
+    color: var(--color-brand-50);
+    background-color: var(--color-brand-500);
+
+    &:hover {
+      background-color: var(--color-brand-700);
+    }
+  `,
 };
 
 const sizes = {
   small: css`
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 0.5rem;
     font-weight: 500;
     text-align: center;
   `,
   medium: css`
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     padding: 0.5rem;
     font-weight: 500;
   `,
