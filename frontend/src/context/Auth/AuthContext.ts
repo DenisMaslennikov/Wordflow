@@ -1,10 +1,12 @@
 import { createContext } from "react";
 
+import type { TokensPair } from "../../features/authentication/types/Tokens.ts";
+
 interface AuthContext {
   accessToken: string | null;
   refreshToken: string | null;
   isAuthenticated: boolean;
-  setTokens: (tokens: { access: string; refresh: string }) => void;
+  setTokens: (tokens: TokensPair) => void;
   logout: () => void;
 }
 
