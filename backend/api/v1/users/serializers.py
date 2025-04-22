@@ -83,7 +83,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """Создание пользователя."""
-        avatar = validated_data.pop("avatar")
+        avatar = validated_data.pop("avatar", None)
         user = User.objects.create_user(**validated_data)
         if avatar:
             user.avatar = avatar
