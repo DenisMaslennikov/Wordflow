@@ -1,13 +1,20 @@
 interface BaseUser {
   username: string;
-  first_name: string;
-  last_name: string;
-  bio: string;
-  avatar: string;
+  first_name: string | null;
+  last_name: string | null;
 }
 
-interface User extends BaseUser {
+interface UserProfile extends BaseUser {
   id: number;
+  email: string;
+  bio: string | null;
+  avatar: string | null;
+}
+
+interface UserForm extends BaseUser {
+  email: string;
+  bio: string | null;
+  avatar: string | null;
 }
 
 interface Login {
@@ -15,4 +22,4 @@ interface Login {
   password: string;
 }
 
-export type { User, Login };
+export type { UserProfile, Login, UserForm };
