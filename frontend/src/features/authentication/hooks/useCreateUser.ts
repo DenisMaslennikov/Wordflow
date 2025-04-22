@@ -1,10 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { userService } from "../api/userService.ts";
 import toast from "react-hot-toast";
 
 function useCreateUser() {
-  const queryClient = useQueryClient();
-
   const { mutate: createUser, isPending: isUserCreating } = useMutation({
     mutationFn: userService.createUser,
     onSuccess: () => {
