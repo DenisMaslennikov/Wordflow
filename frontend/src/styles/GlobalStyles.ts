@@ -50,6 +50,15 @@ const GlobalStyles = createGlobalStyle`
         --border-radius-sm: 5px;
         --border-radius-md: 7px;
         --border-radius-lg: 9px;
+
+        --color-brand-50: #c5c5e0;
+        --color-brand-100: #b0b2e0;
+        --color-brand-200: #9a9ee0;
+        --color-brand-500: #4a4dcc;
+        --color-brand-600: #383bb8;
+        --color-brand-700: #272a93;
+        --color-brand-800: #1a1a5d;
+        --color-brand-900: #12112d;
     }
 
     *,
