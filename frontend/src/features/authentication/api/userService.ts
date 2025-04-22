@@ -1,7 +1,5 @@
 import apiClient from "../../../service/apiClient.ts";
 
-import { ACCESS_KEY, REFRESH_KEY } from "../../../utils/constants.ts";
-
 import type { LoginForm, UserForm, UserProfile } from "../types/User.ts";
 import type { TokensPair } from "../types/Tokens.ts";
 
