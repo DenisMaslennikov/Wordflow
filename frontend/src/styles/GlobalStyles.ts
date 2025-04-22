@@ -21,7 +21,7 @@ const GlobalStyles = createGlobalStyle`
           --color-red-700: #b91c1c;
           --color-red-800: #991b1b;
 
-          --backdrop-color: rgba(255, 255, 255, 0.1);
+          --backdrop-color: rgba(0, 0, 0, 0.6);
         }
 
         &.dark-mode {
@@ -41,7 +41,7 @@ const GlobalStyles = createGlobalStyle`
           --color-red-700: #b91c1c;
           --color-red-800: #991b1b;
 
-          --backdrop-color: rgba(0, 0, 0, 0.3);
+          --backdrop-color: rgba(255, 255, 255, 0.1);
         }
       
         --color-active: #769eef;
