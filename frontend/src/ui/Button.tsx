@@ -15,19 +15,18 @@ const styles = {
 const sizes = {
   small: css`
     font-size: 1.2rem;
-    padding: 0.4rem 0.8rem;
-    text-transform: uppercase;
-    font-weight: 600;
+    padding: 0.5rem;
+    font-weight: 500;
     text-align: center;
   `,
   medium: css`
     font-size: 1.4rem;
-    padding: 1.2rem 1.6rem;
+    padding: 0.5rem;
     font-weight: 500;
   `,
   large: css`
     font-size: 1.6rem;
-    padding: 1.2rem 2.4rem;
+    padding: 0.5rem;
     font-weight: 500;
   `,
 };
