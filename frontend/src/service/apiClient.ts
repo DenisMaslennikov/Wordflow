@@ -1,9 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { ACCESS_KEY, REFRESH_KEY } from "../utils/constants.ts";
+import { ACCESS_KEY, API_BASE_URL, REFRESH_KEY } from "../utils/constants.ts";
 import { getTokenFromLocalStorage } from "../utils/jwt.ts";
 import { TokensPair } from "../features/authentication/types/Tokens.ts";
-
-const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,

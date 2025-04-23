@@ -30,6 +30,7 @@ services:
     command: npm run dev -- --host
     environment:
       - VITE_API_URL=http://127.0.0.1:8000/api/v1/
+      - VITE_MEDIA_BASE_URL=http://127.0.0.1:8000
     volumes:
       - "./frontend:/frontend/"
       - /frontend/node_modules

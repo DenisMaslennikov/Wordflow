@@ -17,3 +17,9 @@ export const USER_PROFILE_STALE_TIME = 60 * 60 * 1000;
 export const TOKEN_REFRESH_THRESHOLD = 30_000;
 // Через сколько времени (в пределах жизни access токена) пытаемся обновить токен в случае ошибки.
 export const TOKEN_REFRESH_SLEEP_TIMOUT_IF_ERROR = 1_000;
+
+// Базовый урл API
+export const API_BASE_URL = import.meta.env.VITE_API_URL;
+
+// Префикс для медиа файлов
+export const VITE_MEDIA_BASE_URL = import.meta.env.VITE_MEDIA_BASE_URL;
