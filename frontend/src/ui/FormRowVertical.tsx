@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PropsWithChildren } from "react";
+import { isValidElement, PropsWithChildren, ReactElement } from "react";
 import { TEXT_MAIN_COLOR } from "../utils/constants.ts";
 
 const StyledFormRow = styled.div`
@@ -47,9 +47,14 @@ function FormRowVertical({
   children,
   label,
 }: PropsWithChildren<FormRowProps>) {
+  const child = isValidElement(children)
+    ? (children as ReactElement<{ id?: string }>)
+    : undefined;
+  const childId = child ? child.props.id : undefined;
+
   return (
     <StyledFormRow>
-      {label && <Label>{label}</Label>}
+      {label && <Label htmlFor={childId}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}
     </StyledFormRow>
