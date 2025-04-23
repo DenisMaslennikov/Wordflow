@@ -24,10 +24,17 @@ function UserMenu() {
     <MenuContainer>
       {isAuthenticated ? (
         <>
-          <Button $style={"link"} $size={"small"}>
-            {user.username}
-          </Button>
-          <Button $style={"link"} $size={"small"} onClick={logout}>
+          <Modal>
+            <Modal.Open modalId={"editUser"}>
+              <Button $style={"link"} $size={"small"}>
+                {user.username}
+              </Button>
+            </Modal.Open>
+            <Modal.Window modalId={"editUser"}>
+              <UserCreateUpdateForm />
+            </Modal.Window>
+          </Modal>
+          <Button $style={"regular"} $size={"small"} onClick={logout}>
             Выход
           </Button>
         </>
