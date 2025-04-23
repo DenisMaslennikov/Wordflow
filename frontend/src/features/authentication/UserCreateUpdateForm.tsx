@@ -13,6 +13,7 @@ import TextArea from "../../ui/TextArea.tsx";
 import Button from "../../ui/Button.tsx";
 import FormRowHorizontal from "../../ui/FormRowHorizontal.tsx";
 import FileInput from "../../ui/FileInput.tsx";
+import useUpdateUserMe from "./hooks/useUpdateUserMe.ts";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
@@ -25,6 +26,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
   const { register, handleSubmit, reset, formState } = useForm<UserForm>();
 
   const { isUserCreating, createUser } = useCreateUser();
+  const { updateUserMe, isUserUpdating } = useUpdateUserMe();
 
   useEffect(() => {
     if (user)
@@ -38,7 +40,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
       });
   }, [user, reset]);
 
-  const isBusy = isUserCreating || false;
+  const isBusy = isUserCreating || isUserUpdating;
 
   const { errors } = formState;
 
@@ -46,18 +48,14 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
 
   function onSubmit(form: UserForm) {
     if (!isAuthenticated) {
-      const user = { ...form };
-
-      if (form.avatar instanceof FileList) {
-        user.avatar = form.avatar[0];
-      }
-
-      createUser(user, {
+      createUser(form, {
         onSuccess: () => {
           reset();
           onCloseModal?.();
         },
       });
+    } else {
+      updateUserMe(form, { onSuccess: () => onCloseModal?.() });
     }
   }
 
