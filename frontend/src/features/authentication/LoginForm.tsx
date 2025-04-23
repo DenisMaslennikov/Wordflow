@@ -22,10 +22,20 @@ function LoginForm({ onCloseModal }: { onCloseModal?: () => void }) {
   return (
     <Form $width={"350px"} onSubmit={handleSubmit(onSubmit)}>
       <FormRowVertical label={"Email"} error={errors?.email?.message}>
-        <Input disabled={isLogin} type={"email"} {...register("email")} />{" "}
+        <Input
+          autoComplete={"email"}
+          disabled={isLogin}
+          type={"email"}
+          {...register("email")}
+        />{" "}
       </FormRowVertical>
       <FormRowVertical label={"Пароль"}>
-        <Input disabled={isLogin} type={"password"} {...register("password")} />
+        <Input
+          autoComplete={"current-password"}
+          disabled={isLogin}
+          type={"password"}
+          {...register("password")}
+        />
       </FormRowVertical>
       <FormRowVertical error={errors?.password?.message}>
         <Button $style={"regular"} $size={"medium"} disabled={isLogin}>
