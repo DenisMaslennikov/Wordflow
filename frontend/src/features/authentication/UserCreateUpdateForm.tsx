@@ -44,7 +44,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
 
   const { errors } = formState;
 
-  if (isUserLoading || !user) return <Spinner />;
+  if (isUserLoading) return <Spinner />;
 
   function onSubmit(form: UserForm) {
     if (!isAuthenticated) {
@@ -82,6 +82,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
       <FormRowVertical label={"Email"} error={errors?.email?.message}>
         <Input
           id={"email"}
+          autoComplete={"email"}
           disabled={isBusy}
           placeholder={"Email"}
           type="email"
@@ -98,6 +99,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
         <>
           <FormRowVertical label={"Пароль"} error={errors?.password?.message}>
             <Input
+              autoComplete={"new-password"}
               id={"password"}
               disabled={isBusy}
               placeholder={"Пароль"}
@@ -117,6 +119,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           >
             <Input
               id={"repeatPassword"}
+              autoComplete={"new-password"}
               disabled={isBusy}
               placeholder={"Повтор пароля"}
               type={"password"}
