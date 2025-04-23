@@ -16,8 +16,6 @@ import BloggerPostEditor from "./pages/BloggerPostEditor.tsx";
 import BloggerAdmin from "./pages/BloggerAdmin.tsx";
 import BloggerComments from "./pages/BloggerComments.tsx";
 import BloggerImages from "./pages/BloggerImages.tsx";
-import Registration from "./pages/Registration.tsx";
-import Login from "./pages/Login.tsx";
 import PageNotFound from "./pages/PageNotFound.tsx";
 import AppWrapper from "./ui/AppWrapper.tsx";
 import DarkModeContextProvider from "./context/DarkMode/DarkModeContextProvider.tsx";
@@ -53,8 +51,6 @@ function App() {
                   />
                   <Route path={"profile"} element={<EditUserProfile />} />
                   <Route path={"user/:username"} element={<UserProfile />} />
-                  <Route path={"register"} element={<Registration />} />
-                  <Route path={"login"} element={<Login />} />
                 </Route>
                 <Route
                   path={"admin/:blogSlug"}
