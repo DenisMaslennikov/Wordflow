@@ -27,7 +27,7 @@ function LoginForm({ onCloseModal }: { onCloseModal?: () => void }) {
           disabled={isLogin}
           type={"email"}
           {...register("email")}
-        />{" "}
+        />
       </FormRowVertical>
       <FormRowVertical label={"Пароль"}>
         <Input
