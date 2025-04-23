@@ -40,7 +40,7 @@ const sizes = {
   `,
 };
 
-type ButtonProps = {
+export type ButtonProps = {
   $style: keyof typeof styles;
   $size: keyof typeof sizes;
 };
