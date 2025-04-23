@@ -10,6 +10,7 @@ import useOutsideClick from "../hooks/useOutsideClick.ts";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 import Button, { type ButtonProps } from "./Button.tsx";
+import { BORDER_COLOR } from "../utils/constants.ts";
 
 type Position = { x: number; y: number };
 
@@ -41,6 +42,7 @@ const StyledList = styled.ul<{ $position: Position | null }>`
 
   right: ${(props) => props.$position?.x}px;
   top: ${(props) => props.$position?.y}px;
+  border: var(${BORDER_COLOR}) 1px solid;
 `;
 
 const Menu = styled.div`
