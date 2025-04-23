@@ -9,7 +9,12 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { AuthContext } from "./AuthContext.ts";
 import useLocalStorageState from "../../hooks/useLocalStorageState.ts";
-import { ACCESS_KEY, REFRESH_KEY } from "../../utils/constants.ts";
+import {
+  ACCESS_KEY,
+  REFRESH_KEY,
+  TOKEN_REFRESH_SLEEP_TIMOUT_IF_ERROR,
+  TOKEN_REFRESH_THRESHOLD,
+} from "../../utils/constants.ts";
 import apiClient, { setAuthTokenUpdater } from "../../service/apiClient.ts";
 
 import { type TokensPair } from "../../features/authentication/types/Tokens.ts";
@@ -51,20 +56,7 @@ function AuthContextProvider({ children }: PropsWithChildren) {
 
   const scheduleTokenRefresh = useCallback(
     (accessToken: string) => {
-      async function refreshAccessToken() {
-        try {
-          if (!refreshToken) throw new Error("No refresh token");
-
-          const { data } = await apiClient.post<TokensPair>("/token/refresh/", {
-            refresh: refreshToken,
-          });
-          setTokens(data);
-          scheduleTokenRefresh(data.access);
-        } catch (error) {
-          logout();
-          throw error;
-        }
-      }
+      if (refreshTimeoutRef.current) clearTimeout(refreshTimeoutRef.current);
 
       function getTokenExpirationTime(token: string): number | null {
         try {
@@ -78,7 +70,28 @@ function AuthContextProvider({ children }: PropsWithChildren) {
       const expTime = getTokenExpirationTime(accessToken);
       if (!expTime) return;
 
-      const delay = expTime - Date.now() - 30_000; // обновим за 30 секунд до истечения
+      const delay = expTime - Date.now() - TOKEN_REFRESH_THRESHOLD;
+
+      async function refreshAccessToken() {
+        try {
+          if (!refreshToken) throw new Error("No refresh token");
+
+          const { data } = await apiClient.post<TokensPair>("/token/refresh/", {
+            refresh: refreshToken,
+          });
+          setTokens(data);
+          scheduleTokenRefresh(data.access);
+        } catch (error) {
+          if (Math.abs(delay) < TOKEN_REFRESH_THRESHOLD)
+            refreshTimeoutRef.current = setTimeout(() => {
+              refreshAccessToken();
+            }, TOKEN_REFRESH_SLEEP_TIMOUT_IF_ERROR);
+          else {
+            logout();
+            throw error;
+          }
+        }
+      }
 
       if (delay <= 0) {
         refreshAccessToken(); // сразу обновим
