@@ -20,13 +20,6 @@ const userService = {
     const response = await apiClient.post<TokensPair>("token/", login);
     return response.data;
   },
-
-  refreshTokens: async (refresh: string) => {
-    const response = await apiClient.post<TokensPair>("token/refresh/", {
-      refresh,
-    });
-    return response.data;
-  },
 };
 
 export { userService };
