@@ -1,13 +1,13 @@
 from django.contrib.auth import get_user_model
 from drf_spectacular.types import OpenApiTypes
-from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse
 from rest_framework import decorators, filters, mixins, parsers, renderers, viewsets
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from .permissions import IsMeOrReadOnly
-from .serializers import CustomTokenObtainPairSerializer, UserSerializer, CustomTokenRefreshSerializer
+from .serializers import CustomTokenObtainPairSerializer, UserSerializer, CustomTokenRefreshSerializer, UserMeSerializer
 from ..blogs.serializers import BlogListSerializer
 
 User = get_user_model()
@@ -47,28 +47,42 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
 
-    @decorators.action(detail=False, methods=["put", "patch", "get"], permission_classes=[IsMeOrReadOnly])
+    @decorators.action(
+        detail=False,
+        methods=["put", "patch", "get"],
+        permission_classes=[IsMeOrReadOnly],
+        serializer_class=UserMeSerializer,
+    )
     def me(self, request):
         """Эндпоинты для реализации работы с профилем текущего пользователя."""
         user = request.user
 
         if request.method == "GET":
-            serializer = UserSerializer(user)
+            serializer = UserMeSerializer(user)
             return Response(serializer.data)
         elif request.method == "PATCH":
-            serializer = self.get_serializer(user, data=request.data, partial=True)
+            serializer = UserMeSerializer(user, data=request.data, partial=True)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
         elif request.method == "PUT":
-            serializer = self.get_serializer(user, data=request.data)
+            serializer = UserMeSerializer(user, data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
 
-    @decorators.action(detail=False, methods=["get"], permission_classes=[IsMeOrReadOnly])
+    @extend_schema(
+        responses={
+            200: OpenApiResponse(
+                response=BlogListSerializer(many=True), description="Список блогов текущего пользователя"
+            )
+        }
+    )
+    @decorators.action(
+        detail=False, methods=["get"], permission_classes=[IsMeOrReadOnly], serializer_class=BlogListSerializer
+    )
     def me_blogs_list(self, request):
-        """Эндпоинты для списка блогов текущего пользователя."""
+        """Эндпоинт для списка блогов текущего пользователя."""
         user = request.user
         if request.method == "GET":
             serializer = BlogListSerializer(user.blogs.all(), many=True)

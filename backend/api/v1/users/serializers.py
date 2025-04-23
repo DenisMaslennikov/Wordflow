@@ -99,3 +99,9 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+
+class UserMeSerializer(UserSerializer):
+    """Сериализатор для работы с текущим пользователем."""
+
+    email = serializers.EmailField(required=True)
