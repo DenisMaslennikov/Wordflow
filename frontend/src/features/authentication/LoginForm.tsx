@@ -7,6 +7,7 @@ import Button from "../../ui/Button.tsx";
 import Input from "../../ui/Input.tsx";
 import SpinnerMini from "../../ui/SpinnerMini.tsx";
 import useAuth from "../../hooks/useAuth.ts";
+import { WIDTH_LOGIN_MODAL } from "../../utils/constants.ts";
 
 function LoginForm({ onCloseModal }: { onCloseModal?: () => void }) {
   const { register, formState, handleSubmit } = useForm<LoginForm>();
@@ -20,7 +21,7 @@ function LoginForm({ onCloseModal }: { onCloseModal?: () => void }) {
   }
 
   return (
-    <Form $width={"350px"} onSubmit={handleSubmit(onSubmit)}>
+    <Form $width={WIDTH_LOGIN_MODAL} onSubmit={handleSubmit(onSubmit)}>
       <FormRowVertical label={"Email"} error={errors?.email?.message}>
         <Input
           autoComplete={"email"}
