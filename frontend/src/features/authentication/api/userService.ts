@@ -2,11 +2,22 @@ import apiClient from "../../../service/apiClient.ts";
 
 import type { LoginForm, UserForm, UserProfile } from "../types/User.ts";
 import type { TokensPair } from "../types/Tokens.ts";
+import { isAxiosError } from "axios";
 
 const userService = {
   getUserMe: async () => {
-    const response = await apiClient.get<UserProfile>("user/me/");
-    return response.data;
+    try {
+      const response = await apiClient.get<UserProfile>("user/me/");
+      return response.data;
+    } catch (error: unknown) {
+      if (isAxiosError(error) && error.response?.status === 401) {
+        // Возвращаем null, если пользователь не авторизован
+        return null;
+      }
+
+      // Пробрасываем ошибку дальше, если она не 401 или не Axios
+      throw error;
+    }
   },
 
   createUser: async (data: UserForm) => {
