@@ -1,8 +1,8 @@
-import Modal from "../ui/Modal.tsx";
-import UserCreateUpdateForm from "./authentication/UserCreateUpdateForm.tsx";
-import useUser from "./authentication/hooks/useUser.ts";
-import SpinnerMini from "../ui/SpinnerMini.tsx";
-import DropDownMenu from "../ui/DropDownMenu.tsx";
+import Modal from "../../ui/Modal.tsx";
+import UserCreateUpdateForm from "./UserCreateUpdateForm.tsx";
+import useUser from "./hooks/useUser.ts";
+import SpinnerMini from "../../ui/SpinnerMini.tsx";
+import DropDownMenu from "../../ui/DropDownMenu.tsx";
 
 function UserProfileManagement() {
   const { isUserLoading, user } = useUser();

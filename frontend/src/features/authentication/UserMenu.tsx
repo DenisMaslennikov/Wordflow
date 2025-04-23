@@ -5,7 +5,7 @@ import Button from "../../ui/Button.tsx";
 import Modal from "../../ui/Modal.tsx";
 import UserCreateUpdateForm from "./UserCreateUpdateForm.tsx";
 import LoginForm from "./LoginForm.tsx";
-import UserProfileManagement from "../UserProfileManagement.tsx";
+import UserProfileManagement from "./UserProfileManagement.tsx";
 
 const MenuContainer = styled.div`
   display: flex;
