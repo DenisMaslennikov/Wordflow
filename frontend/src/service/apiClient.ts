@@ -52,7 +52,9 @@ apiClient.interceptors.response.use(
     const originalRequest = err.config as AxiosRequestConfig & {
       _retry?: boolean;
     };
-    if (!getTokenFromLocalStorage(REFRESH_KEY)) return;
+    if (!getTokenFromLocalStorage(REFRESH_KEY)) {
+      return Promise.reject(err);
+    }
 
     if (err.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
