@@ -5,6 +5,12 @@ export const BUTTON_TEXT_COLOR = "--color-grey-500";
 export const TEXT_MAIN_COLOR = "--color-grey-800";
 export const HOVER_COLOR = "--color-grey-100";
 
+// Ширина модального окна логина.
+export const WIDTH_LOGIN_MODAL = "340px";
+
+// Ширина модального окна регистрации.
+export const WIDTH_REGISTRATION_MODAL = "340px";
+
 // Ключи для хранения токенов в localStorage
 export const ACCESS_KEY = "accessToken";
 export const REFRESH_KEY = "refreshToken";
