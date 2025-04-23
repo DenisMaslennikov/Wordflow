@@ -14,9 +14,9 @@ interface UserProfile extends BaseUser {
 interface UserForm extends BaseUser {
   email: string;
   bio: string | null;
-  avatar: FileList | File | null;
-  password: string;
-  repeatPassword: string;
+  avatar: FileList | File | string | null;
+  password?: string;
+  repeatPassword?: string;
 }
 
 interface LoginForm {
