@@ -84,7 +84,7 @@ function Toggle({
     const rect = e.currentTarget.getBoundingClientRect();
     setPosition({
       x: window.innerWidth - rect.width - rect.x,
-      y: rect.y + rect.height + 8, // TODO Убрать магическое число
+      y: rect.y + rect.height,
     });
 
     if (!openId || openId !== id) open(id);
@@ -125,6 +125,7 @@ function ListItem({
   } & Omit<ComponentPropsWithoutRef<"button">, "onClick" | "children"> &
     ButtonProps
 >) {
+  const { close } = useContext(MenuContext);
   function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     onClick?.(e);
     close();
