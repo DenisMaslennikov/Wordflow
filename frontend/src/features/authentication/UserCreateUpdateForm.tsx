@@ -12,8 +12,12 @@ import Input from "../../ui/Input.tsx";
 import TextArea from "../../ui/TextArea.tsx";
 import Button from "../../ui/Button.tsx";
 import FormRowHorizontal from "../../ui/FormRowHorizontal.tsx";
-import FileInput from "../../ui/FileInput.tsx";
 import useUpdateUserMe from "./hooks/useUpdateUserMe.ts";
+import ImageInput from "../../ui/ImageInput.tsx";
+import {
+  VITE_MEDIA_BASE_URL,
+  WIDTH_REGISTRATION_MODAL,
+} from "../../utils/constants.ts";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
@@ -60,7 +64,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
   }
 
   return (
-    <Form $width={"350px"} onSubmit={handleSubmit(onSubmit)}>
+    <Form $width={WIDTH_REGISTRATION_MODAL} onSubmit={handleSubmit(onSubmit)}>
       <FormRowVertical
         label={"Имя пользователя"}
         error={errors?.username?.message}
@@ -157,13 +161,14 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           {...register("bio")}
         />
       </FormRowVertical>
-      <FormRowVertical label={"Аватар"} error={errors?.bio?.message}>
-        <FileInput
+      {!isAuthenticated && user?.avatar && "ddd"}
+      <FormRowVertical label={"Аватар"} error={errors?.avatar?.message}>
+        <ImageInput
           id={"image"}
           disabled={isBusy}
           {...register("avatar")}
-          accept="image/*"
-          multiple={false}
+          $width={WIDTH_REGISTRATION_MODAL}
+          src={user?.avatar ? VITE_MEDIA_BASE_URL + user?.avatar : undefined}
         />
       </FormRowVertical>
 
