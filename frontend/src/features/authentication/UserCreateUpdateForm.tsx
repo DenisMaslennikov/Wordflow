@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import Form from "../../ui/Form.tsx";
 import useUser from "./hooks/useUser.ts";
 import Spinner from "../../ui/Spinner.tsx";
@@ -23,6 +25,18 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
   const { register, handleSubmit, reset, formState } = useForm<UserForm>();
 
   const { isUserCreating, createUser } = useCreateUser();
+
+  useEffect(() => {
+    if (user)
+      reset({
+        username: user.username,
+        avatar: user.avatar,
+        bio: user.bio,
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+      });
+  }, [user, reset]);
 
   const isBusy = isUserCreating || false;
 
@@ -82,37 +96,41 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           })}
         />
       </FormRowVertical>
-      <FormRowVertical label={"Пароль"} error={errors?.password?.message}>
-        <Input
-          id={"password"}
-          disabled={isBusy}
-          placeholder={"Пароль"}
-          type={"password"}
-          {...register("password", {
-            required: "Не указан пароль",
-            minLength: {
-              value: 8,
-              message: "Минимальная длинна пароля 8 символов",
-            },
-          })}
-        />
-      </FormRowVertical>
-      <FormRowVertical
-        label={"Повтор пароля"}
-        error={errors?.repeatPassword?.message}
-      >
-        <Input
-          id={"repeatPassword"}
-          disabled={isBusy}
-          placeholder={"Повтор пароля"}
-          type={"password"}
-          {...register("repeatPassword", {
-            required: "Введите пароль повторно",
-            validate: (value, formValues) =>
-              value === formValues.password || "Пароли не совпадают",
-          })}
-        />
-      </FormRowVertical>
+      {!isAuthenticated && (
+        <>
+          <FormRowVertical label={"Пароль"} error={errors?.password?.message}>
+            <Input
+              id={"password"}
+              disabled={isBusy}
+              placeholder={"Пароль"}
+              type={"password"}
+              {...register("password", {
+                required: "Не указан пароль",
+                minLength: {
+                  value: 8,
+                  message: "Минимальная длинна пароля 8 символов",
+                },
+              })}
+            />
+          </FormRowVertical>
+          <FormRowVertical
+            label={"Повтор пароля"}
+            error={errors?.repeatPassword?.message}
+          >
+            <Input
+              id={"repeatPassword"}
+              disabled={isBusy}
+              placeholder={"Повтор пароля"}
+              type={"password"}
+              {...register("repeatPassword", {
+                required: "Введите пароль повторно",
+                validate: (value, formValues) =>
+                  value === formValues.password || "Пароли не совпадают",
+              })}
+            />
+          </FormRowVertical>
+        </>
+      )}
       <FormRowVertical label={"Имя"} error={errors?.first_name?.message}>
         <Input
           id={"first_name"}
