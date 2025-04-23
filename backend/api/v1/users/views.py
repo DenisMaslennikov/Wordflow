@@ -58,14 +58,22 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
         user = request.user
 
         if request.method == "GET":
-            serializer = UserMeSerializer(user)
-            return Response(serializer.data)
+            if user.is_anonymous:
+                empty_data = {field_name: None for field_name in UserMeSerializer().get_fields().keys()}
+                return Response(empty_data)
+            else:
+                serializer = UserMeSerializer(user)
+                return Response(serializer.data)
         elif request.method == "PATCH":
+            if user.is_anonymous:
+                return Response({"error": "Только авторизованый пользователь может редактировать свой профиль"})
             serializer = UserMeSerializer(user, data=request.data, partial=True)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
         elif request.method == "PUT":
+            if user.is_anonymous:
+                return Response({"error": "Только авторизованый пользователь может редактировать свой профиль"})
             serializer = UserMeSerializer(user, data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
