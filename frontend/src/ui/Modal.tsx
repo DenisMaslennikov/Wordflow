@@ -44,6 +44,7 @@ const StyledModal = styled.div`
   padding: 1rem;
   overflow-y: auto;
   overflow-x: hidden;
+  max-height: 90vh;
 `;
 
 const Overlay = styled.div`
