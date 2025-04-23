@@ -9,7 +9,6 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { AuthContext } from "./AuthContext.ts";
 import useLocalStorageState from "../../hooks/useLocalStorageState.ts";
-import { getTokenExpirationTime } from "../../utils/jwt.ts";
 import { ACCESS_KEY, REFRESH_KEY } from "../../utils/constants.ts";
 import apiClient, { setAuthTokenUpdater } from "../../service/apiClient.ts";
 
@@ -64,6 +63,15 @@ function AuthContextProvider({ children }: PropsWithChildren) {
         } catch (error) {
           logout();
           throw error;
+        }
+      }
+
+      function getTokenExpirationTime(token: string): number | null {
+        try {
+          const payload = JSON.parse(atob(token.split(".")[1]));
+          return payload.exp ? payload.exp * 1000 : null; // convert to ms
+        } catch {
+          return null;
         }
       }
 
