@@ -56,7 +56,7 @@ function AuthContextProvider({ children }: PropsWithChildren) {
         try {
           if (!refreshToken) throw new Error("No refresh token");
 
-          const { data } = await apiClient.post("/token/refresh/", {
+          const { data } = await apiClient.post<TokensPair>("/token/refresh/", {
             refresh: refreshToken,
           });
           setTokens(data);
