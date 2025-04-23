@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse
-from rest_framework import decorators, filters, mixins, parsers, renderers, viewsets
+from rest_framework import decorators, filters, mixins, parsers, renderers, viewsets, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -59,21 +59,26 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
 
         if request.method == "GET":
             if user.is_anonymous:
-                empty_data = {field_name: None for field_name in UserMeSerializer().get_fields().keys()}
-                return Response(empty_data)
-            else:
-                serializer = UserMeSerializer(user)
-                return Response(serializer.data)
+                return Response(None, status=status.HTTP_401_UNAUTHORIZED)
+
+            serializer = UserMeSerializer(user)
+            return Response(serializer.data)
         elif request.method == "PATCH":
             if user.is_anonymous:
-                return Response({"error": "Только авторизованый пользователь может редактировать свой профиль"})
+                return Response(
+                    {"error": "Только авторизированный пользователь может редактировать свой профиль"},
+                    status=status.HTTP_401_UNAUTHORIZED,
+                )
             serializer = UserMeSerializer(user, data=request.data, partial=True)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
         elif request.method == "PUT":
             if user.is_anonymous:
-                return Response({"error": "Только авторизованый пользователь может редактировать свой профиль"})
+                return Response(
+                    {"error": "Только авторизированный пользователь может редактировать свой профиль"},
+                    status=status.HTTP_401_UNAUTHORIZED,
+                )
             serializer = UserMeSerializer(user, data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
