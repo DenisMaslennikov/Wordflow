@@ -1,11 +1,16 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { ACCESS_KEY, API_BASE_URL, REFRESH_KEY } from "../utils/constants.ts";
+import {
+  ACCESS_KEY,
+  API_BASE_URL,
+  AXIOS_TIMEOUT,
+  REFRESH_KEY,
+} from "../utils/constants.ts";
 import { getTokenFromLocalStorage } from "../utils/jwt.ts";
 import { TokensPair } from "../features/authentication/types/Tokens.ts";
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 1000,
+  timeout: AXIOS_TIMEOUT,
   headers: {
     "Content-Type": "application/json",
   },

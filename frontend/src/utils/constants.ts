@@ -1,3 +1,6 @@
+// Axios timout
+export const AXIOS_TIMEOUT = 10_000;
+
 // Настройка цветов.
 export const BORDER_COLOR = "--color-grey-300";
 export const BACKGROUND_COLOR = "--color-grey-0";
