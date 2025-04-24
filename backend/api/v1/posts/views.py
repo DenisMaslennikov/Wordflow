@@ -18,7 +18,7 @@ from utils.constants import POST_STATUS_PUBLISHED
 
 
 class PostListAPIView(ListAPIView):
-    """Просмотр списка постов блога."""
+    """Просмотр списка постов."""
 
     queryset = Post.objects.all()
     serializer_class = PostListSerializer
