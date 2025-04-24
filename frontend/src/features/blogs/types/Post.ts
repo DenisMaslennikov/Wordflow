@@ -21,11 +21,4 @@ interface Post extends BasePost {
   published_at: Date;
 }
 
-interface PostApiPagination {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: PostApi[];
-}
-
-export type { PostApi, Post, PostApiPagination };
+export type { PostApi, Post };
