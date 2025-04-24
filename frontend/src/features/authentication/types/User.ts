@@ -30,4 +30,15 @@ interface LoginForm {
   password: string;
 }
 
-export type { UserProfile, LoginForm, UserSignupForm, UserUpdateForm };
+interface ChangePasswordForm {
+  password: string;
+  repeatPassword: string;
+}
+
+export type {
+  UserProfile,
+  LoginForm,
+  UserSignupForm,
+  UserUpdateForm,
+  ChangePasswordForm,
+};
