@@ -11,12 +11,18 @@ interface UserProfile extends BaseUser {
   avatar: string | null;
 }
 
-interface UserForm extends BaseUser {
+interface UserSignupForm extends BaseUser {
   email: string;
   bio: string | null;
   avatar: FileList | File | string | null;
-  password?: string;
-  repeatPassword?: string;
+  password: string;
+  repeatPassword: string;
+}
+interface UserUpdateForm extends BaseUser {
+  email: string;
+  bio: string | null;
+  avatar: FileList | File | string | null;
+  avatar_delete: boolean;
 }
 
 interface LoginForm {
@@ -24,4 +30,4 @@ interface LoginForm {
   password: string;
 }
 
-export type { UserProfile, LoginForm, UserForm };
+export type { UserProfile, LoginForm, UserSignupForm, UserUpdateForm };

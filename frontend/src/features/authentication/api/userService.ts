@@ -1,6 +1,11 @@
 import apiClient from "../../../service/apiClient.ts";
 
-import type { LoginForm, UserForm, UserProfile } from "../types/User.ts";
+import type {
+  LoginForm,
+  UserSignupForm,
+  UserProfile,
+  UserUpdateForm,
+} from "../types/User.ts";
 import type { TokensPair } from "../types/Tokens.ts";
 import { isAxiosError } from "axios";
 
@@ -20,7 +25,7 @@ const userService = {
     }
   },
 
-  createUser: async (data: UserForm) => {
+  createUser: async (data: UserSignupForm) => {
     const body =
       data.avatar instanceof FileList
         ? { ...data, avatar: data.avatar[0] }
@@ -31,7 +36,7 @@ const userService = {
     return response.data;
   },
 
-  updateUserMe: async (data: UserForm) => {
+  updateUserMe: async (data: UserUpdateForm) => {
     const body =
       typeof data.avatar === "string"
         ? // eslint-disable-next-line @typescript-eslint/no-unused-vars
