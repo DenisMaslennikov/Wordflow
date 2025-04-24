@@ -1,6 +1,6 @@
-import { UserShort } from "../../authentication/types/User.ts";
-import { Tag } from "./Tag.ts";
-import { BlogApi } from "./Blog.ts";
+import type { UserShort } from "../../authentication/types/User.ts";
+import type { Tag } from "./Tag.ts";
+import type { Blog, BlogApi } from "./Blog.ts";
 
 interface BasePost {
   user: UserShort;
@@ -8,17 +8,18 @@ interface BasePost {
   title: string;
   content: string;
   tags: Tag[];
-  blog: BlogApi;
 }
 
 interface PostApi extends BasePost {
   id: number;
   published_at: string;
+  blog: BlogApi;
 }
 
 interface Post extends BasePost {
   id: number;
   publishedAt: Date;
+  blog: Blog;
 }
 
 export type { PostApi, Post };
