@@ -91,11 +91,24 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class UserMeSerializer(UserSerializer):
+class UserMeSerializer(serializers.ModelSerializer):
     """Сериализатор для работы с текущим пользователем."""
 
+    id = serializers.IntegerField(read_only=True)
     email = serializers.EmailField(required=True)
-    avatar_delete = serializers.BooleanField(default=False)
+    avatar_delete = serializers.BooleanField(write_only=True, default=False)
+    password = serializers.CharField(write_only=True, required=False)
+
+    class Meta:
+        """Метакласс сериализатора текущего пользователя."""
+
+        model = User
+        fields = ("id", "username", "email", "password", "first_name", "last_name", "bio", "avatar", "avatar_delete")
+        extra_kwargs = {
+            "bio": {"required": False},
+            "first_name": {"required": False},
+            "last_name": {"required": False},
+        }
 
     def update(self, instance, validated_data):
         """Обновление пользователя."""
