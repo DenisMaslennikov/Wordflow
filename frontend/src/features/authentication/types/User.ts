@@ -21,7 +21,7 @@ interface UserSignupForm extends BaseUser {
 interface UserUpdateForm extends BaseUser {
   email: string;
   bio: string | null;
-  avatar: FileList | File | string | null;
+  avatar?: FileList | File | string | null;
   avatar_delete: boolean;
 }
 
@@ -33,6 +33,12 @@ interface LoginForm {
 interface ChangePasswordForm {
   password: string;
   repeatPassword: string;
+}
+
+export function isUserUpdateForm(
+  data: UserUpdateForm | ChangePasswordForm,
+): data is UserUpdateForm {
+  return "username" in data;
 }
 
 export type {
