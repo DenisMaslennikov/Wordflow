@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BORDER_COLOR } from "../utils/constants.ts";
+import { BORDER_COLOR } from "../../utils/constants.ts";
 
 const StyledFooter = styled.footer`
   display: flex;
