@@ -1,0 +1,53 @@
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { postService } from "../api/postService.ts";
+import { toPost } from "../transform/toPost.ts";
+import { PaginatedResults } from "../../../types/PaginatedResults.ts";
+import type { Post, PostApi } from "../types/Post.ts";
+import { useSearchParams } from "react-router-dom";
+import { DEFAULT_POSTS_PER_PAGE } from "../../../utils/constants.ts";
+
+function usePosts() {
+  const queryClient = useQueryClient();
+
+  const [searchParams] = useSearchParams();
+
+  const limit = Number(searchParams.get("limit") ?? DEFAULT_POSTS_PER_PAGE);
+  const page = Number(searchParams.get("page") ?? 1);
+  const offset = limit * (page - 1);
+
+  function select(data: PaginatedResults<PostApi>): PaginatedResults<Post> {
+    const results = data.results.map(toPost);
+    return { ...data, results };
+  }
+
+  const { data, isLoading: isPostsLoading } = useQuery<
+    PaginatedResults<PostApi>,
+    Error,
+    PaginatedResults<Post>
+  >({
+    queryFn: () => postService.getPosts({ limit, offset }),
+    queryKey: ["posts", limit, offset],
+    select,
+  });
+
+  const count = data?.count || 0;
+  const next = data?.next || null;
+  const previous = data?.previous || null;
+  const posts = data?.results || [];
+
+  if (next)
+    queryClient.prefetchQuery({
+      queryKey: ["posts", limit, offset + limit],
+      queryFn: () => postService.getPosts({ limit, offset: offset + limit }),
+    });
+
+  if (previous)
+    queryClient.prefetchQuery({
+      queryKey: ["posts", limit, offset - limit],
+      queryFn: () => postService.getPosts({ limit, offset: offset - limit }),
+    });
+
+  return { posts, isPostsLoading, count, pages: Math.ceil(count / limit) };
+}
+
+export default usePosts;
