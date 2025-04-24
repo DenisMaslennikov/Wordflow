@@ -53,7 +53,7 @@ function usePosts() {
     count,
     pages: Math.ceil(count / limit),
     from: (page - 1) * limit,
-    to: page * limit <= count ? page * limit : count,
+    to: page * limit <= count ? page * limit - 1 : count,
   };
 }
 
