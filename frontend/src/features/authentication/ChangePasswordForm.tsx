@@ -35,6 +35,15 @@ function ChangePasswordForm({ onCloseModal }: { onCloseModal?: () => void }) {
         disabled={true}
         value={user?.username}
       />
+      <Input
+        type="text"
+        name="email"
+        autoComplete="email"
+        style={{ display: "none" }}
+        tabIndex={-1}
+        disabled={true}
+        value={user?.email}
+      />
       <FormRowVertical label={"Новый пароль"} error={errors?.password?.message}>
         <Input
           autoComplete={"new-password"}
