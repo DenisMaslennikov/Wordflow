@@ -7,7 +7,6 @@ import PostList from "./pages/PostList.tsx";
 import PostListView from "./ui/PostListView.tsx";
 import Post from "./pages/Post.tsx";
 import UserProfile from "./pages/UserProfile.tsx";
-import EditUserProfile from "./pages/EditUserProfile.tsx";
 import BlogLayout from "./ui/BlogLayout.tsx";
 import BloggerLayout from "./ui/BloggerLayout.tsx";
 import ProtectedRoute from "./ui/ProtectedRoute.tsx";
@@ -49,7 +48,6 @@ function App() {
                     path={"blog/:blogSlug/:postSlug/:postId"}
                     element={<Post />}
                   />
-                  <Route path={"profile"} element={<EditUserProfile />} />
                   <Route path={"user/:username"} element={<UserProfile />} />
                 </Route>
                 <Route
