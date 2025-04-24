@@ -1,11 +1,11 @@
 import apiClient from "../../../service/apiClient.ts";
 
 import {
-  LoginForm,
-  UserSignupForm,
-  UserProfile,
-  UserUpdateForm,
-  ChangePasswordForm,
+  type LoginForm,
+  type UserSignupForm,
+  type UserProfile,
+  type UserUpdateForm,
+  type ChangePasswordForm,
   isUserUpdateForm,
 } from "../types/User.ts";
 import type { TokensPair } from "../types/Tokens.ts";
