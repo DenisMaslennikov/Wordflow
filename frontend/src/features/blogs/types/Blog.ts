@@ -10,7 +10,7 @@ interface BlogApi extends BaseBlog {
 }
 interface Blog extends BaseBlog {
   id: number;
-  created_at: Date;
+  createdAt: Date;
 }
 
 export type { BlogApi, Blog };
