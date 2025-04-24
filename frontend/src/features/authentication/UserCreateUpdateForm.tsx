@@ -4,8 +4,8 @@ import Form from "../../ui/Form.tsx";
 import useUser from "./hooks/useUser.ts";
 import Spinner from "../../ui/Spinner.tsx";
 import useAuth from "../../hooks/useAuth.ts";
-import { useForm } from "react-hook-form";
-import type { UserForm } from "./types/User.ts";
+import { FieldErrors, useForm } from "react-hook-form";
+import type { UserSignupForm, UserUpdateForm } from "./types/User.ts";
 import useCreateUser from "./hooks/useCreateUser.ts";
 import FormRowVertical from "../../ui/FormRowVertical.tsx";
 import Input from "../../ui/Input.tsx";
@@ -15,9 +15,11 @@ import FormRowHorizontal from "../../ui/FormRowHorizontal.tsx";
 import useUpdateUserMe from "./hooks/useUpdateUserMe.ts";
 import ImageInput from "../../ui/ImageInput.tsx";
 import {
+  PASSWORD_MIN_LENGTH,
   VITE_MEDIA_BASE_URL,
   WIDTH_REGISTRATION_MODAL,
 } from "../../utils/constants.ts";
+import CheckBox from "../../ui/CheckBox.tsx";
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
@@ -27,10 +29,14 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
   const { user, isUserLoading } = useUser();
   const { isAuthenticated } = useAuth();
 
-  const { register, handleSubmit, reset, formState } = useForm<UserForm>();
+  const { register, handleSubmit, reset, formState, watch } = useForm<
+    UserSignupForm | UserUpdateForm
+  >();
 
   const { isUserCreating, createUser } = useCreateUser();
   const { updateUserMe, isUserUpdating } = useUpdateUserMe();
+
+  const isAvatarDelete = watch("avatar_delete");
 
   useEffect(() => {
     if (user)
@@ -50,17 +56,32 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
 
   if (isUserLoading) return <Spinner />;
 
-  function onSubmit(form: UserForm) {
+  function onSubmit(form: UserSignupForm | UserUpdateForm) {
     if (!isAuthenticated) {
-      createUser(form, {
+      createUser(form as UserSignupForm, {
         onSuccess: () => {
           reset();
           onCloseModal?.();
         },
       });
     } else {
-      updateUserMe(form, { onSuccess: () => onCloseModal?.() });
+      updateUserMe(form as UserUpdateForm, {
+        onSuccess: () => onCloseModal?.(),
+      });
     }
+  }
+
+  function handleReset() {
+    if (user)
+      reset({
+        username: user.username,
+        avatar: user.avatar,
+        bio: user.bio,
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+      });
+    else reset();
   }
 
   return (
@@ -101,7 +122,10 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
       </FormRowVertical>
       {!isAuthenticated && (
         <>
-          <FormRowVertical label={"Пароль"} error={errors?.password?.message}>
+          <FormRowVertical
+            label={"Пароль"}
+            error={(errors as FieldErrors<UserSignupForm>)?.password?.message}
+          >
             <Input
               autoComplete={"new-password"}
               id={"password"}
@@ -111,15 +135,17 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
               {...register("password", {
                 required: "Не указан пароль",
                 minLength: {
-                  value: 8,
-                  message: "Минимальная длинна пароля 8 символов",
+                  value: PASSWORD_MIN_LENGTH,
+                  message: `Минимальная длинна пароля ${PASSWORD_MIN_LENGTH} символов`,
                 },
               })}
             />
           </FormRowVertical>
           <FormRowVertical
             label={"Повтор пароля"}
-            error={errors?.repeatPassword?.message}
+            error={
+              (errors as FieldErrors<UserSignupForm>)?.repeatPassword?.message
+            }
           >
             <Input
               id={"repeatPassword"}
@@ -130,7 +156,8 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
               {...register("repeatPassword", {
                 required: "Введите пароль повторно",
                 validate: (value, formValues) =>
-                  value === formValues.password || "Пароли не совпадают",
+                  value === (formValues as UserSignupForm).password ||
+                  "Пароли не совпадают",
               })}
             />
           </FormRowVertical>
@@ -161,11 +188,23 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           {...register("bio")}
         />
       </FormRowVertical>
-      {!isAuthenticated && user?.avatar && "ddd"}
+      {isAuthenticated && user?.avatar && (
+        <FormRowVertical
+          error={
+            (errors as FieldErrors<UserUpdateForm>)?.avatar_delete?.message
+          }
+        >
+          <CheckBox
+            label={"Удалить аватар"}
+            id={"deleteAvatar"}
+            {...register("avatar_delete")}
+          />
+        </FormRowVertical>
+      )}
       <FormRowVertical label={"Аватар"} error={errors?.avatar?.message}>
         <ImageInput
           id={"image"}
-          disabled={isBusy}
+          disabled={isBusy || isAvatarDelete}
           {...register("avatar")}
           $width={WIDTH_REGISTRATION_MODAL}
           src={user?.avatar ? VITE_MEDIA_BASE_URL + user?.avatar : undefined}
@@ -180,7 +219,8 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           $size={"medium"}
           $style={"link"}
           disabled={isBusy}
-          type={"reset"}
+          type={"button"}
+          onClick={handleReset}
         >
           Отмена
         </Button>
