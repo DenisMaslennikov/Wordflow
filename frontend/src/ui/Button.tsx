@@ -49,7 +49,7 @@ const sizes = {
     font-size: 1.3rem;
     padding: 0.5rem;
     font-weight: 500;
-    text-align: left;
+    text-align: center;
     width: 100%;
   `,
 };
