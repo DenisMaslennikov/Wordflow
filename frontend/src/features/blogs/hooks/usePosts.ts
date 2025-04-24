@@ -47,7 +47,14 @@ function usePosts() {
       queryFn: () => postService.getPosts({ limit, offset: offset - limit }),
     });
 
-  return { posts, isPostsLoading, count, pages: Math.ceil(count / limit) };
+  return {
+    posts,
+    isPostsLoading,
+    count,
+    pages: Math.ceil(count / limit),
+    from: (page - 1) * limit,
+    to: page * limit <= count ? page * limit : count,
+  };
 }
 
 export default usePosts;
