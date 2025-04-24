@@ -45,6 +45,13 @@ const sizes = {
     text-align: left;
     width: 100%;
   `,
+  mediumFullWidth: css`
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+  `,
 };
 
 export type ButtonProps = {
