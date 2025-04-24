@@ -18,7 +18,7 @@ interface PostApi extends BasePost {
 
 interface Post extends BasePost {
   id: number;
-  published_at: Date;
+  publishedAt: Date;
 }
 
 export type { PostApi, Post };
