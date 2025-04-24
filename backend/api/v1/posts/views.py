@@ -24,20 +24,21 @@ class PostListAPIView(ListAPIView):
     serializer_class = PostListSerializer
     pagination_class = PostPagination
     filter_backends = (PrioritizedPostSearchFilter, filters.OrderingFilter, DjangoFilterBackend)
-    filterset_fields = ("user_id", "tags__id")
+    filterset_fields = ("user_id", "tags__id", "blog__slug", "blog_id")
     ordering_fields = ("title", "content", "published_at", "user_username")
     ordering = ("-published_at",)
 
     def get_queryset(self):
         """Получение кверисета."""
-        blog_slug = self.kwargs["blog_slug"]
+        # blog_slug = self.kwargs["blog_slug"]
         return (
             Post.objects.filter(
-                blog__slug=blog_slug,
+                # blog__slug=blog_slug,
                 published_at__lte=datetime.datetime.now(tz=datetime.timezone.utc),
                 status__exact=POST_STATUS_PUBLISHED,
             )
             .select_related("user")
+            .select_related("blog")
             .prefetch_related("tags")
         )
 
