@@ -27,7 +27,7 @@ app_name = "v1"
 urlpatterns = [
     path("", include(router.urls)),
     path("post_editor/<int:blog_id>/", include(blog_router.urls)),
-    path("blog_images/<int:blog_id>/", include(images_router.urls)),
+    path("blog_images/<slug:blog_slug>/", include(images_router.urls)),
     path("post_comments/<int:post_id>/", include(comments_router.urls)),
     path("main_page/posts/", MainPagePostsListAPIView.as_view(), name="main_page_posts"),
     path("blog_posts/<slug:blog_slug>/", PostListAPIView.as_view(), name="blog_posts"),

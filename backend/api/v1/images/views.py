@@ -21,15 +21,15 @@ class ImageViewSet(
     permission_classes = (IsBlogAuthorOrForbidden,)
 
     def get_queryset(self):
-        """Получение кверисета в зависимости от blog_id."""
-        blog_id = self.kwargs["blog_id"]
-        queryset = self.queryset.filter(blog_id=blog_id).select_related("user")
+        """Получение кверисета в зависимости от blog_slug."""
+        blog_slug = self.kwargs["blog_slug"]
+        queryset = self.queryset.filter(blog__slug=blog_slug).select_related("user")
         return queryset
 
     def perform_create(self, serializer):
         """Сохранение нового изображения."""
-        blog_id = self.kwargs["blog_id"]
-        image = serializer.save(user=self.request.user, blog_id=blog_id)
+        blog_slug = self.kwargs["blog_slug"]
+        image = serializer.save(user=self.request.user, blog__slug=blog_slug)
         return image
 
     def perform_destroy(self, instance):
