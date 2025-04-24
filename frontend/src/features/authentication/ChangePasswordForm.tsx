@@ -10,10 +10,13 @@ import {
 import usePasswordChange from "./hooks/usePasswordChange.ts";
 import FormRowHorizontal from "../../ui/FormRowHorizontal.tsx";
 import Button from "../../ui/Button.tsx";
+import useUser from "./hooks/useUser.ts";
 
 function ChangePasswordForm({ onCloseModal }: { onCloseModal?: () => void }) {
   const { register, formState, handleSubmit } = useForm<ChangePasswordForm>();
   const { changePassword, isPasswordChanging } = usePasswordChange();
+
+  const { user } = useUser();
 
   const { errors } = formState;
 
@@ -29,6 +32,8 @@ function ChangePasswordForm({ onCloseModal }: { onCloseModal?: () => void }) {
         autoComplete="username"
         style={{ display: "none" }}
         tabIndex={-1}
+        disabled={true}
+        value={user?.username}
       />
       <FormRowVertical label={"Новый пароль"} error={errors?.password?.message}>
         <Input
