@@ -35,6 +35,12 @@ interface ChangePasswordForm {
   repeatPassword: string;
 }
 
+interface UserShort {
+  id: number;
+  username: string;
+  avatar: string;
+}
+
 export function isUserUpdateForm(
   data: UserUpdateForm | ChangePasswordForm,
 ): data is UserUpdateForm {
@@ -47,4 +53,5 @@ export type {
   UserSignupForm,
   UserUpdateForm,
   ChangePasswordForm,
+  UserShort,
 };
