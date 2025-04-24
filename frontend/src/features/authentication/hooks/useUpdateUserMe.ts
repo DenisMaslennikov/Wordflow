@@ -12,6 +12,7 @@ function useUpdateUserMe() {
       queryClient.setQueriesData({ queryKey: ["user"] }, data);
       toast.success("Данные пользователя обновлены");
     },
+    onError: () => toast.error("Ошибка обновления данных"),
   });
   return { updateUserMe, isUserUpdating };
 }
