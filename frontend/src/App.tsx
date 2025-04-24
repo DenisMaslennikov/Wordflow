@@ -3,7 +3,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import GlobalStyles from "./styles/GlobalStyles.ts";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import PostList from "./pages/PostList.tsx";
+import ArticleList from "./pages/ArticleList.tsx";
 import PostListView from "./ui/PostListView.tsx";
 import Post from "./pages/Post.tsx";
 import UserProfile from "./pages/UserProfile.tsx";
@@ -45,8 +45,8 @@ function App() {
               <Routes>
                 <Route element={<BlogLayout />}>
                   <Route element={<PostListView />}>
-                    <Route index path={"/"} element={<PostList />} />
-                    <Route path={"blog/:blogSlug"} element={<PostList />} />
+                    <Route index path={"/"} element={<ArticleList />} />
+                    <Route path={"blog/:blogSlug"} element={<ArticleList />} />
                   </Route>
                   <Route
                     path={"blog/:blogSlug/:postSlug/:postId"}
