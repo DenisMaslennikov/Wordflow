@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { isValidElement, PropsWithChildren, ReactElement } from "react";
-import { TEXT_MAIN_COLOR } from "../utils/constants.ts";
+import Label from "./Label.tsx";
 
 const StyledFormRow = styled.div`
   display: flex;
@@ -29,12 +29,6 @@ const Error = styled.span`
   color: var(--color-red-700);
   hyphens: auto;
   word-break: break-word;
-`;
-
-const Label = styled.label`
-  font-size: 1rem;
-  color: var(${TEXT_MAIN_COLOR});
-  margin: 0.5rem 0;
 `;
 
 interface FormRowProps {
