@@ -3,6 +3,7 @@ import UserCreateUpdateForm from "./UserCreateUpdateForm.tsx";
 import useUser from "./hooks/useUser.ts";
 import SpinnerMini from "../../ui/SpinnerMini.tsx";
 import DropDownMenu from "../../ui/DropDownMenu.tsx";
+import ChangePasswordForm from "./ChangePasswordForm.tsx";
 
 function UserProfileManagement() {
   const { isUserLoading, user } = useUser();
@@ -25,12 +26,17 @@ function UserProfileManagement() {
               Редактировать профиль
             </DropDownMenu.ListItem>
           </Modal.Open>
-          <DropDownMenu.ListItem $size={"smallFullWidth"} $style={"link"}>
-            Сменить пароль
-          </DropDownMenu.ListItem>
+          <Modal.Open modalId={"changePassword"}>
+            <DropDownMenu.ListItem $size={"smallFullWidth"} $style={"link"}>
+              Сменить пароль
+            </DropDownMenu.ListItem>
+          </Modal.Open>
         </DropDownMenu.List>
         <Modal.Window modalId={"editUser"}>
           <UserCreateUpdateForm />
+        </Modal.Window>
+        <Modal.Window modalId={"changePassword"}>
+          <ChangePasswordForm />
         </Modal.Window>
       </Modal>
     </DropDownMenu>
