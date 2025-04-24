@@ -30,10 +30,10 @@ class PostListAPIView(ListAPIView):
 
     def get_queryset(self):
         """Получение кверисета."""
-        blog_id = self.kwargs["blog_id"]
+        blog_slug = self.kwargs["blog_slug"]
         return (
             Post.objects.filter(
-                blog_id=blog_id,
+                blog__slug=blog_slug,
                 published_at__lte=datetime.datetime.now(tz=datetime.timezone.utc),
                 status__exact=POST_STATUS_PUBLISHED,
             )

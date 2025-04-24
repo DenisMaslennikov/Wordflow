@@ -30,7 +30,7 @@ urlpatterns = [
     path("blog_images/<int:blog_id>/", include(images_router.urls)),
     path("post_comments/<int:post_id>/", include(comments_router.urls)),
     path("main_page/posts/", MainPagePostsListAPIView.as_view(), name="main_page_posts"),
-    path("blog_posts/<int:blog_id>/", PostListAPIView.as_view(), name="blog_posts"),
+    path("blog_posts/<slug:blog_slug>/", PostListAPIView.as_view(), name="blog_posts"),
     path("blog_post/<int:id>/", PostRetrieveAPIView.as_view(), name="blog_post"),
     path("roles/", RolesListAPIView.as_view(), name="roles"),
 ]
