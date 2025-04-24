@@ -90,18 +90,22 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-    def update(self, instance, validated_data):
-        """Обновление пользователя."""
-        password = validated_data.pop("password", None)
-        for attr, value in validated_data.items():
-            setattr(instance, attr, value)
-        if password:
-            instance.set_password(password)
-        instance.save()
-        return instance
-
 
 class UserMeSerializer(UserSerializer):
     """Сериализатор для работы с текущим пользователем."""
 
     email = serializers.EmailField(required=True)
+    avatar_delete = serializers.BooleanField(default=False)
+
+    def update(self, instance, validated_data):
+        """Обновление пользователя."""
+        password = validated_data.pop("password", None)
+        avatar_delete = validated_data.pop("avatar_delete", False)
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        if password:
+            instance.set_password(password)
+        if avatar_delete:
+            instance.avatar = None
+        instance.save()
+        return instance
