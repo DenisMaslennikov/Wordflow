@@ -1,8 +1,9 @@
 import apiClient from "../../../service/apiClient.ts";
+import { PostApiPagination } from "../types/Post.ts";
 
 export const postService = {
-  getMainPagePost: async () => {
-    const response = await apiClient.get("main_page/posts");
+  getPosts: async () => {
+    const response = await apiClient.get<PostApiPagination>("posts/");
     return response.data;
   },
 };
