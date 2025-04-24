@@ -19,7 +19,11 @@ import PageNotFound from "./pages/PageNotFound.tsx";
 import AppWrapper from "./ui/AppWrapper.tsx";
 import DarkModeContextProvider from "./context/DarkMode/DarkModeContextProvider.tsx";
 import AuthContextProvider from "./context/Auth/AuthContextProvider.tsx";
-import { DEFAULT_STALE_TIME } from "./utils/constants.ts";
+import {
+  DEFAULT_STALE_TIME,
+  ERROR_TOAST_DURATION,
+  SUCCESS_TOAST_DURATION,
+} from "./utils/constants.ts";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -81,10 +85,10 @@ function App() {
             containerStyle={{ margin: "8px" }}
             toastOptions={{
               success: {
-                duration: 3000,
+                duration: SUCCESS_TOAST_DURATION,
               },
               error: {
-                duration: 5000,
+                duration: ERROR_TOAST_DURATION,
               },
               style: {
                 fontSize: "16px",
