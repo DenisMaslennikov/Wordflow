@@ -15,3 +15,19 @@ class ImageSerializer(serializers.ModelSerializer):
 
         model = Image
         fields = ("id", "image", "alt", "user")
+
+
+class ImageShortSerializer(serializers.ModelSerializer):
+    """Короткий сериализатор модели Image."""
+
+    id = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        """Мета класс сериализатора Image."""
+
+        model = Image
+        fields = (
+            "id",
+            "image",
+            "alt",
+        )
