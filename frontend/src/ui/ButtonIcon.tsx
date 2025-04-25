@@ -5,14 +5,16 @@ const ButtonIcon = styled.button<{
   $height?: string;
   $width?: string;
   $padding?: string;
+  $margin?: string;
 }>`
   background: none;
   border: none;
-  padding: ${({ $padding = "0.5rem" }) => $padding};
+  padding: ${({ $padding = "0" }) => $padding};
+  margin: ${({ $margin = "0" }) => $margin};
 
   & svg {
-    width: ${({ $width = "2.2rem" }) => $width};
-    height: ${({ $height = "2.2rem" }) => $height};
+    width: ${({ $width = "1rem" }) => $width};
+    height: ${({ $height = "1rem" }) => $height};
     color: var(${BUTTON_TEXT_COLOR});
   }
 
