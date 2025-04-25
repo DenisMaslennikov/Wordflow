@@ -41,4 +41,5 @@ export const VITE_MEDIA_BASE_URL = import.meta.env.VITE_MEDIA_BASE_URL;
 export const PASSWORD_MIN_LENGTH = 8;
 
 // Количество постов по умолчанию на страницу
-export const DEFAULT_POSTS_PER_PAGE = 20;
+export const DEFAULT_POSTS_PER_PAGE = 10;
+export const ITEMS_PER_PAGE_SELECTOR = [1, 5, 10, 20, 30, 50, 100];
