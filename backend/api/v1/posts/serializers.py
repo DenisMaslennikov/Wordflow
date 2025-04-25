@@ -1,13 +1,13 @@
 from django.utils.text import Truncator
 from rest_framework import serializers
 
-from api.v1.blogs.serializers import BlogListSerializer, BlogDetailedSerializer
+from api.v1.blogs.serializers import BlogListSerializer
 from api.v1.images.serializers import ImageShortSerializer
 from api.v1.tags.serializers import TagSerializer
 from api.v1.users.serializers import UsernameAvatarUserSerializer
 from posts.models import Post
 from tags.models import Tag
-from utils.constants import POST_STATUS_DRAFT, POST_STATUS_PUBLISHED
+from utils.constants import POST_STATUS_DRAFT, POST_STATUS_PUBLISHED, TRUNCATE_TEXT_IN_POST_LIST_TO_WORDS
 
 
 class PostListSerializer(serializers.ModelSerializer):
@@ -46,7 +46,7 @@ class MainPagePostListSerializer(serializers.ModelSerializer):
 
     def get_content(self, obj) -> str:
         """Получение поля content для списка постов."""
-        return Truncator(obj.content).words(30)
+        return Truncator(obj.content).words(TRUNCATE_TEXT_IN_POST_LIST_TO_WORDS)
 
 
 class PostListWithStatusSerializer(serializers.ModelSerializer):
