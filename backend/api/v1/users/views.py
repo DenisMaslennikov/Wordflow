@@ -62,7 +62,7 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
             if user.is_anonymous:
                 return Response(None, status=status.HTTP_401_UNAUTHORIZED)
 
-            serializer = UserMeSerializer(user)
+            serializer = UserMeSerializer(user, context={"request": request})
             return Response(serializer.data)
         elif request.method == "PATCH":
             if user.is_anonymous:
@@ -70,7 +70,7 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
                     {"error": "Только авторизированный пользователь может редактировать свой профиль"},
                     status=status.HTTP_401_UNAUTHORIZED,
                 )
-            serializer = UserMeSerializer(user, data=request.data, partial=True)
+            serializer = UserMeSerializer(user, data=request.data, partial=True, context={"request": request})
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
@@ -80,7 +80,7 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
                     {"error": "Только авторизированный пользователь может редактировать свой профиль"},
                     status=status.HTTP_401_UNAUTHORIZED,
                 )
-            serializer = UserMeSerializer(user, data=request.data)
+            serializer = UserMeSerializer(user, data=request.data, context={"request": request})
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
