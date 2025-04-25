@@ -23,7 +23,7 @@ export const WIDTH_REGISTRATION_MODAL = "340px";
 export const IMG_HEADER_SIZE = "3rem";
 
 // Максимальная ширина поста в ленте.
-export const MAX_WIDTH_POST_IN_LIST = "1200px";
+export const MAX_WIDTH_POST_IN_LIST = "900px";
 
 // Максимальный размер превью изображения к посту в ленте
 export const MAX_POST_PREVIEW_WIDTH = "150px";
