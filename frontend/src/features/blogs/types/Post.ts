@@ -1,6 +1,7 @@
 import type { UserShort } from "../../authentication/types/User.ts";
 import type { Tag } from "./Tag.ts";
 import type { Blog, BlogApi } from "./Blog.ts";
+import type { Image } from "./Image.ts";
 
 interface BasePost {
   user: UserShort;
@@ -8,6 +9,7 @@ interface BasePost {
   title: string;
   content: string;
   tags: Tag[];
+  preview: Image;
 }
 
 interface PostApi extends BasePost {
