@@ -1,7 +1,9 @@
 import usePosts from "./hooks/usePosts.ts";
 import Spinner from "../../ui/Spinner.tsx";
 import styled from "styled-components";
-import Footer from "../../ui/Footer.tsx";
+import FooterPaginator from "../../ui/FooterPaginator.tsx";
+import { DEFAULT_POSTS_PER_PAGE } from "../../utils/constants.ts";
+import { useSearchParams } from "react-router-dom";
 
 const StyledPostList = styled.div`
   flex: 1;
@@ -11,13 +13,22 @@ const StyledPostList = styled.div`
 
 function PostList() {
   const { posts, isPostsLoading, pages, from, to, count } = usePosts();
+  const [searchParams] = useSearchParams();
+
+  const limit = Number(searchParams.get("limit") ?? DEFAULT_POSTS_PER_PAGE);
 
   if (isPostsLoading) return <Spinner />;
 
   return (
     <>
       <StyledPostList>Список постов</StyledPostList>
-      <Footer pages={pages} from={from} to={to} count={count} />
+      <FooterPaginator
+        pagesNumber={pages}
+        from={from}
+        to={to}
+        countResults={count}
+        limit={limit}
+      />
     </>
   );
 }
