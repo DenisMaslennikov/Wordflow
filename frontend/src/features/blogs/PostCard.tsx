@@ -9,6 +9,8 @@ import {
 } from "../../utils/constants.ts";
 import DOMPurify from "dompurify";
 import PostLink from "./PostLink.tsx";
+import BlogLink from "./BlogLink.tsx";
+import AuthorLink from "./AuthorLink.tsx";
 
 const StyledPostCard = styled.div`
   margin: 1rem auto;
@@ -16,6 +18,7 @@ const StyledPostCard = styled.div`
   max-width: ${MAX_WIDTH_POST_IN_LIST};
   width: 100%;
   padding: 1rem 1rem;
+  border-radius: var(--border-radius-lg);
 
   & img {
     max-width: ${MAX_POST_PREVIEW_WIDTH};
@@ -27,6 +30,12 @@ const StyledPostCard = styled.div`
     display: table;
     clear: both;
   }
+`;
+
+const LinkBlock = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
 
 const StyledTextBlock = styled.div`
@@ -44,15 +53,23 @@ const Preview = styled.img`
 
 function PostCard({ post }: { post: Post }) {
   return (
-    <PostLink post={post}>
-      <StyledPostCard>
+    <StyledPostCard>
+      <PostLink post={post}>
         <Heading as={"h3"}>{post.title}</Heading>
+      </PostLink>
+      <LinkBlock>
+        <AuthorLink author={post.user} />
+        <BlogLink blog={post.blog} />
+      </LinkBlock>
+      <PostLink post={post}>
         {post.preview ? <Preview src={`${post.preview?.image}`} /> : null}
+      </PostLink>
+      <PostLink post={post}>
         <StyledTextBlock
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
         />
-      </StyledPostCard>
-    </PostLink>
+      </PostLink>
+    </StyledPostCard>
   );
 }
 

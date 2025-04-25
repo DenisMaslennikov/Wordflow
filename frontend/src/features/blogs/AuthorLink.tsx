@@ -6,7 +6,9 @@ interface AuthorLinkProps {
 }
 
 function AuthorLink({ author }: AuthorLinkProps) {
-  return <StyledLink to={`/user/${author.id}`}>{author.username}</StyledLink>;
+  return (
+    <StyledLink to={`/user/${author.username}`}>{author.username}</StyledLink>
+  );
 }
 
 export default AuthorLink;
