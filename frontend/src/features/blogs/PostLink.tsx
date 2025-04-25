@@ -11,7 +11,7 @@ interface PostLinkProps {
 
 function PostLink({ children, post }: PostLinkProps) {
   return (
-    <StyledPostLink to={`blog/${post.blog.slug}/${post.slug}/${post.id}`}>
+    <StyledPostLink to={`/blog/${post.blog.slug}/${post.slug}/${post.id}`}>
       {children}
     </StyledPostLink>
   );
