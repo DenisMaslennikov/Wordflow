@@ -27,25 +27,6 @@ class PostListSerializer(serializers.ModelSerializer):
 
     def get_content(self, obj) -> str:
         """Получение поля content для списка постов."""
-        return Truncator(obj.content).words(30)
-
-
-class MainPagePostListSerializer(serializers.ModelSerializer):
-    """Сериализатор списка постов для главной страницы."""
-
-    user = UsernameAvatarUserSerializer(read_only=True)
-    content = serializers.SerializerMethodField()
-    tags = TagSerializer(many=True, read_only=True)
-    blog = BlogListSerializer(read_only=True)
-
-    class Meta:
-        """Метаклас сериализатора списка постов для главной страницы."""
-
-        model = Post
-        fields = ("id", "user", "slug", "title", "content", "published_at", "tags", "blog")
-
-    def get_content(self, obj) -> str:
-        """Получение поля content для списка постов."""
         return Truncator(obj.content).words(TRUNCATE_TEXT_IN_POST_LIST_TO_WORDS, html=True)
 
 
