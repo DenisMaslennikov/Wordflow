@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import type { Post } from "./types/Post.ts";
 
-const StyledPostLink = styled(NavLink)``;
+const StyledPostLink = styled(Link)``;
 
 interface PostLinkProps {
   children: React.ReactNode;
