@@ -1,14 +1,13 @@
 from django.contrib.auth import get_user_model
-from drf_spectacular.types import OpenApiTypes
-from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiResponse
-from rest_framework import decorators, filters, mixins, parsers, renderers, viewsets, status
+from drf_spectacular.utils import OpenApiResponse, extend_schema
+from rest_framework import decorators, filters, mixins, parsers, renderers, status, viewsets
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from .permissions import IsMeOrReadOnly
-from .serializers import CustomTokenObtainPairSerializer, UserSerializer, CustomTokenRefreshSerializer, UserMeSerializer
 from ..blogs.serializers import BlogListSerializer
+from .permissions import IsMeOrReadOnly
+from .serializers import CustomTokenObtainPairSerializer, CustomTokenRefreshSerializer, UserMeSerializer, UserSerializer
 
 User = get_user_model()
 
@@ -23,6 +22,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         responses=TokenObtainPairSerializer,
     )
     def post(self, request, *args, **kwargs):
+        """Получение токенов."""
         return super().post(request, *args, **kwargs)
 
 
@@ -45,6 +45,7 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
 
     @extend_schema(request=UserSerializer)
     def create(self, request, *args, **kwargs):
+        """Создание нового пользователя."""
         return super().create(request, *args, **kwargs)
 
     @decorators.action(

@@ -1,4 +1,4 @@
-from rest_framework import mixins, permissions, viewsets, filters
+from rest_framework import filters, mixins, permissions, viewsets
 
 from api.v1.tags.serializers import TagSerializer
 from tags.models import Tag
