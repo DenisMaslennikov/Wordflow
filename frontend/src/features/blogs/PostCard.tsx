@@ -8,6 +8,7 @@ import {
   MAX_WIDTH_POST_IN_LIST,
 } from "../../utils/constants.ts";
 import DOMPurify from "dompurify";
+import PostLink from "./PostLink.tsx";
 
 const StyledPostCard = styled.div`
   margin: 1rem auto;
@@ -36,13 +37,15 @@ const Preview = styled.img`
 
 function PostCard({ post }: { post: Post }) {
   return (
-    <StyledPostCard>
-      <Heading as={"h3"}>{post.title}</Heading>
-      {post.preview ? <Preview src={`${post.preview?.image}`} /> : null}
-      <StyledTextBlock
-        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
-      />
-    </StyledPostCard>
+    <PostLink post={post}>
+      <StyledPostCard>
+        <Heading as={"h3"}>{post.title}</Heading>
+        {post.preview ? <Preview src={`${post.preview?.image}`} /> : null}
+        <StyledTextBlock
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+        />
+      </StyledPostCard>
+    </PostLink>
   );
 }
 
