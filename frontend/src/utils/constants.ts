@@ -44,9 +44,6 @@ export const TOKEN_REFRESH_SLEEP_TIMOUT_IF_ERROR = 1_000;
 // Базовый урл API
 export const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-// Префикс для медиа файлов
-export const VITE_MEDIA_BASE_URL = import.meta.env.VITE_MEDIA_BASE_URL;
-
 // Минимальная длинна пароля
 export const PASSWORD_MIN_LENGTH = 8;
 
