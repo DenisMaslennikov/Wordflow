@@ -30,7 +30,9 @@ function UserProfileManagement() {
         >
           <UserContainer>
             <span>{user.username}</span>
-            <Avatar $width={IMG_HEADER_SIZE} src={user.avatar} />
+            {user.avatar && (
+              <Avatar $size={IMG_HEADER_SIZE} src={user.avatar} />
+            )}
           </UserContainer>
         </DropDownMenu.Toggle>
         <DropDownMenu.List id="user-profile-management">
