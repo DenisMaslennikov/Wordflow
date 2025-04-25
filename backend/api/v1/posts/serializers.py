@@ -46,7 +46,7 @@ class MainPagePostListSerializer(serializers.ModelSerializer):
 
     def get_content(self, obj) -> str:
         """Получение поля content для списка постов."""
-        return Truncator(obj.content).words(TRUNCATE_TEXT_IN_POST_LIST_TO_WORDS)
+        return Truncator(obj.content).words(TRUNCATE_TEXT_IN_POST_LIST_TO_WORDS, html=True)
 
 
 class PostListWithStatusSerializer(serializers.ModelSerializer):
