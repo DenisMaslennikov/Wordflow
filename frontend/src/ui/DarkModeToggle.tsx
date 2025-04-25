@@ -5,7 +5,12 @@ import useDarkMode from "../hooks/useDarkMode.ts";
 function DarkModeToggle() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   return (
-    <ButtonIcon onClick={toggleDarkMode} $width={"2.2rem"} $height={"2.2rem"}>
+    <ButtonIcon
+      onClick={toggleDarkMode}
+      $width={"2.2rem"}
+      $height={"2.2rem"}
+      $padding={"0.5rem"}
+    >
       {isDarkMode ? <HiOutlineSun /> : <HiOutlineMoon />}
     </ButtonIcon>
   );

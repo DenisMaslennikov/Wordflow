@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { HOVER_COLOR, BUTTON_TEXT_COLOR } from "../utils/constants.ts";
 
-const ButtonIcon = styled.button<{ $height?: string; $width?: string }>`
+const ButtonIcon = styled.button<{
+  $height?: string;
+  $width?: string;
+  $padding?: string;
+}>`
   background: none;
   border: none;
-  padding: 0.5rem;
+  padding: ${({ $padding = "0.5rem" }) => $padding};
 
   & svg {
     width: ${({ $width = "2.2rem" }) => $width};
