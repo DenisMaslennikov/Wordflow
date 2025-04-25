@@ -9,7 +9,7 @@ interface BasePost {
   title: string;
   content: string;
   tags: Tag[];
-  preview: Image;
+  preview: Image | null;
 }
 
 interface PostApi extends BasePost {
