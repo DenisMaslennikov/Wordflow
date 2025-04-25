@@ -6,6 +6,7 @@ import Footer from "../../ui/Footer.tsx";
 const StyledPostList = styled.div`
   flex: 1;
   display: flex;
+  overflow-y: auto;
 `;
 
 function PostList() {
