@@ -52,8 +52,8 @@ function usePosts() {
     isPostsLoading,
     count,
     pages: Math.ceil(count / limit),
-    from: (page - 1) * limit,
-    to: page * limit <= count ? page * limit - 1 : count,
+    from: (page - 1) * limit + 1,
+    to: page * limit <= count ? page * limit : count,
   };
 }
 
