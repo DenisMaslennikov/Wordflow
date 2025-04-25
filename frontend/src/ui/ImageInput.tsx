@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ChangeEvent, ComponentPropsWithoutRef, useState } from "react";
-import Avatar from "../features/authentication/Avatar.tsx";
+import Avatar from "./Avatar.tsx";
 
 const Container = styled.div`
   display: flex;
