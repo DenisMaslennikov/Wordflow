@@ -22,7 +22,7 @@ class IsBlogAuthorOrForbidden(permissions.BasePermission):
 
     def has_permission(self, request: Request, view: ModelViewSet) -> bool:
         """Права на эндпоинты."""
-        blog_id = view.kwargs.get("blog_id") or request.query_params.get("blog_id")
-        if not blog_id or not request.user.is_authenticated:
+        blog_slug = view.kwargs.get("blog_slug") or request.query_params.get("blog_slug")
+        if not blog_slug or not request.user.is_authenticated:
             return False
-        return BlogAuthor.objects.filter(blog_id=blog_id, user_id=request.user.id, role__in=AUTHOR_ROLES).exists()
+        return BlogAuthor.objects.filter(blog__slug=blog_slug, user_id=request.user.id, role__in=AUTHOR_ROLES).exists()

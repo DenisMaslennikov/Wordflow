@@ -2,6 +2,7 @@ from rest_framework import mixins, parsers, renderers, viewsets
 
 from api.v1.images.serializers import ImageSerializer
 from api.v1.posts.permissions import IsBlogAuthorOrForbidden
+from blogs.models import Blog
 from images.models import Image
 
 
@@ -29,7 +30,8 @@ class ImageViewSet(
     def perform_create(self, serializer):
         """Сохранение нового изображения."""
         blog_slug = self.kwargs["blog_slug"]
-        image = serializer.save(user=self.request.user, blog__slug=blog_slug)
+        blog_id = Blog.objects.get(slug=blog_slug).id
+        image = serializer.save(user=self.request.user, blog_id=blog_id)
         return image
 
     def perform_destroy(self, instance):
