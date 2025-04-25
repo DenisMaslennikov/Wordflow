@@ -39,6 +39,7 @@ class PostListAPIView(ListAPIView):
             )
             .select_related("user")
             .select_related("blog")
+            .select_related("preview")
             .prefetch_related("tags")
         )
 

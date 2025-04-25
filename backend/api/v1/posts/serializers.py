@@ -2,6 +2,7 @@ from django.utils.text import Truncator
 from rest_framework import serializers
 
 from api.v1.blogs.serializers import BlogListSerializer, BlogDetailedSerializer
+from api.v1.images.serializers import ImageSerializer
 from api.v1.tags.serializers import TagSerializer
 from api.v1.users.serializers import UsernameAvatarUserSerializer
 from posts.models import Post
@@ -16,12 +17,13 @@ class PostListSerializer(serializers.ModelSerializer):
     content = serializers.SerializerMethodField()
     tags = TagSerializer(many=True, read_only=True)
     blog = BlogListSerializer(read_only=True)
+    preview = ImageSerializer(read_only=True)
 
     class Meta:
         """Метаклас сериализатора списка постов."""
 
         model = Post
-        fields = ("id", "user", "slug", "title", "content", "published_at", "tags", "blog")
+        fields = ("id", "user", "slug", "title", "content", "published_at", "tags", "blog", "preview")
 
     def get_content(self, obj) -> str:
         """Получение поля content для списка постов."""
