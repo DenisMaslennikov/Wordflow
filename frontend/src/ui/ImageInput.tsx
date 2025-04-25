@@ -58,7 +58,7 @@ function ImageInput({
   }
   return (
     <Container>
-      <Avatar src={preview} $width={$width} />
+      <Avatar src={preview} $size={$width} />
       <StyledFileInput
         accept={"image/*"}
         multiple={false}
