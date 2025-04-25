@@ -21,6 +21,12 @@ const StyledPostCard = styled.div`
     max-width: ${MAX_POST_PREVIEW_WIDTH};
     max-height: ${MAX_POST_PREVIEW_HEIGHT};
   }
+
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 `;
 
 const StyledTextBlock = styled.div`
@@ -33,6 +39,7 @@ const Preview = styled.img`
   max-width: ${MAX_POST_PREVIEW_WIDTH};
   max-height: ${MAX_POST_PREVIEW_HEIGHT};
   margin-right: 1rem;
+  display: block;
 `;
 
 function PostCard({ post }: { post: Post }) {
