@@ -30,7 +30,6 @@ function PostList() {
           <PostCard key={post.id} post={post} />
         ))}
       </StyledPostList>
-
       <FooterPaginator
         pagesNumber={pages}
         from={from}

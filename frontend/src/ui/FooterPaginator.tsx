@@ -20,6 +20,7 @@ const StyledFooter = styled.footer`
   border-top: var(${BORDER_COLOR}) 1px solid;
   justify-content: center;
   align-items: center;
+  min-height: 47px;
 `;
 
 const Select = styled.select`

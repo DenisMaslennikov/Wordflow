@@ -11,6 +11,7 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   gap: 2rem;
   padding: 0.5rem 1rem;
+  min-height: 73px;
 `;
 
 const LeftHeaderBlock = styled.div`
