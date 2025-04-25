@@ -42,6 +42,7 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
     permission_classes = (IsMeOrReadOnly,)
     filter_backends = (filters.SearchFilter,)
     search_fields = ("username",)
+    lookup_field = "username"
 
     @extend_schema(request=UserSerializer)
     def create(self, request, *args, **kwargs):
