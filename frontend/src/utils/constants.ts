@@ -18,6 +18,13 @@ export const WIDTH_LOGIN_MODAL = "340px";
 // Ширина модального окна регистрации.
 export const WIDTH_REGISTRATION_MODAL = "340px";
 
+// Максимальная ширина поста в ленте.
+export const MAX_WIDTH_POST_IN_LIST = "1200px";
+
+// Максимальный размер превью изображения к посту в ленте
+export const MAX_POST_PREVIEW_WIDTH = "150px";
+export const MAX_POST_PREVIEW_HEIGHT = "150px";
+
 // Ключи для хранения токенов в localStorage
 export const ACCESS_KEY = "accessToken";
 export const REFRESH_KEY = "refreshToken";
