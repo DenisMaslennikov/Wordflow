@@ -16,7 +16,6 @@ import useUpdateUserMe from "./hooks/useUpdateUserMe.ts";
 import ImageInput from "../../ui/ImageInput.tsx";
 import {
   PASSWORD_MIN_LENGTH,
-  VITE_MEDIA_BASE_URL,
   WIDTH_REGISTRATION_MODAL,
 } from "../../utils/constants.ts";
 import CheckBox from "../../ui/CheckBox.tsx";
@@ -207,7 +206,7 @@ function UserCreateUpdateForm({ onCloseModal }: { onCloseModal?: () => void }) {
           disabled={isBusy || isAvatarDelete}
           {...register("avatar")}
           $width={WIDTH_REGISTRATION_MODAL}
-          src={user?.avatar ? VITE_MEDIA_BASE_URL + user?.avatar : undefined}
+          src={user?.avatar ? user?.avatar : undefined}
         />
       </FormRowVertical>
 
