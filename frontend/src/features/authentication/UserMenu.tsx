@@ -10,6 +10,7 @@ import UserProfileManagement from "./UserProfileManagement.tsx";
 const MenuContainer = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 0.5rem;
 `;
 
@@ -21,7 +22,7 @@ function UserMenu() {
       {isAuthenticated ? (
         <>
           <UserProfileManagement />
-          <Button $style={"regular"} $size={"small"} onClick={logout}>
+          <Button $style={"regular"} $size={"medium"} onClick={logout}>
             Выход
           </Button>
         </>
