@@ -4,10 +4,14 @@ import styled from "styled-components";
 import FooterPaginator from "../../ui/FooterPaginator.tsx";
 import { DEFAULT_POSTS_PER_PAGE } from "../../utils/constants.ts";
 import { useSearchParams } from "react-router-dom";
+import PostCard from "./PostCard.tsx";
 
 const StyledPostList = styled.div`
   flex: 1;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   overflow-y: auto;
 `;
 
@@ -21,7 +25,12 @@ function PostList() {
 
   return (
     <>
-      <StyledPostList>Список постов</StyledPostList>
+      <StyledPostList>
+        {posts.map((post) => (
+          <PostCard key={post.id} post={post} />
+        ))}
+      </StyledPostList>
+
       <FooterPaginator
         pagesNumber={pages}
         from={from}
