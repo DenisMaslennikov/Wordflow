@@ -29,7 +29,7 @@ function UserMenu() {
       ) : (
         <Modal>
           <Modal.Open modalId={"registration"}>
-            <Button $style={"regular"} $size={"small"}>
+            <Button $style={"regular"} $size={"medium"}>
               Регистрация
             </Button>
           </Modal.Open>
@@ -37,7 +37,7 @@ function UserMenu() {
             <UserCreateUpdateForm />
           </Modal.Window>
           <Modal.Open modalId={"Login"}>
-            <Button $style={"regular"} $size={"small"}>
+            <Button $style={"regular"} $size={"medium"}>
               Вход
             </Button>
           </Modal.Open>
