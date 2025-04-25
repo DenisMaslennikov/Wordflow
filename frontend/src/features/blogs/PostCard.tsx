@@ -36,6 +36,8 @@ const LinkBlock = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: center;
+  font-size: 1.2rem;
 `;
 
 const StyledTextBlock = styled.div`
@@ -58,8 +60,10 @@ function PostCard({ post }: { post: Post }) {
         <Heading as={"h3"}>{post.title}</Heading>
       </PostLink>
       <LinkBlock>
-        <AuthorLink author={post.user} />
+        <span>Опубликовано {post.publishedAt.toLocaleString()} в блоге</span>
         <BlogLink blog={post.blog} />
+        <span>Автором</span>
+        <AuthorLink author={post.user} />
       </LinkBlock>
       <PostLink post={post}>
         {post.preview ? <Preview src={`${post.preview?.image}`} /> : null}
