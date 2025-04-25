@@ -4,6 +4,16 @@ import useUser from "./hooks/useUser.ts";
 import SpinnerMini from "../../ui/SpinnerMini.tsx";
 import DropDownMenu from "../../ui/DropDownMenu.tsx";
 import ChangePasswordForm from "./ChangePasswordForm.tsx";
+import Avatar from "../../ui/Avatar.tsx";
+import { IMG_HEADER_SIZE } from "../../utils/constants.ts";
+import styled from "styled-components";
+
+const UserContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+`;
 
 function UserProfileManagement() {
   const { isUserLoading, user } = useUser();
@@ -18,7 +28,10 @@ function UserProfileManagement() {
           $size={"small"}
           id={"user-profile-management"}
         >
-          {user.username}
+          <UserContainer>
+            <span>{user.username}</span>
+            <Avatar $width={IMG_HEADER_SIZE} src={user.avatar} />
+          </UserContainer>
         </DropDownMenu.Toggle>
         <DropDownMenu.List id="user-profile-management">
           <Modal.Open modalId={"editUser"}>

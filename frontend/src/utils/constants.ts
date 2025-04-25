@@ -18,6 +18,9 @@ export const WIDTH_LOGIN_MODAL = "340px";
 // Ширина модального окна регистрации.
 export const WIDTH_REGISTRATION_MODAL = "340px";
 
+// Размер аватара в хедере
+export const IMG_HEADER_SIZE = "3rem";
+
 // Максимальная ширина поста в ленте.
 export const MAX_WIDTH_POST_IN_LIST = "1200px";
 

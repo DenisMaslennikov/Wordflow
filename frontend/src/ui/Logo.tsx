@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { TEXT_MAIN_COLOR } from "../utils/constants.ts";
+import { IMG_HEADER_SIZE, TEXT_MAIN_COLOR } from "../utils/constants.ts";
 
 const Img = styled.img`
-  height: 3rem;
+  height: ${IMG_HEADER_SIZE};
   width: auto;
 `;
 
