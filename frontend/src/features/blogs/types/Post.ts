@@ -23,5 +23,14 @@ interface Post extends BasePost {
   publishedAt: Date;
   blog: Blog;
 }
+interface PostDetailedApi extends BasePost {
+  id: number;
+  published_at: string;
+}
 
-export type { PostApi, Post };
+interface PostDetailed extends BasePost {
+  id: number;
+  publishedAt: Date;
+}
+
+export type { PostApi, Post, PostDetailedApi, PostDetailed };
