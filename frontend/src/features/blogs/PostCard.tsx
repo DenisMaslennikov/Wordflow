@@ -22,7 +22,7 @@ const ReadMore = styled(Link)`
   border-radius: var(--border-radius-sm);
   font-size: 1rem;
 
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
 
   &:hover {
     background-color: var(--color-brand-700);
