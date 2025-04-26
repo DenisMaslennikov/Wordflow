@@ -6,7 +6,7 @@ import { isAxiosError } from "axios";
 interface GetPostsParams {
   limit: number;
   offset: number;
-  blogSlug: string | null;
+  blogSlug?: string | null;
 }
 
 export const postService = {
