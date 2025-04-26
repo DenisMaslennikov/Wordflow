@@ -1,5 +1,7 @@
+import PostDetailed from "../features/blogs/PostDetailed.tsx";
+
 function Post() {
-  return <div>Post</div>;
+  return <PostDetailed />;
 }
 
 export default Post;
