@@ -1,4 +1,9 @@
-import type { Post, PostApi } from "../types/Post.ts";
+import type {
+  Post,
+  PostApi,
+  PostDetailed,
+  PostDetailedApi,
+} from "../types/Post.ts";
 import { toBlog } from "./toBlog.ts";
 
 function toPost(post: PostApi): Post {
@@ -7,4 +12,10 @@ function toPost(post: PostApi): Post {
   return { publishedAt: new Date(published_at), blog: toBlog(blog), ...data };
 }
 
-export { toPost };
+function toDetailedPost(post: PostDetailedApi): PostDetailed {
+  const { published_at, ...data } = post;
+
+  return { publishedAt: new Date(published_at), ...data };
+}
+
+export { toPost, toDetailedPost };
