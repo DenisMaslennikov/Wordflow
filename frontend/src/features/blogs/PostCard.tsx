@@ -14,6 +14,9 @@ import AuthorLink from "./AuthorLink.tsx";
 import Tag from "./Tag.tsx";
 import { Link } from "react-router-dom";
 import postToLink from "./utils/postToLink.ts";
+import PostMeta from "./PostMeta.tsx";
+import Tags from "./Tags.tsx";
+import PostBottomContainer from "./PostBottomContainer.tsx";
 
 const ReadMore = styled(Link)`
   border: none;
@@ -27,14 +30,6 @@ const ReadMore = styled(Link)`
   &:hover {
     background-color: var(--color-brand-700);
   }
-`;
-
-const PostBottomContainer = styled.div`
-  display: flex;
-  flex: 1 1 auto;
-  justify-content: flex-end;
-  flex-direction: row;
-  align-items: center;
 `;
 
 const StyledPostCard = styled.div`
@@ -51,32 +46,6 @@ const StyledPostCard = styled.div`
     height: auto;
     width: 100%;
   }
-
-  &::after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-`;
-
-const PostMeta = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  font-size: 0.75rem;
-  margin-bottom: 1rem;
-`;
-
-const Tags = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  flex: 1 1 auto;
-  margin-right: 2rem;
 `;
 
 const StyledTextBlock = styled.div`
