@@ -24,7 +24,7 @@ class PostListAPIView(ListAPIView):
     serializer_class = PostListSerializer
     pagination_class = PostPagination
     filter_backends = (PrioritizedPostSearchFilter, filters.OrderingFilter, DjangoFilterBackend)
-    filterset_fields = ("user_id", "tags__id", "blog__slug", "blog_id")
+    filterset_fields = ("user_id", "tags__id", "blog__slug", "blog_id", "tags__slug")
     ordering_fields = ("title", "content", "published_at", "user_username")
     ordering = ("-published_at",)
 
