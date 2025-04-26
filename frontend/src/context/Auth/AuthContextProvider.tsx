@@ -120,10 +120,6 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     return { accessToken, refreshToken, setTokens, logout, isAuthenticated };
   }, [accessToken, refreshToken, setTokens, logout, isAuthenticated]);
 
-  useEffect(() => {
-    if (!refreshToken) return;
-  }, [refreshToken]);
-
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
