@@ -32,12 +32,12 @@ const StyledPostCard = styled.div`
   }
 `;
 
-const LinkBlock = styled.div`
+const PostMeta = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 0.75rem;
 `;
 
 const StyledTextBlock = styled.div`
@@ -59,12 +59,15 @@ function PostCard({ post }: { post: Post }) {
       <PostLink post={post}>
         <Heading as={"h3"}>{post.title}</Heading>
       </PostLink>
-      <LinkBlock>
-        <span>Опубликовано {post.publishedAt.toLocaleString()} в блоге</span>
+      <PostMeta>
+        <span>
+          Опубликовано {post.publishedAt.toLocaleDateString()}{" "}
+          {post.publishedAt.toLocaleTimeString()} в блоге
+        </span>
         <BlogLink blog={post.blog} />
         <span>Автором</span>
         <AuthorLink author={post.user} />
-      </LinkBlock>
+      </PostMeta>
       <PostLink post={post}>
         {post.preview ? <Preview src={`${post.preview?.image}`} /> : null}
       </PostLink>
