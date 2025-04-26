@@ -1,7 +1,21 @@
 import styled, { css } from "styled-components";
-import { BACKGROUND_COLOR, HOVER_COLOR } from "../utils/constants.ts";
+import {
+  BACKGROUND_COLOR,
+  HOVER_COLOR,
+  LINK_COLOR,
+} from "../utils/constants.ts";
 
 const styles = {
+  tag: css`
+    color: var(${LINK_COLOR});
+    border: none;
+    background-color: var(${BACKGROUND_COLOR});
+    padding: 0.1rem 0.2rem;
+
+    &:hover {
+      background-color: var(${HOVER_COLOR});
+    }
+  `,
   link: css`
     border: none;
     background-color: var(${BACKGROUND_COLOR});
@@ -22,6 +36,11 @@ const styles = {
 };
 
 const sizes = {
+  micro: css`
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: center;
+  `,
   small: css`
     font-size: 1rem;
     padding: 0.5rem;

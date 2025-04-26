@@ -11,6 +11,7 @@ import DOMPurify from "dompurify";
 import PostLink from "./PostLink.tsx";
 import BlogLink from "./BlogLink.tsx";
 import AuthorLink from "./AuthorLink.tsx";
+import Tag from "./Tag.tsx";
 
 const StyledPostCard = styled.div`
   margin: 1rem auto;
@@ -38,6 +39,15 @@ const PostMeta = styled.div`
   justify-content: flex-end;
   align-items: center;
   font-size: 0.75rem;
+`;
+
+const Tags = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
 `;
 
 const StyledTextBlock = styled.div`
@@ -76,6 +86,11 @@ function PostCard({ post }: { post: Post }) {
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
         />
       </PostLink>
+      <Tags>
+        {post.tags.map((tag) => (
+          <Tag key={tag.id} tag={tag} />
+        ))}
+      </Tags>
     </StyledPostCard>
   );
 }
