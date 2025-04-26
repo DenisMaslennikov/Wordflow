@@ -1,6 +1,7 @@
 import apiClient from "../../../service/apiClient.ts";
 import { PostApi, PostDetailedApi } from "../types/Post.ts";
 import { PaginatedResults } from "../../../types/PaginatedResults.ts";
+import { isAxiosError } from "axios";
 
 interface GetPostsParams {
   limit: number;
@@ -15,9 +16,14 @@ export const postService = {
     return response.data;
   },
   getPost: async (postId: number) => {
-    const response = await apiClient.get<PostDetailedApi>(
-      `blog_post/${postId}`,
-    );
-    return response.data;
+    try {
+      const response = await apiClient.get<PostDetailedApi>(
+        `blog_post/${postId}`,
+      );
+      return response.data;
+    } catch (error: unknown) {
+      if (isAxiosError(error) && error.status === 404) return null;
+      throw error;
+    }
   },
 };

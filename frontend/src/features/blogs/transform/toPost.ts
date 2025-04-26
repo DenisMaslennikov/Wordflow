@@ -12,7 +12,9 @@ function toPost(post: PostApi): Post {
   return { publishedAt: new Date(published_at), blog: toBlog(blog), ...data };
 }
 
-function toDetailedPost(post: PostDetailedApi): PostDetailed {
+function toDetailedPost(post: PostDetailedApi | null): PostDetailed | null {
+  if (!post) return null;
+
   const { published_at, ...data } = post;
 
   return { publishedAt: new Date(published_at), ...data };
