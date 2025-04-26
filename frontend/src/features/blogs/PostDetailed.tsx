@@ -5,6 +5,7 @@ import Spinner from "../../ui/Spinner.tsx";
 import ResourceNotFound from "../../ui/ResourceNotFound.tsx";
 import Heading from "../../ui/Heading.tsx";
 import DOMPurify from "dompurify";
+import PostMeta from "./PostMeta.tsx";
 
 const PostContainer = styled.div`
   display: flex;
@@ -33,6 +34,7 @@ function PostDetailed() {
   return (
     <PostContainer>
       <Heading as={"h1"}>{post.title}</Heading>
+      <PostMeta post={post} />
       <ContentContainer
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
       />

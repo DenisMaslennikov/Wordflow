@@ -1,5 +1,6 @@
 import DOMPurify from "dompurify";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import type { Post } from "./types/Post.ts";
 import Heading from "../../ui/Heading.tsx";
@@ -9,14 +10,11 @@ import {
   MAX_POST_PREVIEW_WIDTH,
   MAX_WIDTH_POST_IN_LIST,
 } from "../../utils/constants.ts";
-import BlogLink from "./BlogLink.tsx";
-import AuthorLink from "./AuthorLink.tsx";
 import Tag from "./Tag.tsx";
-import { Link } from "react-router-dom";
 import postToLink from "./utils/postToLink.ts";
-import PostMeta from "./PostMeta.tsx";
 import Tags from "./Tags.tsx";
 import PostBottomContainer from "./PostBottomContainer.tsx";
+import PostMeta from "./PostMeta.tsx";
 
 const ReadMore = styled(Link)`
   border: none;
@@ -70,15 +68,8 @@ function PostCard({ post }: { post: Post }) {
       <Link to={postToLink(post)}>
         <Heading as={"h3"}>{post.title}</Heading>
       </Link>
-      <PostMeta>
-        <span>
-          Опубликовано {post.publishedAt.toLocaleDateString()}{" "}
-          {post.publishedAt.toLocaleTimeString()} в блоге
-        </span>
-        <BlogLink blog={post.blog} />
-        <span>Автором</span>
-        <AuthorLink author={post.user} />
-      </PostMeta>
+
+      <PostMeta post={post} />
 
       {post.preview ? (
         <Link to={postToLink(post)}>
