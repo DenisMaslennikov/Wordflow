@@ -76,6 +76,7 @@ const Tags = styled.div`
   gap: 0.5rem;
   margin-top: 1rem;
   flex: 1 1 auto;
+  margin-right: 2rem;
 `;
 
 const StyledTextBlock = styled.div`
