@@ -16,12 +16,12 @@ function PostMeta({ post }: { post: Post | PostDetailed }) {
   return (
     <StyledPostMeta>
       <span>
-        Опубликовано {post.publishedAt.toLocaleDateString()}
-        {post.publishedAt.toLocaleTimeString()} в блоге
+        {`Опубликовано ${post.publishedAt.toLocaleDateString()} ${post.publishedAt.toLocaleTimeString()}\u00A0`}
       </span>
       {"blog" in post && (
         <>
-          {" в блоге "} <BlogLink blog={post.blog} />
+          <span>В блоге:</span>
+          <BlogLink blog={post.blog} />
         </>
       )}
       <span>Автором</span>
