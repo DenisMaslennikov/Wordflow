@@ -15,6 +15,28 @@ import Tag from "./Tag.tsx";
 import { Link } from "react-router-dom";
 import postToLink from "./utils/postToLink.ts";
 
+const ReadMore = styled(Link)`
+  border: none;
+  color: var(--color-brand-50);
+  background-color: var(--color-brand-500);
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+
+  padding: 0.5rem;
+
+  &:hover {
+    background-color: var(--color-brand-700);
+  }
+`;
+
+const PostBottomContainer = styled.div`
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+`;
+
 const StyledPostCard = styled.div`
   margin: 1rem auto;
   border: var(${BORDER_COLOR}) 1px solid;
@@ -53,6 +75,7 @@ const Tags = styled.div`
   align-items: center;
   gap: 0.5rem;
   margin-top: 1rem;
+  flex: 1 1 auto;
 `;
 
 const StyledTextBlock = styled.div`
@@ -96,13 +119,16 @@ function PostCard({ post }: { post: Post }) {
       <StyledTextBlock
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
       />
-      {post.tags.length > 0 && (
-        <Tags>
-          {post.tags.map((tag) => (
-            <Tag key={tag.id} tag={tag} />
-          ))}
-        </Tags>
-      )}
+      <PostBottomContainer>
+        {post.tags.length > 0 && (
+          <Tags>
+            {post.tags.map((tag) => (
+              <Tag key={tag.id} tag={tag} />
+            ))}
+          </Tags>
+        )}
+        <ReadMore to={postToLink(post)}>Далее</ReadMore>
+      </PostBottomContainer>
     </StyledPostCard>
   );
 }
