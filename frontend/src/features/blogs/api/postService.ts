@@ -6,12 +6,13 @@ import { isAxiosError } from "axios";
 interface GetPostsParams {
   limit: number;
   offset: number;
+  blogSlug: string | null;
 }
 
 export const postService = {
-  getPosts: async ({ limit, offset }: GetPostsParams) => {
+  getPosts: async ({ limit, offset, blogSlug }: GetPostsParams) => {
     const response = await apiClient.get<PaginatedResults<PostApi>>("posts/", {
-      params: { limit, offset },
+      params: { limit, offset, blog__slug: blogSlug },
     });
     return response.data;
   },

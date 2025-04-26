@@ -3,12 +3,12 @@ import { postService } from "../api/postService.ts";
 import { toPost } from "../transform/toPost.ts";
 import { PaginatedResults } from "../../../types/PaginatedResults.ts";
 import type { Post, PostApi } from "../types/Post.ts";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { DEFAULT_POSTS_PER_PAGE } from "../../../utils/constants.ts";
 
 function usePosts() {
   const queryClient = useQueryClient();
-
+  const { blogSlug } = useParams();
   const [searchParams] = useSearchParams();
 
   const limit = Number(searchParams.get("limit") ?? DEFAULT_POSTS_PER_PAGE);
@@ -25,8 +25,8 @@ function usePosts() {
     Error,
     PaginatedResults<Post>
   >({
-    queryFn: () => postService.getPosts({ limit, offset }),
-    queryKey: ["posts", limit, offset],
+    queryFn: () => postService.getPosts({ limit, offset, blogSlug }),
+    queryKey: ["posts", limit, offset, blogSlug],
     select,
   });
 
