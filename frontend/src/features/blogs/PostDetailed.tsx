@@ -6,6 +6,7 @@ import ResourceNotFound from "../../ui/ResourceNotFound.tsx";
 import Heading from "../../ui/Heading.tsx";
 import DOMPurify from "dompurify";
 import PostMeta from "./PostMeta.tsx";
+import Tags from "./Tags.tsx";
 
 const PostContainer = styled.div`
   display: flex;
@@ -38,6 +39,7 @@ function PostDetailed() {
       <ContentContainer
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
       />
+      <Tags tags={post.tags} />
     </PostContainer>
   );
 }

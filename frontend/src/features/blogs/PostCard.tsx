@@ -10,7 +10,6 @@ import {
   MAX_POST_PREVIEW_WIDTH,
   MAX_WIDTH_POST_IN_LIST,
 } from "../../utils/constants.ts";
-import Tag from "./Tag.tsx";
 import postToLink from "./utils/postToLink.ts";
 import Tags from "./Tags.tsx";
 import PostBottomContainer from "./PostBottomContainer.tsx";
@@ -81,13 +80,7 @@ function PostCard({ post }: { post: Post }) {
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
       />
       <PostBottomContainer>
-        {post.tags.length > 0 && (
-          <Tags>
-            {post.tags.map((tag) => (
-              <Tag key={tag.id} tag={tag} />
-            ))}
-          </Tags>
-        )}
+        <Tags tags={post.tags} />
         <ReadMore to={postToLink(post)}>Далее</ReadMore>
       </PostBottomContainer>
     </StyledPostCard>
