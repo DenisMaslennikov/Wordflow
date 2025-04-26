@@ -56,7 +56,8 @@ const StyledTextBlock = styled.div`
 `;
 
 const Preview = styled.img`
-  float: left;
+  align-self: center;
+  justify-self: center;
   max-width: ${MAX_POST_PREVIEW_WIDTH};
   max-height: ${MAX_POST_PREVIEW_HEIGHT};
   margin-right: 1rem;

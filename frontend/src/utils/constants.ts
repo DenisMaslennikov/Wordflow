@@ -26,8 +26,8 @@ export const IMG_HEADER_SIZE = "3rem";
 export const MAX_WIDTH_POST_IN_LIST = "900px";
 
 // Максимальный размер превью изображения к посту в ленте
-export const MAX_POST_PREVIEW_WIDTH = "150px";
-export const MAX_POST_PREVIEW_HEIGHT = "150px";
+export const MAX_POST_PREVIEW_WIDTH = "700px";
+export const MAX_POST_PREVIEW_HEIGHT = "700px";
 
 // Ключи для хранения токенов в localStorage
 export const ACCESS_KEY = "accessToken";
