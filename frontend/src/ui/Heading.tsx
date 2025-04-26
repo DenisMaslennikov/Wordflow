@@ -24,6 +24,7 @@ const Heading = styled.h1<{ as: string }>`
       font-weight: 500;
       hyphens: auto;
       word-break: break-word;
+      display: inline;
     `}  
 
   line-height: 1.4
