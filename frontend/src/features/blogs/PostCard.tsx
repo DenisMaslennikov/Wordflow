@@ -1,17 +1,19 @@
+import DOMPurify from "dompurify";
+import styled from "styled-components";
+
 import type { Post } from "./types/Post.ts";
 import Heading from "../../ui/Heading.tsx";
-import styled from "styled-components";
 import {
   BORDER_COLOR,
   MAX_POST_PREVIEW_HEIGHT,
   MAX_POST_PREVIEW_WIDTH,
   MAX_WIDTH_POST_IN_LIST,
 } from "../../utils/constants.ts";
-import DOMPurify from "dompurify";
-import PostLink from "./PostLink.tsx";
 import BlogLink from "./BlogLink.tsx";
 import AuthorLink from "./AuthorLink.tsx";
 import Tag from "./Tag.tsx";
+import { Link } from "react-router-dom";
+import postToLink from "./utils/postToLink.ts";
 
 const StyledPostCard = styled.div`
   margin: 1rem auto;
@@ -72,9 +74,9 @@ const Preview = styled.img`
 function PostCard({ post }: { post: Post }) {
   return (
     <StyledPostCard>
-      <PostLink post={post}>
+      <Link to={postToLink(post)}>
         <Heading as={"h3"}>{post.title}</Heading>
-      </PostLink>
+      </Link>
       <PostMeta>
         <span>
           Опубликовано {post.publishedAt.toLocaleDateString()}{" "}
@@ -84,14 +86,16 @@ function PostCard({ post }: { post: Post }) {
         <span>Автором</span>
         <AuthorLink author={post.user} />
       </PostMeta>
-      <PostLink post={post}>
-        {post.preview ? <Preview src={`${post.preview?.image}`} /> : null}
-      </PostLink>
-      <PostLink post={post}>
-        <StyledTextBlock
-          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
-        />
-      </PostLink>
+
+      {post.preview ? (
+        <Link to={postToLink(post)}>
+          <Preview src={`${post.preview?.image}`} />
+        </Link>
+      ) : null}
+
+      <StyledTextBlock
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+      />
       {post.tags.length > 0 && (
         <Tags>
           {post.tags.map((tag) => (
