@@ -1,5 +1,5 @@
 import apiClient from "../../../service/apiClient.ts";
-import { PostApi } from "../types/Post.ts";
+import { PostApi, PostDetailedApi } from "../types/Post.ts";
 import { PaginatedResults } from "../../../types/PaginatedResults.ts";
 
 interface GetPostsParams {
@@ -12,6 +12,12 @@ export const postService = {
     const response = await apiClient.get<PaginatedResults<PostApi>>("posts/", {
       params: { limit, offset },
     });
+    return response.data;
+  },
+  getPost: async (postId: number) => {
+    const response = await apiClient.get<PostDetailedApi>(
+      `blog_post/${postId}`,
+    );
     return response.data;
   },
 };
