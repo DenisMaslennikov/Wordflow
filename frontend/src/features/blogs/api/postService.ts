@@ -7,12 +7,13 @@ interface GetPostsParams {
   limit: number;
   offset: number;
   blogSlug?: string | null;
+  tagSlug?: string | null;
 }
 
 export const postService = {
-  getPosts: async ({ limit, offset, blogSlug }: GetPostsParams) => {
+  getPosts: async ({ limit, offset, blogSlug, tagSlug }: GetPostsParams) => {
     const response = await apiClient.get<PaginatedResults<PostApi>>("posts/", {
-      params: { limit, offset, blog__slug: blogSlug },
+      params: { limit, offset, blog__slug: blogSlug, tags__slug: tagSlug },
     });
     return response.data;
   },

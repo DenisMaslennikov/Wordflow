@@ -13,6 +13,7 @@ function usePosts() {
 
   const limit = Number(searchParams.get("limit") ?? DEFAULT_POSTS_PER_PAGE);
   const page = Number(searchParams.get("page") ?? 1);
+  const tagSlug = searchParams.get("tag");
   const offset = limit * (page - 1);
 
   function select(data: PaginatedResults<PostApi>): PaginatedResults<Post> {
@@ -25,8 +26,8 @@ function usePosts() {
     Error,
     PaginatedResults<Post>
   >({
-    queryFn: () => postService.getPosts({ limit, offset, blogSlug }),
-    queryKey: ["posts", limit, offset, blogSlug],
+    queryFn: () => postService.getPosts({ limit, offset, blogSlug, tagSlug }),
+    queryKey: ["posts", limit, offset, blogSlug, tagSlug],
     select,
   });
 
