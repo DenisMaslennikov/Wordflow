@@ -24,6 +24,8 @@ const StyledPostCard = styled.div`
   & img {
     max-width: ${MAX_POST_PREVIEW_WIDTH};
     max-height: ${MAX_POST_PREVIEW_HEIGHT};
+    height: auto;
+    width: 100%;
   }
 
   &::after {
@@ -39,6 +41,7 @@ const PostMeta = styled.div`
   justify-content: flex-end;
   align-items: center;
   font-size: 0.75rem;
+  margin-bottom: 1rem;
 `;
 
 const Tags = styled.div`
@@ -60,6 +63,8 @@ const Preview = styled.img`
   justify-self: center;
   max-width: ${MAX_POST_PREVIEW_WIDTH};
   max-height: ${MAX_POST_PREVIEW_HEIGHT};
+  height: auto;
+  width: 100%;
   margin-right: 1rem;
   display: block;
 `;
