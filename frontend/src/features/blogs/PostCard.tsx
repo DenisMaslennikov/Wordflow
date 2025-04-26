@@ -86,11 +86,13 @@ function PostCard({ post }: { post: Post }) {
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
         />
       </PostLink>
-      <Tags>
-        {post.tags.map((tag) => (
-          <Tag key={tag.id} tag={tag} />
-        ))}
-      </Tags>
+      {post.tags.length > 0 && (
+        <Tags>
+          {post.tags.map((tag) => (
+            <Tag key={tag.id} tag={tag} />
+          ))}
+        </Tags>
+      )}
     </StyledPostCard>
   );
 }
