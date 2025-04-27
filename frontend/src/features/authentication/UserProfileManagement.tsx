@@ -1,7 +1,6 @@
 import Modal from "../../ui/Modal.tsx";
 import UserCreateUpdateForm from "./UserCreateUpdateForm.tsx";
 import useUser from "./hooks/useUser.ts";
-import SpinnerMini from "../../ui/SpinnerMini.tsx";
 import DropDownMenu from "../../ui/DropDownMenu.tsx";
 import ChangePasswordForm from "./ChangePasswordForm.tsx";
 import Avatar from "../../ui/Avatar.tsx";
@@ -16,9 +15,9 @@ const UserContainer = styled.div`
 `;
 
 function UserProfileManagement() {
-  const { isUserLoading, user } = useUser();
+  const { user } = useUser();
 
-  if (isUserLoading || !user) return <SpinnerMini />;
+  if (!user) return null;
 
   return (
     <DropDownMenu>

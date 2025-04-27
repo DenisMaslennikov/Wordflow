@@ -6,6 +6,10 @@ import Modal from "../../ui/Modal.tsx";
 import UserCreateUpdateForm from "./UserCreateUpdateForm.tsx";
 import LoginForm from "./LoginForm.tsx";
 import UserProfileManagement from "./UserProfileManagement.tsx";
+import MyBlogs from "./MyBlogs.tsx";
+import useUser from "./hooks/useUser.ts";
+import useMyBlogs from "./hooks/useMyBlogs.ts";
+import SpinnerMini from "../../ui/SpinnerMini.tsx";
 
 const MenuContainer = styled.div`
   display: flex;
@@ -16,12 +20,22 @@ const MenuContainer = styled.div`
 
 function UserMenu() {
   const { isAuthenticated, logout } = useAuth();
+  const { isUserLoading } = useUser();
+  const { isMyBlogsLoading } = useMyBlogs();
+  const isUserInfoLoading = isMyBlogsLoading || isUserLoading;
 
   return (
     <MenuContainer>
       {isAuthenticated ? (
         <>
-          <UserProfileManagement />
+          {isUserInfoLoading ? (
+            <SpinnerMini />
+          ) : (
+            <>
+              <MyBlogs />
+              <UserProfileManagement />
+            </>
+          )}
           <Button $style={"regular"} $size={"medium"} onClick={logout}>
             Выход
           </Button>
