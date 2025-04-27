@@ -16,6 +16,7 @@ const PostContainer = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   flex: 1 1 auto;
+  gap: 1rem;
 `;
 
 const ContentContainer = styled.div`

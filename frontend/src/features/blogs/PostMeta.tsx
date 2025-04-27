@@ -9,7 +9,7 @@ const StyledPostMeta = styled.div`
   justify-content: flex-end;
   align-items: center;
   font-size: 0.75rem;
-  margin-bottom: 1rem;
+  width: 100%;
 `;
 
 function PostMeta({ post }: { post: Post | PostDetailed }) {

@@ -36,6 +36,9 @@ const StyledPostCard = styled.div`
   width: 100%;
   padding: 1rem 1rem;
   border-radius: var(--border-radius-lg);
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
 
   & img {
     max-width: ${MAX_POST_PREVIEW_WIDTH};
@@ -62,7 +65,6 @@ const Preview = styled.img`
   max-height: ${MAX_POST_PREVIEW_HEIGHT};
   height: auto;
   width: 100%;
-  margin-right: 1rem;
   display: block;
 `;
 
