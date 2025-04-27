@@ -35,6 +35,7 @@ export const REFRESH_KEY = "refreshToken";
 
 // Настройки времени жизни кеша react-query
 export const DEFAULT_STALE_TIME = 0;
+// Время жизни кеша для профиля пользователя и списка его блогов.
 export const USER_PROFILE_STALE_TIME = 60 * 60 * 1000;
 
 // За сколько до истечения срока жизни токена токен считается протухшим
