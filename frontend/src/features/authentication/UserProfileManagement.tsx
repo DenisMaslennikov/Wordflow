@@ -4,7 +4,6 @@ import useUser from "./hooks/useUser.ts";
 import DropDownMenu from "../../ui/DropDownMenu.tsx";
 import ChangePasswordForm from "./ChangePasswordForm.tsx";
 import Avatar from "../../ui/Avatar.tsx";
-import { IMG_HEADER_SIZE } from "../../utils/constants.ts";
 import styled from "styled-components";
 
 const UserContainer = styled.div`
@@ -31,9 +30,7 @@ function UserProfileManagement() {
         >
           <UserContainer>
             <span>{user.username}</span>
-            {user.avatar && (
-              <Avatar $size={IMG_HEADER_SIZE} src={user.avatar} />
-            )}
+            {user.avatar && <Avatar $size={"100%"} src={user.avatar} />}
           </UserContainer>
         </DropDownMenu.Toggle>
         <DropDownMenu.List id="user-profile-management">

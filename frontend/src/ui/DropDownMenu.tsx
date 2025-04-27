@@ -78,6 +78,8 @@ function Toggle({
   children,
   $style,
   $size,
+  $fullHeight,
+  $fullWidth,
 }: PropsWithChildren<{ id: Id } & ButtonProps>) {
   const { openId, close, open, setPosition } = useContext(MenuContext);
 
@@ -94,7 +96,13 @@ function Toggle({
   }
 
   return (
-    <Button $style={$style} $size={$size} onClick={handleClick}>
+    <Button
+      $style={$style}
+      $size={$size}
+      onClick={handleClick}
+      $fullHeight={$fullHeight}
+      $fullWidth={$fullWidth}
+    >
       {children}
     </Button>
   );

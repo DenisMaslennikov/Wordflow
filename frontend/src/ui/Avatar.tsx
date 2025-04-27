@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const ImgWrapper = styled.div<{ $size?: string }>`
+  aspect-ratio: 1/1;
   width: ${({ $size }) => $size};
   height: ${({ $size }) => $size};
   border-radius: 50%;
