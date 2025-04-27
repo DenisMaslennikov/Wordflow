@@ -57,31 +57,21 @@ const sizes = {
     padding: 0.5rem;
     font-weight: 500;
   `,
-  smallFullWidth: css`
-    font-size: 1rem;
-    padding: 0.5rem;
-    font-weight: 500;
-    text-align: left;
-    width: 100%;
-  `,
-  mediumFullWidth: css`
-    font-size: 1.3rem;
-    padding: 0.5rem;
-    font-weight: 500;
-    text-align: center;
-    width: 100%;
-  `,
 };
 
 export type ButtonProps = {
   $style: keyof typeof styles;
   $size: keyof typeof sizes;
+  $fullWidth?: boolean;
+  $fullHeight?: boolean;
 };
 
 const Button = styled.button<ButtonProps>`
   border-radius: var(--border-radius-sm);
   display: flex;
   align-items: center;
+  ${({ $fullHeight }) => $fullHeight && "height: 100%;"}
+  ${({ $fullWidth }) => $fullWidth && "width: 100%;"}
   ${({ $style }) => styles[$style]};
   ${({ $size }) => sizes[$size]}
 `;

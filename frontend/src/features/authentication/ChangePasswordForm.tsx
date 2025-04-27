@@ -79,7 +79,8 @@ function ChangePasswordForm({ onCloseModal }: { onCloseModal?: () => void }) {
       </FormRowVertical>
       <FormRowHorizontal>
         <Button
-          $size={"mediumFullWidth"}
+          $fullWidth
+          $size={"medium"}
           $style={"regular"}
           disabled={isPasswordChanging}
         >

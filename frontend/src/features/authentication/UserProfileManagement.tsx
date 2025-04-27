@@ -36,12 +36,12 @@ function UserProfileManagement() {
         </DropDownMenu.Toggle>
         <DropDownMenu.List id="user-profile-management">
           <Modal.Open modalId={"editUser"}>
-            <DropDownMenu.ListItem $size={"smallFullWidth"} $style={"link"}>
+            <DropDownMenu.ListItem $fullWidth $size={"small"} $style={"link"}>
               Редактировать профиль
             </DropDownMenu.ListItem>
           </Modal.Open>
           <Modal.Open modalId={"changePassword"}>
-            <DropDownMenu.ListItem $size={"smallFullWidth"} $style={"link"}>
+            <DropDownMenu.ListItem $fullWidth $size={"small"} $style={"link"}>
               Сменить пароль
             </DropDownMenu.ListItem>
           </Modal.Open>
