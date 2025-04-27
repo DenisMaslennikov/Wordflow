@@ -29,8 +29,13 @@ const userService = {
   },
 
   getMyBlogs: async () => {
-    const response = await apiClient.get<BlogShort[]>("user/my_blogs/");
-    return response.data;
+    try {
+      const response = await apiClient.get<BlogShort[]>("user/my_blogs/");
+      return response.data;
+    } catch (error: unknown) {
+      if (isAxiosError(error) && error.response?.status === 401) return null;
+      throw error;
+    }
   },
 
   createUser: async (data: UserSignupForm) => {
