@@ -16,6 +16,7 @@ const MenuContainer = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+  height: 100%;
 `;
 
 function UserMenu() {

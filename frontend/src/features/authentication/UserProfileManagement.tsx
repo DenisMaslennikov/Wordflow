@@ -12,6 +12,7 @@ const UserContainer = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+  height: 100%;
 `;
 
 function UserProfileManagement() {
@@ -25,6 +26,7 @@ function UserProfileManagement() {
         <DropDownMenu.Toggle
           $style={"link"}
           $size={"small"}
+          $fullHeight
           id={"user-profile-management"}
         >
           <UserContainer>
