@@ -45,12 +45,6 @@ const StyledList = styled.ul<{ $position: Position | null }>`
   border: var(${BORDER_COLOR}) 1px solid;
 `;
 
-const Menu = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
 function DropDownMenu({ children }: PropsWithChildren) {
   const [openId, setOpenId] = useState<Id>(null);
   const [position, setPosition] = useState<Position | null>(null);
@@ -153,6 +147,5 @@ function ListItem({
 DropDownMenu.Toggle = Toggle;
 DropDownMenu.List = List;
 DropDownMenu.ListItem = ListItem;
-DropDownMenu.Menu = Menu;
 
 export default DropDownMenu;
