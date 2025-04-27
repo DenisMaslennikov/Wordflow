@@ -52,3 +52,9 @@ export const PASSWORD_MIN_LENGTH = 8;
 // Количество постов по умолчанию на страницу
 export const DEFAULT_POSTS_PER_PAGE = 10;
 export const ITEMS_PER_PAGE_SELECTOR = [1, 5, 10, 20, 30, 50, 100];
+
+// Константы ключей для кеша react-query
+export const USER_QUERY_KEY = "user";
+export const MY_BLOGS_QUERY_KEY = "myBlogs";
+export const POSTS_QUERY_KEY = "posts";
+export const POST_QUERY_KEY = "post";

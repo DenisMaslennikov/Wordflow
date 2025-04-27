@@ -4,7 +4,10 @@ import { toPost } from "../transform/toPost.ts";
 import { PaginatedResults } from "../../../types/PaginatedResults.ts";
 import type { Post, PostApi } from "../types/Post.ts";
 import { useParams, useSearchParams } from "react-router-dom";
-import { DEFAULT_POSTS_PER_PAGE } from "../../../utils/constants.ts";
+import {
+  DEFAULT_POSTS_PER_PAGE,
+  POSTS_QUERY_KEY,
+} from "../../../utils/constants.ts";
 
 function usePosts() {
   const queryClient = useQueryClient();
@@ -27,7 +30,7 @@ function usePosts() {
     PaginatedResults<Post>
   >({
     queryFn: () => postService.getPosts({ limit, offset, blogSlug, tagSlug }),
-    queryKey: ["posts", limit, offset, blogSlug, tagSlug],
+    queryKey: [POSTS_QUERY_KEY, limit, offset, blogSlug, tagSlug],
     select,
   });
 
@@ -38,13 +41,13 @@ function usePosts() {
 
   if (next)
     queryClient.prefetchQuery({
-      queryKey: ["posts", limit, offset + limit],
+      queryKey: [POSTS_QUERY_KEY, limit, offset + limit],
       queryFn: () => postService.getPosts({ limit, offset: offset + limit }),
     });
 
   if (previous)
     queryClient.prefetchQuery({
-      queryKey: ["posts", limit, offset - limit],
+      queryKey: [POSTS_QUERY_KEY, limit, offset - limit],
       queryFn: () => postService.getPosts({ limit, offset: offset - limit }),
     });
 
