@@ -24,7 +24,7 @@ function PostMeta({ post }: { post: Post | PostDetailed }) {
           <BlogLink blog={post.blog} />
         </>
       )}
-      <span>Автором</span>
+      <span>Автором:</span>
       <AuthorLink author={post.user} />
     </StyledPostMeta>
   );
