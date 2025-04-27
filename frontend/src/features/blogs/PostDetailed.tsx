@@ -23,6 +23,9 @@ const ContentContainer = styled.div`
     max-width: ${MAX_WIDTH_POST_IN_LIST};
     width: 100%;
   }
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 function PostDetailed() {

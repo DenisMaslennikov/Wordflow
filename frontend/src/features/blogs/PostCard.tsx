@@ -48,6 +48,11 @@ const StyledPostCard = styled.div`
 const StyledTextBlock = styled.div`
   hyphens: auto;
   word-break: break-word;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 `;
 
 const Preview = styled.img`
