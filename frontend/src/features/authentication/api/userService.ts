@@ -10,6 +10,7 @@ import {
 } from "../types/User.ts";
 import type { TokensPair } from "../types/Tokens.ts";
 import { isAxiosError } from "axios";
+import { BlogShort } from "../../blogs/types/Blog.ts";
 
 const userService = {
   getUserMe: async () => {
@@ -25,6 +26,11 @@ const userService = {
       // Пробрасываем ошибку дальше, если она не 401 или не Axios
       throw error;
     }
+  },
+
+  getMyBlogs: async () => {
+    const response = await apiClient.get<BlogShort[]>("user/my_blogs/");
+    return response.data;
   },
 
   createUser: async (data: UserSignupForm) => {
