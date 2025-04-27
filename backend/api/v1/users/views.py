@@ -99,6 +99,8 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
     def my_blogs(self, request):
         """Эндпоинт для списка блогов текущего пользователя."""
         user = request.user
+        if user.is_anonymous:
+            return Response(None, status=status.HTTP_401_UNAUTHORIZED)
         if request.method == "GET":
             serializer = BlogShortSerializer(user.blogs.all(), many=True)
             return Response(serializer.data)
