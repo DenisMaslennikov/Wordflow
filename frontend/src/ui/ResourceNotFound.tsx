@@ -23,7 +23,9 @@ function ResourceNotFound({ message }: { message: string }) {
       <Button
         onClick={() => navigate(-1)}
         $style={"regular"}
-        $size={"mediumFullWidth"}
+        $size={"medium"}
+        $fullWidth
+        $center
       >
         Вернутся назад
       </Button>
