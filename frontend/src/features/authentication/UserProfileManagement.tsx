@@ -24,7 +24,7 @@ function UserProfileManagement() {
       <Modal>
         <DropDownMenu.Toggle
           $style={"link"}
-          $size={"small"}
+          $size={"medium"}
           $fullHeight
           id={"user-profile-management"}
         >
