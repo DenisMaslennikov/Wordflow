@@ -11,15 +11,14 @@ import { AuthContext } from "./AuthContext.ts";
 import useLocalStorageState from "../../hooks/useLocalStorageState.ts";
 import {
   ACCESS_KEY,
-  MY_BLOGS_QUERY_KEY,
   REFRESH_KEY,
   TOKEN_REFRESH_SLEEP_TIMOUT_IF_ERROR,
   TOKEN_REFRESH_THRESHOLD,
-  USER_QUERY_KEY,
 } from "../../utils/constants.ts";
 import apiClient, { setAuthTokenUpdater } from "../../service/apiClient.ts";
 
 import { type TokensPair } from "../../features/authentication/types/Tokens.ts";
+import currentUserCachePredicate from "../../utils/currentUserCachePredicate.ts";
 
 function AuthContextProvider({ children }: PropsWithChildren) {
   const [accessToken, setAccessToken] = useLocalStorageState<string | null>(
@@ -51,9 +50,7 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     localStorage.removeItem(REFRESH_KEY);
     localStorage.removeItem(ACCESS_KEY);
     queryClient.removeQueries({
-      predicate: (query) =>
-        query.queryKey[0] === USER_QUERY_KEY ||
-        query.queryKey[0] === MY_BLOGS_QUERY_KEY,
+      predicate: currentUserCachePredicate,
     });
     if (refreshTimeoutRef.current) {
       clearTimeout(refreshTimeoutRef.current);
