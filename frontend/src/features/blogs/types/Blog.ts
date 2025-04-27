@@ -8,9 +8,16 @@ interface BlogApi extends BaseBlog {
   id: number;
   created_at: string;
 }
+
 interface Blog extends BaseBlog {
   id: number;
   createdAt: Date;
 }
 
-export type { BlogApi, Blog };
+interface BlogShort {
+  id: number;
+  title: string;
+  slug: string;
+}
+
+export type { BlogApi, Blog, BlogShort };
