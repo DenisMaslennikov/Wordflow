@@ -12,11 +12,11 @@ function MyBlogs() {
         $fullHeight
         $size={"medium"}
         $style={"link"}
-        id="myBlogs"
+        menuId="myBlogs"
       >
         Мои блоги
       </DropDownMenu.Toggle>
-      <DropDownMenu.List id={"myBlogs"}>
+      <DropDownMenu.List menuId={"myBlogs"}>
         {myBlogs.map((blog) => (
           <DropDownMenu.ListItem
             key={blog.id}
