@@ -20,6 +20,7 @@ const LeftHeaderBlock = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 2rem;
+  height: 100%;
 `;
 
 const RightHeaderBlock = styled.div`

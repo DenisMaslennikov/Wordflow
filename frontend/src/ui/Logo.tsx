@@ -1,10 +1,14 @@
 import styled from "styled-components";
-import { IMG_HEADER_SIZE, TEXT_MAIN_COLOR } from "../utils/constants.ts";
+import { TEXT_MAIN_COLOR } from "../utils/constants.ts";
 import { Link } from "react-router-dom";
 
+const StyledLink = styled(Link)`
+  height: 100%;
+`;
+
 const Img = styled.img`
-  height: ${IMG_HEADER_SIZE};
-  width: auto;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const LogoContainer = styled.div`
@@ -12,6 +16,7 @@ const LogoContainer = styled.div`
   gap: 0.2rem;
   text-align: center;
   align-items: center;
+  height: 100%;
 `;
 
 const LogoText = styled.span`
@@ -24,12 +29,12 @@ const LogoText = styled.span`
 
 function Logo() {
   return (
-    <Link to={"/"}>
+    <StyledLink to={"/"}>
       <LogoContainer>
         <Img src={"/logo.png"} alt={"Logo"}></Img>
         <LogoText>Wordflow</LogoText>
       </LogoContainer>
-    </Link>
+    </StyledLink>
   );
 }
 
