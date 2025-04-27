@@ -1,9 +1,11 @@
 import useMyBlogs from "./hooks/useMyBlogs.ts";
 import CreateBlog from "../blogs/CreateBlog.tsx";
 import DropDownMenu from "../../ui/DropDownMenu.tsx";
+import { useNavigate } from "react-router-dom";
 
 function MyBlogs() {
   const { myBlogs } = useMyBlogs();
+  const navigate = useNavigate();
   if (!myBlogs || myBlogs.length === 0)
     return <CreateBlog variant={"header"} />;
   return (
@@ -19,6 +21,7 @@ function MyBlogs() {
       <DropDownMenu.List menuId={"myBlogs"}>
         {myBlogs.map((blog) => (
           <DropDownMenu.ListItem
+            onClick={() => navigate(`/admin/${blog.slug}`)}
             key={blog.id}
             $size={"small"}
             $style={"link"}
