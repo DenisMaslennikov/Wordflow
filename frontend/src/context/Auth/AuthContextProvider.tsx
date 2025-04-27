@@ -50,8 +50,10 @@ function AuthContextProvider({ children }: PropsWithChildren) {
     setRefreshToken(null);
     localStorage.removeItem(REFRESH_KEY);
     localStorage.removeItem(ACCESS_KEY);
-    queryClient.invalidateQueries({
-      queryKey: [[USER_QUERY_KEY], [MY_BLOGS_QUERY_KEY]],
+    queryClient.removeQueries({
+      predicate: (query) =>
+        query.queryKey[0] === USER_QUERY_KEY ||
+        query.queryKey[0] === MY_BLOGS_QUERY_KEY,
     });
     if (refreshTimeoutRef.current) {
       clearTimeout(refreshTimeoutRef.current);
