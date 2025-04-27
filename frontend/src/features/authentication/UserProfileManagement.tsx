@@ -26,14 +26,14 @@ function UserProfileManagement() {
           $style={"link"}
           $size={"medium"}
           $fullHeight
-          id={"user-profile-management"}
+          menuId={"user-profile-management"}
         >
           <UserContainer>
             <span>{user.username}</span>
             {user.avatar && <Avatar $size={"100%"} src={user.avatar} />}
           </UserContainer>
         </DropDownMenu.Toggle>
-        <DropDownMenu.List id="user-profile-management">
+        <DropDownMenu.List menuId="user-profile-management">
           <Modal.Open modalId={"editUser"}>
             <DropDownMenu.ListItem $fullWidth $size={"small"} $style={"link"}>
               Редактировать профиль

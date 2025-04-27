@@ -68,13 +68,15 @@ function DropDownMenu({ children }: PropsWithChildren) {
 }
 
 function Toggle({
-  id,
+  menuId,
   children,
   $style,
   $size,
-  $fullHeight,
-  $fullWidth,
-}: PropsWithChildren<{ id: Id } & ButtonProps>) {
+  ...args
+}: PropsWithChildren<
+  { menuId: Id } & Omit<ComponentPropsWithoutRef<"button">, "children" | "id"> &
+    ButtonProps
+>) {
   const { openId, close, open, setPosition } = useContext(MenuContext);
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -85,29 +87,23 @@ function Toggle({
       y: rect.y + rect.height,
     });
 
-    if (!openId || openId !== id) open(id);
+    if (!openId || openId !== menuId) open(menuId);
     else close();
   }
 
   return (
-    <Button
-      $style={$style}
-      $size={$size}
-      onClick={handleClick}
-      $fullHeight={$fullHeight}
-      $fullWidth={$fullWidth}
-    >
+    <Button $style={$style} $size={$size} onClick={handleClick} {...args}>
       {children}
     </Button>
   );
 }
 
-function List({ id, children }: PropsWithChildren<{ id: Id }>) {
+function List({ menuId, children }: PropsWithChildren<{ menuId: Id }>) {
   const { openId, position, close } = useContext(MenuContext);
 
   const ref = useOutsideClick<HTMLUListElement>(close, false);
 
-  if (openId !== id) return null;
+  if (openId !== menuId) return null;
 
   return createPortal(
     <StyledList ref={ref} $position={position}>
