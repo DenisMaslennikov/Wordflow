@@ -73,7 +73,7 @@ const Button = styled.button<ButtonProps>`
   align-items: center;
   ${({ $fullHeight }) => $fullHeight && "height: 100%;"}
   ${({ $fullWidth }) => $fullWidth && "width: 100%;"}
-  ${({ $center }) => $center && "text-align: center;"}
+  ${({ $center }) => $center && "justify-content: center;"}
   
   ${({ $style }) => styles[$style]};
   ${({ $size }) => sizes[$size]}
