@@ -13,6 +13,9 @@ export const LINK_COLOR = "--color-brand-500";
 export const SUCCESS_TOAST_DURATION = 3000;
 export const ERROR_TOAST_DURATION = 5000;
 
+// Максимальная высота хедера
+export const HEADER_SIZE = "72px";
+
 // Ширина модального окна логина.
 export const WIDTH_LOGIN_MODAL = "340px";
 
