@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { IMG_HEADER_SIZE, TEXT_MAIN_COLOR } from "../utils/constants.ts";
+import { Link } from "react-router-dom";
 
 const Img = styled.img`
   height: ${IMG_HEADER_SIZE};
@@ -23,10 +24,12 @@ const LogoText = styled.span`
 
 function Logo() {
   return (
-    <LogoContainer>
-      <Img src={"/logo.png"} alt={"Logo"}></Img>
-      <LogoText>Wordflow</LogoText>
-    </LogoContainer>
+    <Link to={"/"}>
+      <LogoContainer>
+        <Img src={"/logo.png"} alt={"Logo"}></Img>
+        <LogoText>Wordflow</LogoText>
+      </LogoContainer>
+    </Link>
   );
 }
 
