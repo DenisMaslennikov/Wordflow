@@ -96,7 +96,7 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
     @decorators.action(
         detail=False, methods=["get"], permission_classes=[IsMeOrReadOnly], serializer_class=BlogShortSerializer
     )
-    def my_blogs_list(self, request):
+    def my_blogs(self, request):
         """Эндпоинт для списка блогов текущего пользователя."""
         user = request.user
         if request.method == "GET":
