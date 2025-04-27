@@ -49,6 +49,18 @@ class BlogListSerializer(serializers.ModelSerializer):
         fields = ("id", "title", "description", "created_at", "slug")
 
 
+class BlogShortSerializer(serializers.ModelSerializer):
+    """Сериализатор короткого представления блога."""
+
+    id = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        """Метакласс сериализатора."""
+
+        model = Blog
+        fields = ("id", "title", "slug")
+
+
 class UserRoleListSerializer(serializers.ModelSerializer):
     """Сериализатор списка ролей пользователей."""
 
