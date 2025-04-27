@@ -80,6 +80,8 @@ export type ButtonProps = {
 
 const Button = styled.button<ButtonProps>`
   border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
   ${({ $style }) => styles[$style]};
   ${({ $size }) => sizes[$size]}
 `;
