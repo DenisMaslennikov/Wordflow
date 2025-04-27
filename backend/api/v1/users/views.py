@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from ..blogs.serializers import BlogListSerializer
+from ..blogs.serializers import BlogListSerializer, BlogShortSerializer
 from .permissions import IsMeOrReadOnly
 from .serializers import CustomTokenObtainPairSerializer, CustomTokenRefreshSerializer, UserMeSerializer, UserSerializer
 
@@ -89,16 +89,16 @@ class UserViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateM
     @extend_schema(
         responses={
             200: OpenApiResponse(
-                response=BlogListSerializer(many=True), description="Список блогов текущего пользователя"
+                response=BlogShortSerializer(many=True), description="Список блогов текущего пользователя"
             )
         }
     )
     @decorators.action(
-        detail=False, methods=["get"], permission_classes=[IsMeOrReadOnly], serializer_class=BlogListSerializer
+        detail=False, methods=["get"], permission_classes=[IsMeOrReadOnly], serializer_class=BlogShortSerializer
     )
-    def me_blogs_list(self, request):
+    def my_blogs_list(self, request):
         """Эндпоинт для списка блогов текущего пользователя."""
         user = request.user
         if request.method == "GET":
-            serializer = BlogListSerializer(user.blogs.all(), many=True)
+            serializer = BlogShortSerializer(user.blogs.all(), many=True)
             return Response(serializer.data)
