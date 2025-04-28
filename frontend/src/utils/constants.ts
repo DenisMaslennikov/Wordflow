@@ -58,3 +58,7 @@ export const USER_QUERY_KEY = "user";
 export const MY_BLOGS_QUERY_KEY = "myBlogs";
 export const POSTS_QUERY_KEY = "posts";
 export const POST_QUERY_KEY = "post";
+
+// APublic ApiKeys
+export const TINYMCE_API_KEY =
+  "j1jw74awj8jr8ez53eamca56ezkmr7zqjsprbsfhtsnalx4f";
