@@ -7,7 +7,7 @@ import Heading from "../../ui/Heading.tsx";
 import DOMPurify from "dompurify";
 import PostMeta from "./PostMeta.tsx";
 import Tags from "./Tags.tsx";
-import CommentsEditor from "../comments/CommentsEditor.tsx";
+import RichTextEditor from "../comments/CommentsEditorV3.tsx";
 
 const PostContainer = styled.div`
   display: flex;
@@ -45,7 +45,7 @@ function PostDetailed() {
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
       />
       <Tags tags={post.tags} />
-      <CommentsEditor />
+      <RichTextEditor />
     </PostContainer>
   );
 }
